@@ -1,4 +1,30 @@
 Swapmeet::Application.routes.draw do
+  get "show/destroy"
+
+  get "users/new"
+
+  get "users/create"
+
+  get "users/edit"
+
+  get "users/update"
+
+  get "users/show"
+
+  get "offers/new"
+
+  get "offers/create"
+
+  get "offers/show"
+
+  get "offers/index"
+
+  get "offers/edit"
+
+  get "offers/update"
+
+  get "offers/destroy"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
