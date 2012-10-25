@@ -1,0 +1,34 @@
+//--------------------
+// Headers
+//--------------------
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+h2 {
+  @include bold(1.6em);
+  margin-bottom: 10px;
+}
+
+h3 {
+  @include bold(1.3em);
+  margin-bottom: 5px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+
+
+//--------------------
+// Links
+//--------------------
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

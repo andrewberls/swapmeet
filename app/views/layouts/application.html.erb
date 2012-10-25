@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Swapmeet</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <meta name="viewport" content="width=device-width">
+  <title>SwapMeet | <%= yield(:title) %></title>
+  <%= stylesheet_link_tag :swapmeet %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <%#= render 'shared/header' %>
+
+  <div class="container">
+
+    <%= yield %>
+
+    <%#= render "shared/footer" %>
+
+  </div><!-- .container -->
+
+  <%= javascript_include_tag :application %>
+  <%= yield :javascript_includes %>
 
 </body>
 </html>

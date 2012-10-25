@@ -1,0 +1,21 @@
+html {
+  overflow-y: scroll;
+}
+
+body {
+  // background-color: $light-gray;
+  // color: $gray-text;
+  font-family: $baseFontFamily;
+  font-size: 13px;
+}
+
+body > .container {
+  margin: 25px auto 0;
+}
+
+@media (max-width: 630px) {
+  body .container { padding: 0 5px; }
+}
+
+.left  { float: left }
+.right { float: right }
