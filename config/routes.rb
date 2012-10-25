@@ -1,29 +1,10 @@
 Swapmeet::Application.routes.draw do
-  get "show/destroy"
 
-  get "users/new"
+  resources :offers
+  resources :users
 
-  get "users/create"
+  root :to => 'users#new'
 
-  get "users/edit"
-
-  get "users/update"
-
-  get "users/show"
-
-  get "offers/new"
-
-  get "offers/create"
-
-  get "offers/show"
-
-  get "offers/index"
-
-  get "offers/edit"
-
-  get "offers/update"
-
-  get "offers/destroy"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -71,10 +52,6 @@ Swapmeet::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
