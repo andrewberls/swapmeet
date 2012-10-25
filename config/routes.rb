@@ -1,9 +1,24 @@
 Swapmeet::Application.routes.draw do
 
+  get "responses/show"
+
+  get "responses/destroy"
+
   resources :offers
   resources :users
 
   root :to => 'users#new'
+
+  # Route page not found to 404 page
+  # match '*a' => 'static#not_found'
+
+
+
+
+
+
+
+
 
 
   # The priority is based upon order of creation:
@@ -58,4 +73,5 @@ Swapmeet::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
 end
