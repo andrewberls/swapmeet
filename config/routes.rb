@@ -1,11 +1,10 @@
 Swapmeet::Application.routes.draw do
 
-  get "responses/show"
-
-  get "responses/destroy"
-
   resources :offers
   resources :users
+
+  match '/new_bid_on/:offer_id' => 'offers#new_bid_on', :via => :get, :as => :new_bid_on
+  match '/create_bid_on/:offer_id' => 'offers#create_bid_on', :via => :post, :as => :create_bid_on
 
   root :to => 'users#new'
 

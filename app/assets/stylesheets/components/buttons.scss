@@ -1,0 +1,233 @@
+.btn {
+  @include border-box;
+  @include border-radius;
+  // @include box-shadow('0 1px 0 rgba(255, 255, 255, 0.5) inset'); // WHITE TOP SHADOW
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1;
+  outline: none;
+  padding: 8px 12px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  &:active {
+    @include box-shadow('0 1px 0 rgba(0, 0, 0, 0.2) inset');
+  }
+
+  &:focus {
+    @include box-shadow('0 0 4px #2ba6cb, 0 1px 0 rgba(255, 255, 255, 0.5) inset');
+    color: white;
+  }
+}
+
+
+
+/*--------------------------------------
+  SIZING
+--------------------------------------*/
+.btn-full {
+  text-align: center;
+  width: 100%;
+}
+
+.btn-large {
+  font-size: 17px;
+  padding: 15px 30px 16px;
+}
+
+.btn-medium {
+  font-size: 14px;
+}
+
+.btn-small {
+  font-size: 11px;
+  padding: 7px 14px 8px;
+}
+
+.btn-tiny {
+  font-size: 10px;
+  padding: 5px 10px 6px;
+}
+
+.btn-round {
+  @include border-radius(1000px);
+  padding-left: 20px; padding-right: 20px;
+}
+
+
+
+/*--------------------------------------
+  COLORS
+--------------------------------------*/
+// blue
+//---------------------
+.btn-blue {
+  background-color: $blue;
+  border: 1px solid darken($blue, 12);
+
+  &:hover {
+    background-color: darken($blue, 5);
+  }
+
+  &:active {
+    background-color: darken($blue, 10);
+  }
+
+  &:focus {
+    @include box-shadow('0 0 4px #2ba6cb, 0 1px 0 rgba(255, 255, 255, 0.5) inset');
+  }
+}
+
+// Aqua
+//---------------------
+.btn-aqua {
+  background-color: $aqua;
+  border: 1px solid darken($aqua, 5);
+
+  &:hover {
+    background-color: #2284a1;
+  }
+
+  &:active {
+    background-color: darken($aqua, 12);
+  }
+
+  &:focus {
+    @include box-shadow('0 0 4px #2ba6cb, 0 1px 0 rgba(255, 255, 255, 0.5) inset');
+  }
+}
+
+// Secondary
+//---------------------
+.btn-secondary {
+  $bg: #F3F3F3;
+  background-color: $bg;
+  border: 1px solid #DCDCDC;
+  color: $gray-text;
+
+  &:hover,
+  &:focus {
+    color: inherit;
+  }
+
+  &:hover {
+    background-color: darken($bg, 3);
+  }
+
+  &:active {
+    background-color: darken($bg, 5);
+  }
+
+  &:focus {
+    @include box-shadow('0 0 5px #e9e9e9, 0 1px 0 rgba(255, 255, 255, 0.5) inset');
+  }
+}
+
+// Green
+//---------------------
+.btn-green {
+  background-color: $green;
+  border: 1px solid darken($green, 10);
+
+  &:hover {
+    background-color: #5da423;
+  }
+
+  &:active {
+    background-color: darken($green, 10);
+  }
+
+  &:focus {
+    @include box-shadow('0 0 5px #5da423, 0 1px 0 rgba(255, 255, 255, 0.5) inset');
+  }
+}
+
+// Red
+//---------------------
+.btn-red {
+  background-color: $red;
+  border: 1px solid #7f0a0c;
+
+  &:hover {
+    background-color: darken($red, 4);
+  }
+
+  &:active {
+    background-color: darken($red, 10);
+  }
+
+  &:focus {
+    @include box-shadow('0 0 4px #c60f13, 0 1px 0 rgba(255, 255, 255, 0.5) inset');
+  }
+}
+
+
+
+/*--------------------------------------
+  DISABLED STYLING
+--------------------------------------*/
+.btn.disabled, .btn[disabled] {
+  cursor: default;
+  opacity: 0.6;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
+
+
+.btn-blue.disabled,
+.btn-blue[disabled] {
+  background-color: #387DBA;
+}
+
+.btn-aqua.disabled,
+.btn-aqua[disabled] {
+  background-color: #2ba6cb;
+}
+
+.btn-green.disabled,
+.btn-green[disabled] {
+  background-color: #5da423;
+}
+
+.btn-red.disabled,
+.btn-red[disabled] {
+  background-color: #c60f13;
+}
+
+.btn-secondary.disabled,
+.btn-secondary[disabled] {
+  background-color: lighten(#e9e9e9, 3);
+}
+
+
+
+/*--------------------------------------
+  BROWSER CORRECTIONS
+--------------------------------------*/
+// Don't use native buttons on iOS
+input[type=submit].btn,
+button.btn {
+  -webkit-appearance: none;
+}
+
+// Correct FF btn padding
+@-moz-document url-prefix() {
+  btn::-moz-focus-inner,
+  input[type="reset"]::-moz-focus-inner,
+  input[type="btn"]::-moz-focus-inner,
+  input[type="submit"]::-moz-focus-inner,
+  input[type="file"] > input[type="btn"]::-moz-focus-inner {
+    border: none;
+    padding: 0;
+  }
+}

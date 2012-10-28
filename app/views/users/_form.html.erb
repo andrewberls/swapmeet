@@ -1,0 +1,48 @@
+<div class="user_form">
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>Oh no!  You need to fix the following to sign up:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+  <legend></legend>
+
+  <div>
+    <%= f.label :username %>:
+    <%= f.text_field :username %>
+  </div>
+
+  <div>
+    <%= f.label :email %>:
+    <%= f.text_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, 'Password' %>:
+    <%= f.password_field :password, size: 40 %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, 'Confirm' %>:
+    <%= f.password_field :password_confirmation, size: 40 %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+  </fieldset>
+<% end %>
+<span class="form-suggestion">
+Already have an account? <a href="/login">Log in! &raquo;</a>
+</span>
+
+</div>

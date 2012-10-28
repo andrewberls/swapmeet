@@ -1,2 +1,23 @@
-<h1>Offers#show</h1>
-<p>Find me in app/views/offers/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @offer.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @offer.description %>
+</p>
+
+<p>
+  <b>Bids for this offer:</b>
+  <ul>
+    <%= render(@offer.bids) %>
+  </ul>
+
+  <%= link_to 'Make a bid', new_bid_on_path(@offer) %> |
+</p>
+
+<%= link_to 'Edit', edit_offer_path(@offer) %> |
+<%= link_to 'Back', offers_path %>
