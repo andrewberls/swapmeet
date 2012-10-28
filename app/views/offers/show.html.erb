@@ -10,6 +10,12 @@
   <%= @offer.description %>
 </p>
 
+<p>
+  <b>Bids for this offer:</b>
+  <ul>
+    <%= render(@offer.bids) %>
+  </ul>
+</p>
 
 <%= link_to 'Edit', edit_offer_path(@offer) %> |
 <%= link_to 'Back', offers_path %>
