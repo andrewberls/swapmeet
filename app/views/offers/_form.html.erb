@@ -4,6 +4,7 @@
 form_options = {}
 if @parent_offer
   form_options = { :url => create_bid_on_path(@parent_offer) }
+  submit_button_text = "Bid this!"
 end
 %>
 
@@ -29,6 +30,6 @@ end
     <%= f.text_field :description %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit submit_button_text %>
   </div>
 <% end %>
