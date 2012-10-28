@@ -20,6 +20,10 @@ class OffersControllerTest < ActionController::TestCase
     get :index
     assert_response :success
   end
+  
+  test "should display all the available items with user" do
+    
+  end
 
   test "should get edit" do
     get :edit

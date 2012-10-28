@@ -4,8 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one: 
+  title: "Couch - good condition"
+  description: "Microfibre couch in pretty good condition.  I'd be interested in trading for a desk."
 # column: value
 #
-two: {}
+two:
+  title: "CS130A textbook"
+  description: "CS130A textbook.  Has some writing and highlighting in it, but real damage to the book.  Desire to swap for CS138 book, or a couple six packs of Pacifico."
 #  column: value
