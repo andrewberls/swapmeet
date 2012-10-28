@@ -2,6 +2,12 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
+    @input_attributes = { 
+      username: "donv",
+      email: "donv@gmail.com",
+      password: "elsecreto",
+      password_confirmation:  "elsecreto"
+    }
     @user = users(:one)
   end
 
@@ -18,7 +24,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { email: @user.email, username: @user.username }
+      post :create, user: @input_attributes
     end
 
     assert_redirected_to user_path(assigns(:user))
