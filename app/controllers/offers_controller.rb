@@ -1,4 +1,45 @@
 class OffersController < ApplicationController
+
+  #############################################################################################
+  #
+  # Bidding on public offers
+  #
+  # Bidding basically creates a new Offer object using a slightly different codepath
+  # that keeps track of the parent offer and also generates the Response object.
+  #
+  # We reuse the same templates as much as we can, so we want to keep the "@offer"
+  # name for the new object being created.
+
+  def new_bid_on
+    @parent_offer = Offer.find_by_id!(params[:offer_id])
+    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+    @offer = Offer.new
+  end
+
+  def create_bid_on
+    @parent_offer = Offer.find_by_id!(params[:offer_id])
+    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+
+    @offer = Offer.new(params[:offer])
+    @response = Response.new(:offer => @parent_offer, :bid => @offer)
+
+    respond_to do |format|
+      if @offer.save and @response.save
+        format.html { redirect_to @parent_offer, notice: 'Your bid was successfully registered.' }
+        format.json { render json: @offer, status: :created, location: @parent_offer }
+      else
+        format.html { render action: "new_bid_on" }
+        format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  #############################################################################################
+  #
+  # Almost-standard scaffolding for the public offers
+  #
+
   # GET /offers
   # GET /offers.json
   def index

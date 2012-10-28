@@ -15,6 +15,8 @@
   <ul>
     <%= render(@offer.bids) %>
   </ul>
+
+  <%= link_to 'Make a bid', new_bid_on_path(@offer) %> |
 </p>
 
 <%= link_to 'Edit', edit_offer_path(@offer) %> |
