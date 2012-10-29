@@ -9,9 +9,13 @@
   border-bottom: 1px dashed $med-gray;
   padding: 12px 10px;
 
-  span {
+  .offer-link {
+    color: inherit;
     display: inline-block;
+    font-size: 1.1em;
     line-height: 35px;
+
+    &:hover { color: $aqua; }
   }
 
   &:last-child {
