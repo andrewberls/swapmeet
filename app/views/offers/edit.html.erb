@@ -1,6 +1,10 @@
-<h1>Editing offer</h1>
+<% provide(:title, 'Editing Offer') %>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span-6 offset-5">
 
-<%= link_to 'Show', @offer %> |
-<%= link_to 'Back', offers_path %>
+    <%= render 'form', title: "Editing &#8220;#{@offer.title}&#8221;"  %>
+
+    <%= link_to raw('&laquo; Back'), offers_path, class: 'back-btn' %>
+  </div>
+</div>

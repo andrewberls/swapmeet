@@ -1,51 +1,39 @@
 class OffersController < ApplicationController
 
-  #############################################################################################
-  #
-  # Bidding on public offers
-  #
-  # Bidding basically creates a new Offer object using a slightly different codepath
-  # that keeps track of the parent offer and also generates the Response object.
-  #
-  # We reuse the same templates as much as we can, so we want to keep the "@offer"
-  # name for the new object being created.
+  before_filter :find_offer, only: [:show, :edit, :update, :destroy]
+  before_filter :find_parent_offer, only: [:bid]
 
-  def new_bid_on
-    @parent_offer = Offer.find_by_id!(params[:offer_id])
-    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
-    @offer = Offer.new
-  end
+  # GET /offers/1/bid
+  # POST /offers/1/bid
+  # Bidding creates a nested offer relationship using an intermediary
+  # response object.
+  def bid
+    if request.get?
+      @offer = Offer.new
+    else
+      # TODO: @offer = current_user.offers.build(params[:offer])
+      @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
+      response = @parent_offer.responses.create(bid: @offer)
 
-  def create_bid_on
-    @parent_offer = Offer.find_by_id!(params[:offer_id])
-    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
-
-    @offer = Offer.new(params[:offer])
-    @response = Response.new(:offer => @parent_offer, :bid => @offer)
-
-    respond_to do |format|
-      if @offer.save and @response.save
-        format.html { redirect_to @parent_offer, notice: 'Your bid was successfully registered.' }
-        format.json { render json: @offer, status: :created, location: @parent_offer }
-      else
-        format.html { render action: "new_bid_on" }
-        format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
+      respond_to do |format|
+        if @offer.save
+          flash[:success] = 'Your bid was successfully registered.'
+          format.html { redirect_to @parent_offer }
+          format.json { render json: @offer, status: :created, location: @parent_offer }
+        else
+          format.html { render action: "bid" }
+          format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
+        end
       end
     end
   end
-
-
-  #############################################################################################
-  #
-  # Almost-standard scaffolding for the public offers
-  #
 
   # GET /offers
   # GET /offers.json
   def index
     # We show only the original public offers ("I want to get rid of my couch"),
     # not the stuff that is posted in response
-    # TODO: Is there a cleaner way to do this with the current models? yes, use NamedScopes
+    # TODO: Use named scopes on the offer model
     @offers = Offer.joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL").page(params[:page]).per(10)
 
     respond_to do |format|
@@ -57,8 +45,6 @@ class OffersController < ApplicationController
   # GET /offers/1
   # GET /offers/1.json
   def show
-    @offer = Offer.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @offer }
@@ -78,13 +64,13 @@ class OffersController < ApplicationController
 
   # GET /offers/1/edit
   def edit
-    @offer = Offer.find(params[:id])
   end
 
   # POST /offers
   # POST /offers.json
   def create
-    @offer = Offer.new(params[:offer])
+    # TODO: @offer = current_user.offers.build(params[:offer])
+    @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
 
     respond_to do |format|
       if @offer.save
@@ -100,8 +86,6 @@ class OffersController < ApplicationController
   # PUT /offers/1
   # PUT /offers/1.json
   def update
-    @offer = Offer.find(params[:id])
-
     respond_to do |format|
       if @offer.update_attributes(params[:offer])
         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
@@ -116,7 +100,6 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   # DELETE /offers/1.json
   def destroy
-    @offer = Offer.find(params[:id])
     @offer.destroy
 
     respond_to do |format|
@@ -124,4 +107,17 @@ class OffersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def find_offer
+    # TODO: access checks (is the current user allowed to view/destroy an offer, etc)
+    @offer = Offer.find(params[:id])
+  end
+
+  def find_parent_offer
+    @parent_offer = Offer.find(params[:id])
+    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+  end
+
 end

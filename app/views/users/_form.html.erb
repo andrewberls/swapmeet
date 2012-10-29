@@ -1,48 +1,28 @@
-<div class="user_form">
-
 <%= form_for @user do |f| %>
+  <h1 class="form-title"><%= raw title %></h1>
+
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2>Oh no!  You need to fix the following to sign up:</h2>
+    <div class="alert alert-error">
+      <h3>Oh no!  You need to fix the following to sign up:</h3>
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <fieldset>
-  <legend></legend>
+  <%= f.label :username %>:
+  <%= f.text_field :username %>
 
-  <div>
-    <%= f.label :username %>:
-    <%= f.text_field :username %>
-  </div>
+  <%= f.label :email %>:
+  <%= f.text_field :email %>
 
-  <div>
-    <%= f.label :email %>:
-    <%= f.text_field :email %>
-  </div>
+  <%= f.label :password %>:
+  <%= f.password_field :password, size: 40 %>
 
-  <div>
-    <%= f.label :password, 'Password' %>:
-    <%= f.password_field :password, size: 40 %>
-  </div>
+  <%= f.label :password_confirmation, 'Confirm' %>:
+  <%= f.password_field :password_confirmation, size: 40 %>
 
-  <div>
-    <%= f.label :password_confirmation, 'Confirm' %>:
-    <%= f.password_field :password_confirmation, size: 40 %>
-  </div>
-
-  <div>
-    <%= f.submit %>
-  </div>
-
-  </fieldset>
+  <%= f.submit btn, class: 'btn btn-blue' %>
 <% end %>
-<span class="form-suggestion">
-Already have an account? <a href="/login">Log in! &raquo;</a>
-</span>
-
-</div>

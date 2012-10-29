@@ -1,23 +1,26 @@
-<p id="notice"><%= notice %></p>
+<%# TODO: WHAT TO TITLE THIS PAGE? %>
 
-<p>
-  <b>Title:</b>
-  <%= @offer.title %>
-</p>
+<%= content_tag :div, flash[:success], class: 'alert alert-success' if flash[:success] %>
 
-<p>
-  <b>Description:</b>
-  <%= @offer.description %>
-</p>
+<%
+# This is an exercise in terrible code. I promise it's temporary.
+# Please don't follow my example :(
+%>
 
-<p>
-  <b>Bids for this offer:</b>
-  <ul>
-    <%= render(@offer.bids) %>
-  </ul>
+<h1>Offer: <%= @offer.title %></h1>
 
-  <%= link_to 'Make a bid', new_bid_on_path(@offer) %> |
-</p>
+<%= render 'offer' %>
 
-<%= link_to 'Edit', edit_offer_path(@offer) %> |
-<%= link_to 'Back', offers_path %>
+<p style="font-size: 1.1em; font-weight: bold; margin: 20px 0 5px;">Bids for this offer:</p>
+<ul style="padding-left: 20px;">
+  <%= render @offer.bids %>
+</ul>
+
+<div style="margin: 20px 0;">
+  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue' %>
+</div>
+
+<span style="font-size: 1.1em">
+  <%= link_to 'Edit', edit_offer_path(@offer) %> |
+  <%= link_to 'Back', offers_path %>
+</span>
