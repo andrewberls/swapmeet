@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class OffersControllerTest < ActionController::TestCase
+  fixtures :offers
+  
   setup do
-    @offer = offers(:one)
+    @offer = offers(:offer_one)
   end
 
   test "should get index" do
@@ -22,6 +24,17 @@ class OffersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to offer_path(assigns(:offer))
+  end
+  
+  test "open offers" do
+    get :index
+    assert_response :success
+    
+    
+  end
+  
+  test "should paginate with ten items per page" do
+    
   end
 
   test "should show offer" do

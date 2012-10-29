@@ -1,27 +1,16 @@
+
 <% provide(:title, 'Offers') %>
 
 <h1>Listing offers</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @offers.each do |offer| %>
-  <tr>
-    <td><%= offer.title %></td>
-    <td><%= offer.description %></td>
-    <td><%= link_to 'Show', offer %></td>
-    <td><%= link_to 'Edit', edit_offer_path(offer) %></td>
-    <td><%= link_to 'Destroy', offer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div id="offers_list">
+
+<%= render @offers %>
+</div>
 
 <br />
 
+<%= paginate @offers %>
+<br />
 <%= link_to 'New Offer', new_offer_path %>
