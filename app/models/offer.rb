@@ -15,5 +15,7 @@ class Offer < ActiveRecord::Base
   def can_receive_bids?
     Response.find_by_bid_id(self.id).blank?
   end
+  
+  scope :offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
 end
