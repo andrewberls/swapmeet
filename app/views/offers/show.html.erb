@@ -7,16 +7,24 @@
 # Please don't follow my example :(
 %>
 
-<h1>Offer: <%= @offer.title %></h1>
 
-<%= render @offer %>
+<h1>Offer</h1>
+<div id="offers_list">
+  <div class="offer">
+    <%= render @offer %>
+  </div>
+</div>
 
-<p style="font-size: 1.1em; font-weight: bold; margin: 20px 0 5px;">Bids for this offer:</p>
-<ul style="padding-left: 20px;">
-  <% @offer.bids.each do |bid| %>
-    <%= render :partial => 'bid', :locals => { :bid => bid } %>
-  <% end %>
-</ul>
+</br>
+
+  <h1>Bids</h1>
+<div id="offers_list">
+    <% @offer.bids.each do |bid| %>
+      <div class="offer">
+        <%= render :partial => 'bid', :locals => { :bid => bid } %>
+      </div>
+    <% end %>
+</div>
 
 <div style="margin: 20px 0;">
   <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue' %>
