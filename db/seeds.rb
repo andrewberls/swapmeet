@@ -1,7 +1,50 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#--------------------
+# SCHEMA
+#--------------------
+# table "users"
+#   string   "username"
+#   string   "email"
 #
-# Examples:
+# table "offers"
+#   string   "title"
+#   text     "description"
+#   integer  "user_id"
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# table "responses"
+#   integer  "offer_id"
+#   integer  "bid_id"
+#   string   "status"
+
+
+
+# lr = LiterateRandomizer.create
+# puts lr.sentence
+# puts lr.paragraph
+
+
+
+
+#--------------------
+# Users
+#--------------------
+User.create(username: "admin", email: "admin@admin.com", password: "admin", password_confirmation: "admin")
+
+# 10.times do |i|
+#   User.create(username: "user{i}", email: "user#{i}@fake.com")
+# end
+
+
+
+#--------------------
+# Offers
+#--------------------
+# 2.times do |i|
+#   Offer.create(title: "test", description: "test").tap { |o| o.user = RANDOM_USER }
+# end
+
+
+
+
+#--------------------
+# Responses
+#--------------------
