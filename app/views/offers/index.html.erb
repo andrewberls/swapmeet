@@ -5,9 +5,8 @@
 
 
 <div id="offers_list">
-<% @offers.each do |offer| %>
-  <%= render :partial => 'offer', :locals => { :offer => offer } %>
-<% end %>
+
+<%= render @offers %>
 </div>
 
 <br />

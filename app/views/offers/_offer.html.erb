@@ -15,8 +15,8 @@
 </style>
 
 <div class="offer">
+  <%= link_to("View Trade >>", { controller: :offers, action: :show, id: offer.id }, { class: "trade_button" }) %> 
   <p style="font-size: 1.1em;">
     <%= offer.title %>
   </p>
-  <%= link_to("View Trade >>", { controller: :offers, action: :show, id: offer.id }, { class: "trade_button" }) %> 
 </div>
