@@ -1,0 +1,12 @@
+<% provide(:title, 'Bid') %>
+
+<div class="row">
+  <div class="span-6 offset-5">
+
+    <%= render 'form', title: "Bid on &#8220;#{@parent_offer.title}&#8221;" %>
+
+    <%= link_to raw('&laquo; Back to the original offer'), @parent_offer, class: 'back-btn' %>
+
+  </div>
+</div>
+

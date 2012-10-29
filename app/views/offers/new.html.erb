@@ -1,5 +1,10 @@
-<h1>New offer</h1>
+<% provide(:title, 'Make a new offer') %>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span-6 offset-5">
 
-<%= link_to 'Back', offers_path %>
+    <%= render 'form', title: "Make a new offer" %>
+
+    <%= link_to raw('&laquo; Back'), offers_path, class: 'back-btn' %>
+  </div>
+</div>

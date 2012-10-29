@@ -1,3 +1,14 @@
-<h1>Sign Up</h1>
-<p>We just need some quick information to get started.</p>
-<%= render 'form' %>
+<% provide(:title, 'Sign up') %>
+
+<div class="row">
+  <div class="span-6 offset-5">
+
+    <%= render 'form', title: 'Sign up', btn: 'Sign up' %>
+
+    <span class="form-suggestion">
+      Already have an account? <%= link_to raw("Log in! &raquo;"), "#" %>
+    </span>
+
+
+  </div>
+</div

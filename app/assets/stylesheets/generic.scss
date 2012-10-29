@@ -3,8 +3,8 @@ html {
 }
 
 body {
-  // background-color: $light-gray;
-  // color: $gray-text;
+  @extend %noise;
+  color: $gray-text;
   font-family: $baseFontFamily;
   font-size: 13px;
 }
@@ -19,3 +19,16 @@ body > .container {
 
 .left  { float: left }
 .right { float: right }
+
+%noise {
+  background: #f6f2e8 url('/images/noise.png');
+}
+
+%whitebox {
+  @include border-box;
+  @include border-radius;
+  @include clearfix;
+  background-color: white;
+  border: 1px solid $med-gray; // outline
+  padding: 20px;
+}
