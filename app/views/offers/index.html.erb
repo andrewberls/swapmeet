@@ -1,18 +1,15 @@
-
 <% provide(:title, 'Offers') %>
 
 <h1>Listing offers</h1>
 
-
 <div id="offers_list">
 
-<% @offers.each do |offer| %>
-  <%= render :partial => 'offer_summary', :locals => { :offer => offer }%>
-<% end %>
+  <% @offers.each do |offer| %>
+    <%= render :partial => 'offer_summary', :locals => { :offer => offer }%>
+  <% end %>
+
 </div>
 
-<br />
-
 <%= paginate @offers %>
-<br />
-<%= link_to 'New Offer', new_offer_path %>
+
+<%#= link_to 'New Offer', new_offer_path, class: 'btn btn-blue btn-medium' %>

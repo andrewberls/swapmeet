@@ -1,3 +1,43 @@
-// Place all the styles related to the offers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#offers_list {
+  @extend %whitebox;
+  padding: 0;
+}
+
+.offer {
+  @include clearfix;
+  @include bold(1.1em);
+  border-bottom: 1px dashed $med-gray;
+  padding: 12px 10px;
+
+  span {
+    display: inline-block;
+    line-height: 35px;
+  }
+
+  &:last-child {
+    border: none;
+  }
+}
+
+.pagination {
+  @include bold(1.1em);
+  margin-top: 15px;
+  text-align: center;
+
+  a, .current {
+    background-color: white;
+    border: 1px solid $med-gray;
+    display: inline-block;
+    padding: 5px 9px;
+  }
+
+  a:hover {
+    background-color: $aqua;
+    color: white;
+    text-decoration: none;
+  }
+
+  .current {
+    background: #f9f9f9;
+  }
+}
