@@ -1,6 +1,19 @@
-
+<style type="text/css">
+  div.offer {
+    border:2px solid;
+    padding: 10px;
+    margin: 10px;
+  }
+  a.trade_button {
+    float: right;
+  }
+  .pagination {
+    width: 10%;
+    margin: 0px auto;
+  }
+</style>
 
 <div class="offer">
-  <i><%= offer.title %></i> - <%= offer.description %>
+  <%= offer.title %>
   <%= link_to("View Trade >>", { controller: :offers, action: :show, id: offer.id }, { class: "trade_button" }) %> 
 </div>
