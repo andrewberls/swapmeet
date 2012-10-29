@@ -45,8 +45,8 @@ class OffersController < ApplicationController
   def index
     # We show only the original public offers ("I want to get rid of my couch"),
     # not the stuff that is posted in response
-    # TODO: Is there a cleaner way to do this with the current models?
-    @offers = Offer.joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
+    # TODO: Is there a cleaner way to do this with the current models? yes, use NamedScopes
+    @offers = Offer.joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL").page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

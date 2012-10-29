@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class OffersControllerTest < ActionController::TestCase
+  fixtures :offers
+  
   setup do
-    @offer = offers(:one)
+    @offer = offers(:offer_one)
   end
 
   test "should get index" do
@@ -25,6 +27,10 @@ class OffersControllerTest < ActionController::TestCase
   end
   
   test "should display all the available items with user" do
+    
+  end
+  
+  test "should paginate with ten items per page" do
     
   end
 

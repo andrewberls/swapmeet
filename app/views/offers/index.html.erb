@@ -1,25 +1,17 @@
-<h1>Listing offers</h1>
+<h1>Open Offers for: Santa Barbara</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h3>Filtering | Options</h3>
 
+
+
+<div id="offers_list"
 <% @offers.each do |offer| %>
-  <tr>
-    <td><%= offer.title %></td>
-    <td><%= offer.description %></td>
-    <td><%= link_to 'Show', offer %></td>
-    <td><%= link_to 'Edit', edit_offer_path(offer) %></td>
-    <td><%= link_to 'Destroy', offer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <%= render :partial => 'offer', :locals => { :offer => offer } %>
 <% end %>
-</table>
+</div>
 
 <br />
 
+<%= paginate @offers %>
+<br />
 <%= link_to 'New Offer', new_offer_path %>

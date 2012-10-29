@@ -1,1 +1,6 @@
-<li><i><%= offer.title %></i> - <%= offer.description %></li>
+
+
+<div class="offer">
+  <i><%= offer.title %></i> - <%= offer.description %>
+  <%= link_to("View Trade >>", { controller: :offers, action: :show, id: offer.id }, { class: "trade_button" }) %> 
+</div>
