@@ -13,7 +13,9 @@
 
 <p style="font-size: 1.1em; font-weight: bold; margin: 20px 0 5px;">Bids for this offer:</p>
 <ul style="padding-left: 20px;">
-  <%= render @offer.bids %>
+  <% @offer.bids.each do |bid| %>
+    <%= render :partial => 'bid', :locals => { :bid => bid } %>
+  <% end %>
 </ul>
 
 <div style="margin: 20px 0;">
