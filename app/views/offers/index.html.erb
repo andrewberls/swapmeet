@@ -6,7 +6,9 @@
 
 <div id="offers_list">
 
-<%= render @offers %>
+<% @offers.each do |offer| %>
+  <%= render :partial => 'offer', :locals => { :offer => offer, :no_description => true }%>
+<% end %>
 </div>
 
 <br />
