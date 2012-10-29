@@ -26,7 +26,10 @@ class OffersControllerTest < ActionController::TestCase
     assert_redirected_to offer_path(assigns(:offer))
   end
   
-  test "should display all the available items with user" do
+  test "open offers" do
+    get :index
+    assert_response :success
+    
     
   end
   
