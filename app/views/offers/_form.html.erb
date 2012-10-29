@@ -3,15 +3,17 @@
 # and to create responses to them.
 form_options = {}
 if @parent_offer
-  form_options = { :url => create_bid_on_path(@parent_offer) }
+  form_options = { :url => bid_on_offer_path(@parent_offer) }
   submit_button_text = "Bid this!"
 end
 %>
 
 <%= form_for(@offer, form_options) do |f| %>
+  <h1><%= raw title %></h1>
+
   <% if @offer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@offer.errors.count, "error") %> prohibited this offer from being saved:</h2>
+    <div class="alert alert-error">
+      <h3><%= pluralize(@offer.errors.count, "error") %> prohibited this offer from being saved:</h3>
 
       <ul>
       <% @offer.errors.full_messages.each do |msg| %>
@@ -21,15 +23,11 @@ end
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit submit_button_text %>
-  </div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit submit_button_text, class: 'btn btn-blue' %>
 <% end %>
