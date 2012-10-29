@@ -31,6 +31,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'brakeman'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
