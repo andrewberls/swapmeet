@@ -27,7 +27,7 @@
 #--------------------
 # Users
 #--------------------
-User.create(username: "admin", email: "admin@admin.com", password: "admin", password_confirmation: "admin")
+User.create(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password")
 
 # 10.times do |i|
 #   User.create(username: "user{i}", email: "user#{i}@fake.com")
