@@ -22,7 +22,6 @@
     <% @offer.bids.each do |bid| %>
       <div class="offer">
         <%= render :partial => 'bid', :locals => { :bid => bid } %>
-        <%= link_to raw("View Bid &raquo;"), bid, class: "btn btn-aqua right" %>
       </div>
     <% end %>
 </div>
