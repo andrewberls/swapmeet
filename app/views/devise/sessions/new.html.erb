@@ -1,0 +1,27 @@
+<% provide(:title, 'Log In') %>
+
+<div class="row">
+  <div class="span-6 offset-5">
+
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <h1 class="form-title">Log In</h1>
+
+      <%= flash_alert %>
+
+      <%= f.label :login, 'Username or email:' %>
+      <%= f.text_field :login %>
+
+      <%= f.label :password %>:
+      <%= f.password_field :password %>
+
+      <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+
+      <%= f.submit 'Sign up', class: 'btn btn-blue' %>
+    <% end %>
+
+   <span class="form-suggestion">
+      Don't have an account? <%= link_to raw("Sign up! &raquo;"), signup_path %>
+    </span>
+
+  </div>
+</div>

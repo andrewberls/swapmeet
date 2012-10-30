@@ -1,5 +1,13 @@
 Swapmeet::Application.routes.draw do
 
+  devise_for :users
+
+  devise_scope :user do
+    get "signup", :to => "devise/registrations#new"
+    get "login", :to => "devise/sessions#new"
+    get "logout", :to => "devise/sessions#destroy"
+  end
+
   resources :offers do
     match 'bid', :on => :member, as: 'bid_on' # /offers/2/bid (matches both GET and POST)
   end
@@ -7,7 +15,7 @@ Swapmeet::Application.routes.draw do
   resources :users
 
 
-  root :to => 'users#new'
+  root :to => 'offers#index'
 
   # Route page not found to 404 page
   # match '*a' => 'static#not_found'

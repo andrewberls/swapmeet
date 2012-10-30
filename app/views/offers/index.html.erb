@@ -2,6 +2,8 @@
 
 <h1>Listing offers</h1>
 
+<%= link_to 'New Offer', new_offer_path, class: 'btn btn-blue btn-medium', style: 'display: inline-block;margin-bottom:15px' %>
+
 <div id="offers_list">
 
   <% @offers.each do |offer| %>
@@ -12,4 +14,3 @@
 
 <%= paginate @offers %>
 
-<%#= link_to 'New Offer', new_offer_path, class: 'btn btn-blue btn-medium' %>

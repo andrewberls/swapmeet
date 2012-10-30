@@ -1,5 +1,7 @@
 class OffersController < ApplicationController
 
+  before_filter :authenticate_user!
+
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
   before_filter :find_parent_offer, only: [:bid]
 

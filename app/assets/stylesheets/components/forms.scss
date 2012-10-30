@@ -38,6 +38,13 @@ form {
     overflow: auto; // Remove scrollbar in IE
   }
 
+  .help-text {
+    color: darken($med-gray, 20);
+    display: inline-block;
+    font-style: italic;
+    margin-left: 5px;
+  }
+
   input[type="submit"] {
     float: right;
   }

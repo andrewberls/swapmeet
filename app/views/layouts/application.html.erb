@@ -8,13 +8,17 @@
 </head>
 <body>
 
-  <%#= render 'shared/header' %>
+  <%= render 'shared/header' %>
 
   <div class="container">
 
     <%= yield %>
 
-    <%#= render "shared/footer" %>
+    <div class="row">
+      <div class="span-16">
+        <%= render "shared/footer" %>
+      </div>
+    </div>
 
   </div><!-- .container -->
 

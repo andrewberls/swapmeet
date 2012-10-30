@@ -4,17 +4,19 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 
+gem 'jquery-rails'
+
+# Authentication
+gem 'devise'
+
 # Pagination
 gem 'kaminari'
 
-gem 'jquery-rails'
-
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+#gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Seed data generation
 gem 'literate_randomizer'
-
 
 # Gems used only for assets and not required
 # in production environments by default.

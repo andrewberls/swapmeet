@@ -1,0 +1,13 @@
+footer {
+  border-top: 1px solid $med-gray;
+  font-size: 1.1em;
+  margin-top: 10em;
+  padding-top: 10px;
+  text-align: right;
+
+  .link-separator {
+    color: darken($med-gray, 20);
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
