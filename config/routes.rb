@@ -11,6 +11,7 @@ Swapmeet::Application.routes.draw do
   resources :offers do
     match 'bid', :on => :member, as: 'bid_on' # /offers/2/bid (matches both GET and POST)
   end
+  match 'dashboard' => 'offers#dashboard', as: 'dashboard'
 
   resources :users
 

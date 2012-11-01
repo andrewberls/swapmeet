@@ -30,6 +30,11 @@ class OffersController < ApplicationController
     end
   end
 
+  # GET /dashboard
+  def dashboard
+
+  end
+
   # GET /offers
   # GET /offers.json
   def index
