@@ -37,6 +37,7 @@ class OffersController < ApplicationController
 
   # POST /offers/1/accept
   def accept
+    debugger
   end
 
   # POST /offers/1/complete/3
