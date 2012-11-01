@@ -37,12 +37,10 @@ class OffersController < ApplicationController
 
   # POST /offers/1/accept
   def accept
-    return render => :text, 'bob'
   end
 
   # POST /offers/1/complete/3
   def complete
-    return render => :text, 'bob'
   end
 
   # GET /offers
