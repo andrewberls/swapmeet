@@ -5,3 +5,7 @@ one:
 two:
   username: BeerTaster
   email: itaste@beer.com
+
+admin:
+  username: admin
+  email: admin@admins.com
