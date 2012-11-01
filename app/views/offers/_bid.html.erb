@@ -11,7 +11,7 @@
   </p>
 
 <div style="margin: 20px 0;">
-  <%= link_to 'Accept', accept_offer_path(@offer), class: 'btn btn-blue' %>
+  <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
 </div>
 
 </div>
