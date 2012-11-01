@@ -13,8 +13,8 @@ class OffersController < ApplicationController
     if request.get?
       @offer = Offer.new
     else
-      # TODO: @offer = current_user.offers.build(params[:offer])
-      @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
+      @offer = current_user.offers.build(params[:offer])
+      # @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
       response = @parent_offer.responses.create(bid: @offer)
 
       respond_to do |format|
@@ -33,6 +33,12 @@ class OffersController < ApplicationController
   # GET /dashboard
   def dashboard
 
+  end
+
+  # GET /offers/1/accept
+  # POST /offers/1/accept
+  def accept
+    return render => :text, 'bob'
   end
 
   # GET /offers
@@ -73,8 +79,7 @@ class OffersController < ApplicationController
   # POST /offers
   # POST /offers.json
   def create
-    # TODO: @offer = current_user.offers.build(params[:offer])
-    @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
+    @offer = current_user.offers.build(params[:offer])
 
     respond_to do |format|
       if @offer.save
