@@ -38,3 +38,5 @@ gem 'brakeman'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+
+gem 'debugger'
