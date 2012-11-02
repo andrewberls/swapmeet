@@ -10,6 +10,16 @@ class Offer < ActiveRecord::Base
 
   validates :description, presence: true
 
+  validates_format_of :image_file_name,
+    :with=>/\.(jpeg|jpg|png|gif)$/i,
+    :message=> "File name has to end with a supported extension",
+    :on => :update,
+    :if => lambda{ |object| object.image.present? }
+  validates_attachment :image,
+    :content_type => { :content_type => ["image/png", "image/jpeg", "image/gif"] },
+    :size => { :in => 0..5.megabytes },
+    :if => lambda{ |object| object.image.present? }
+
   belongs_to :user
   has_many :responses
   has_many :bids, through: :responses
