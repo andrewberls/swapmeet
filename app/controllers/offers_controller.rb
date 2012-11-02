@@ -35,28 +35,30 @@ class OffersController < ApplicationController
 
   end
 
-  # POST /offers/1/accept
+  # POST /offers/1/accept/:bid_id
   def accept
     Response.transaction do
       bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
       raise ActiveRecord::RecordNotFound if bid_resp.nil?
 
-      # We lock out all the other children of this auction, as well as any parent offers
+      # Lock out all the other children of this auction, as well as any parent offers
       # in any other auctions.
-      offer = Offer.find_by_id(params[:offer_id])  
+      offer = Offer.find(params[:offer_id])
       other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
       bid_resp.accept!
-      ((offer.responses + other_offer_responses) - [bid_resp]).each { |r| r.lock_out! }
+      ((offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
     end
   end
 
-  # POST /offers/1/complete/3
+  # POST /offers/:offer_id/complete/:bid_id
   def complete
   end
 
   # GET /offers
   # GET /offers.json
   def index
+    # We show only 'parent' offers ("I want to get rid of my couch"),
+    # not offers posted as responses
     @offers = Offer.parent_offers.page(params[:page]).per(10)
 
     respond_to do |format|
