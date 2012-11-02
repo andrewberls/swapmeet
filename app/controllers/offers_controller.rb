@@ -18,7 +18,6 @@ class OffersController < ApplicationController
       response = @parent_offer.responses.new(bid: @offer) do |resp|
         resp.status = 'open'
       end.save
-
       respond_to do |format|
         if @offer.save
           flash[:success] = 'Your bid was successfully registered.'

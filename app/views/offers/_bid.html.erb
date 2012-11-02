@@ -10,6 +10,12 @@
     <%= bid.description %>
   </p>
 
+  <p>
+    <% if bid.image.present? %>
+      <%= image_tag bid.image.url(:thumb) %>
+    <% end %>
+  </p>
+
 
 <div style="margin: 20px 0">
 <% if bid == accepted_bid %>
