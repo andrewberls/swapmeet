@@ -63,6 +63,7 @@ form {
 .form-suggestion {
   // "Already have an account?..."
   @include bold(1.2em);
+  color: #666;
   float: right;
   margin-top: 10px;
 }
