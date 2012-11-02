@@ -16,7 +16,7 @@ class OffersController < ApplicationController
       @offer = current_user.offers.build(params[:offer])
       # @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
       response = @parent_offer.responses.create(bid: @offer)
-
+      response.status = 'open'
       respond_to do |format|
         if @offer.save
           flash[:success] = 'Your bid was successfully registered.'
