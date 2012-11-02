@@ -10,4 +10,21 @@ class Response < ActiveRecord::Base
   validates_each :offer do |record, attr, value|
     record.errors.add(attr, " cannot receive bids") if not value.can_receive_bids?
   end
+
+  # Accept a bid
+  def accept!
+    self.status = 'accepted'    
+    self.save
+  end
+
+  def complete!
+    self.status = 'completed'    
+    self.save
+  end
+
+  def lock_out!
+    self.status = 'locked'    
+    self.save
+  end
+
 end

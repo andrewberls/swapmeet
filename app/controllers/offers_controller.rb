@@ -37,7 +37,13 @@ class OffersController < ApplicationController
 
   # POST /offers/1/accept
   def accept
-    debugger
+    Response.transaction do
+      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+      parent_offer = Offer.find_by_id(params[:offer_id])
+      raise ActiveRecord::RecordNotFound if bid_resp.nil?
+      bid_resp.accept!
+      (parent_offer.responses - [bid_resp]).each { |r| r.lock_out! }
+    end
   end
 
   # POST /offers/1/complete/3
