@@ -48,3 +48,22 @@ header {
     }
   }
 }
+
+
+@media (max-width: 630px) {
+  header {
+    background-image: none; // TODO: background image doesn't repeat well
+    height: auto;
+    text-align: center;
+
+    li a {
+      padding: 0;
+    }
+
+    .user-links {
+      display: inline-block;
+      float: none;
+      margin-top: -10px;
+    }
+  }
+}
