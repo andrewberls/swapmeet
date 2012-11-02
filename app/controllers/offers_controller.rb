@@ -43,16 +43,28 @@ class OffersController < ApplicationController
 
       # Lock out all the other children of this auction, as well as any parent offers
       # in any other auctions.
-      offer = Offer.find(params[:offer_id])
+      @offer = Offer.find(params[:offer_id])
       other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
       bid_resp.accept!
-      ((offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
+      ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
+    end
+
+    flash[:success] = 'You have succesfully accepted the bid'
+    respond_to do |format|
+      format.html { redirect_to @offer }
+      format.json { render json: @offer, status: :created, location: @offer }
     end
   end
 
   # POST /offers/:offer_id/complete/:bid_id
   def complete
   end
+
+
+
+
+
+
 
   # GET /offers
   # GET /offers.json

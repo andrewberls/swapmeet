@@ -1,5 +1,5 @@
 
-<div style ="margin: 5px;">
+<div style ="margin: 5px 0">
   <p style="font-size: 1.1em;">
     <span style="font-weight: bold">Title:</span>
     <%= bid.title %>
@@ -10,8 +10,14 @@
     <%= bid.description %>
   </p>
 
-<div style="margin: 20px 0;">
-  <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
+
+<div style="margin: 20px 0">
+<% if bid == accepted_bid %>
+    <div class="alert alert-success">This offer has been accepted</div>
+  <% elsif accepted_bid.blank? %>
+    <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
+<% end %>
 </div>
+
 
 </div>
