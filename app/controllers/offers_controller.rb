@@ -14,9 +14,11 @@ class OffersController < ApplicationController
       @offer = Offer.new
     else
       @offer = current_user.offers.build(params[:offer])
-      # @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
-      response = @parent_offer.responses.create(bid: @offer)
-      response.status = 'open'
+
+      response = @parent_offer.responses.new(bid: @offer) do |resp|
+        resp.status = 'open'
+      end.save
+
       respond_to do |format|
         if @offer.save
           flash[:success] = 'Your bid was successfully registered.'
@@ -82,7 +84,6 @@ class OffersController < ApplicationController
   # GET /offers/1
   # GET /offers/1.json
   def show
-    @responses = Response.where(:offer_id => params[:id]).all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @offer }
