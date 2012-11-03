@@ -14,6 +14,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "a good rating should up good karma count by one" do
+    assert_equal 0, @user.up_ratings
     @user.add_good_rating
     assert_equal 1, @user.up_ratings
     assert_equal 0, @user.down_ratings
@@ -21,9 +22,9 @@ class UserTest < ActiveSupport::TestCase
   
   test "a bad rating should up bad karma count by one" do   
     @user = users(:two) or raise "Could not find user"
-    puts "user = #{@user.inspect}"
+    assert_equal 0, @user.down_ratings
     @user.add_bad_rating
-    assert_equal 6, @user.up_ratings
+    assert_equal 5, @user.up_ratings
     assert_equal 1, @user.down_ratings
   end
 end
