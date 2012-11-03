@@ -1,3 +1,6 @@
+# Credential files
+config/aws.yml
+
 # Numerous always-ignore extensions
 *.diff
 *.err
