@@ -9,4 +9,5 @@
     <span style="font-weight: bold">Description:</span>
     <%= bid.description %>
   </p>
+  <%= render :partial => "karma", :locals => { :user => bid.user } %>
 </div>

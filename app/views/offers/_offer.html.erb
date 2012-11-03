@@ -7,3 +7,7 @@
   <span style="font-weight: bold">Description:</span>
   <%= @offer.description %>
 </p>
+
+<p>
+  User: <%= link_to @offer.user.username, user_path %><%= " +#{@offer.user.up_ratings} -#{@offer.user.down_ratings}" %>
+</p>
