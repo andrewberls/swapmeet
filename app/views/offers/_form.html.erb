@@ -1,9 +1,9 @@
 <%
 # This form is used both to create new "original" offers
 # and to create responses to them.
-form_options = {}
+form_options = { :html => { :multipart => true } }
 if @parent_offer
-  form_options = { :url => bid_on_offer_path(@parent_offer) }
+  form_options[:url] = bid_on_offer_path(@parent_offer)
   submit_button_text = "Bid this!"
 end
 %>
@@ -28,6 +28,9 @@ end
 
   <%= f.label :description %>
   <%= f.text_field :description %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image, :accept => 'image/png,image/gif,image/jpeg' %>
 
   <%= f.submit submit_button_text, class: 'btn btn-blue' %>
 <% end %>

@@ -7,3 +7,9 @@
   <span style="font-weight: bold">Description:</span>
   <%= @offer.description %>
 </p>
+
+<p>
+  <% if @offer.image.present? %>
+    <%= image_tag @offer.image.url, :style => "max-width: 100%" %>
+  <% end %>
+</p>
