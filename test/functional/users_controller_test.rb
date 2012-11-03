@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @input_attributes = { 
       username: "donv",
@@ -9,9 +11,11 @@ class UsersControllerTest < ActionController::TestCase
       password_confirmation:  "elsecreto"
     }
     @user = users(:one)
+    @admin_user = users(:admin)  # For now, same as any other user
   end
 
   test "should get index" do
+    sign_in @admin_user
     get :index
     assert_response :success
     assert_not_nil assigns(:users)
@@ -31,21 +35,25 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should show user" do
+    sign_in @user
     get :show, id: @user
     assert_response :success
   end
 
   test "should get edit" do
+    sign_in @user
     get :edit, id: @user
     assert_response :success
   end
 
   test "should update user" do
+    sign_in @user
     put :update, id: @user, user: { email: @user.email, username: @user.username }
-    assert_response :success
+    assert_redirected_to user_path(assigns(:user))
   end
 
   test "should destroy user" do
+    sign_in @admin_user
     assert_difference('User.count', -1) do
       delete :destroy, id: @user
     end

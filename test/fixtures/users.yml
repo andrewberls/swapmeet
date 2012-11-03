@@ -9,3 +9,8 @@ two:
   email: itaste@beer.com
   up_ratings: 5
   down_ratings: 0
+
+admin:
+  username: admin
+  email: admin@admins.com
+

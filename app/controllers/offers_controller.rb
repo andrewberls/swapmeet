@@ -33,10 +33,7 @@ class OffersController < ApplicationController
   # GET /offers
   # GET /offers.json
   def index
-    # We show only the original public offers ("I want to get rid of my couch"),
-    # not the stuff that is posted in response
-    # TODO: Use named scopes on the offer model
-    @offers = Offer.offers.page(params[:page]).per(10)
+    @offers = Offer.parent_offers.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

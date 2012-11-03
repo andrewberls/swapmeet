@@ -7,8 +7,8 @@ class OfferTest < ActiveSupport::TestCase
     assert_equal 2, offer.bids.count
   end
 
-  test "namedscope offers should return only offers" do
-    offers = Offer.offers
+  test "namedscope parent_offers should return only offers" do
+    offers = Offer.parent_offers
     assert_equal false, offers.include?(offers(:bid_one))
     assert offers.include?(offers(:offer_one))
   end

@@ -1,50 +1,72 @@
 #--------------------
-# SCHEMA
+# Config options
 #--------------------
-# table "users"
-#   string   "username"
-#   string   "email"
-#
-# table "offers"
-#   string   "title"
-#   text     "description"
-#   integer  "user_id"
-#
-# table "responses"
-#   integer  "offer_id"
-#   integer  "bid_id"
-#   string   "status"
+USER_COUNT  = 100
+OFFER_COUNT = 100
+BID_COUNT   = 175
 
 
+#--------------------
+# Utilites
+#--------------------
+def random_user
+  User.all.shuffle.first
+end
 
-# lr = LiterateRandomizer.create
-# puts lr.sentence
-# puts lr.paragraph
+mark = " -> "
 
 
-
+puts "\nStarting seed generation. Configuration: "
+puts "#{mark}user count:  #{USER_COUNT}"
+puts "#{mark}offer count: #{OFFER_COUNT}"
+puts "#{mark}bid count:   #{BID_COUNT}"
+puts ""
+beginning_time = Time.now
 
 #--------------------
 # Users
 #--------------------
 User.create(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password")
 
-# 10.times do |i|
-#   User.create(username: "user{i}", email: "user#{i}@fake.com")
-# end
+USER_COUNT.times do |i|
+  User.create!(username: "user#{i}", email: "user#{i}@fake.com", password: "password", password_confirmation: "password")
+end
 
 
 
 #--------------------
 # Offers
 #--------------------
-# 2.times do |i|
-#   Offer.create(title: "test", description: "test").tap { |o| o.user = RANDOM_USER }
-# end
-
+OFFER_COUNT.times do |i|
+  Offer.create!(title: "test-offer#{i}", description: LiterateRandomizer.sentence).tap do |offer|
+    offer.user = random_user
+  end
+end
 
 
 
 #--------------------
 # Responses
 #--------------------
+BID_COUNT.times do |i|
+  parent_offer = Offer.all.shuffle.first
+  parent_user  = random_user
+  bid_user = begin
+    user = random_user
+    # Since we're choosing random users, make sure a user isn't bidding on its own offer
+    while user == parent_user
+      puts "#{mark}bid_user was equal to parent_user, shuffling"
+      user = random_user
+    end
+    user
+  end
+
+  bid = Offer.create!(title: "test-bid#{i}", description: LiterateRandomizer.sentence).tap do |offer|
+    offer.user = bid_user
+  end
+
+  response = parent_offer.responses.create(bid: bid)
+end
+
+
+puts "Seed generation completed: #{Time.now - beginning_time}s"
