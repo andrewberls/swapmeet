@@ -1,0 +1,69 @@
+$header-height: 40px;
+
+header {
+  @include clearfix;
+  background: #4C4545 url('/images/header.jpg');
+  height: $header-height;
+
+  ul {
+    float: left;
+  }
+
+  li, a {
+    display: inline-block;
+  }
+
+  li {
+    line-height: $header-height;
+    margin-right: 10px;
+
+    a {
+      font-size: 11px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      padding: 0 8px;
+
+      &:hover {
+        background-color: $aqua;
+        text-decoration: none;
+      }
+
+      &.current {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .user-links {
+    @include bold(0.9em);
+    float: right;
+    line-height: $header-height;
+    color: $med-gray;
+
+    .link-separator {
+      color: darken($med-gray, 20);
+      display: inline-block;
+      margin: 0 5px;
+    }
+  }
+}
+
+
+@media (max-width: 630px) {
+  header {
+    background-image: none; // TODO: background image doesn't repeat well
+    height: auto;
+    text-align: center;
+
+    li a {
+      padding: 0;
+    }
+
+    .user-links {
+      display: inline-block;
+      float: none;
+      margin-top: -10px;
+    }
+  }
+}
