@@ -1,5 +1,5 @@
 <% #user passed in %>
-<div class="right" style="width: 150px; color: grey; padding: 10px; margin-right: 10px; font-size: smaller">
-  <span style="float: left"><%= link_to user.username, user, style: "color: gray" %></span>
-  <span style="float: right"><%= "+#{user.up_ratings} -#{user.down_ratings}" %></span>
+<div id="karma_summary" class="karma right">
+  <span class="left"><%= link_to user.username, user %></span>
+  <span class="right"><%= "+#{user.up_ratings} -#{user.down_ratings}" %></span>
 </div>

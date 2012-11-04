@@ -38,7 +38,12 @@ class UsersControllerTest < ActionController::TestCase
     sign_in @user
     get :show, id: @user
     assert_response :success
+    
+    assert_select "p#karma" do |p|
+      assert_select p[0], "p", { :text => /Up Ratings:\s+1\s+Down Ratings:\s+2/}
+    end
   end
+  
 
   test "should get edit" do
     sign_in @user

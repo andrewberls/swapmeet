@@ -12,6 +12,13 @@
   <%= @user.email %>
 </p>
 
+<p id="karma">
+  <b>Up Ratings:</b>
+  <%= @user.up_ratings  %>
+  <br />
+  <b>Down Ratings:</b>
+  <%= @user.down_ratings %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
