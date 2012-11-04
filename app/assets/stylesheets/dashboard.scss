@@ -1,0 +1,81 @@
+.section-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.dashboard-section {
+  // TODO: Cheeky is overriding margins here?
+  margin-top: 50px;
+
+  @media (max-width: 630px) {
+    margin-top: 15px;
+  }
+}
+
+.offer-box {
+  @extend %whitebox;
+  padding: 0;
+  width: 32%;
+
+  .offer-title {
+
+  }
+
+  .offer-details {
+    padding: 10px;
+
+    .offer-title {
+      margin-bottom: 10px;
+      color: #666;
+      @include bold(1.1em);
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .offer-notifications {
+    @include clearfix;
+    background-color: #F3F3F3;
+    border: 1px solid #DCDCDC;
+    color: lighten($gray-text, 10);
+    padding: 10px 5px;
+
+    .username {
+      color: #666;
+      font-weight: bold;
+    }
+
+    p, a {
+      display: inline-block;
+    }
+
+    a {
+      float: right;
+      font-weight: bold;
+    }
+  }
+}
+
+
+
+@media (max-width: 630px) {
+  .dashboard-section .offer-box {
+    margin-top: 10px;
+    width: 100%;
+
+    .offer-details  {
+      padding: 5px;
+
+      .offer-title {
+        margin: 0;
+      }
+    }
+
+
+    img {
+      display: none;
+    }
+  }
+}
