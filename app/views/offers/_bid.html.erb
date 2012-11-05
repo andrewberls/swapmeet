@@ -22,6 +22,8 @@
   <div style="margin: 20px 0">
     <% if bid == accepted_bid %>
       <div class="alert alert-success">This offer has been accepted</div>
+    <% elsif bid == completed_bid %>
+      <div class="alert alert-success">This offer has been completed</div>
     <% elsif accepted_bid.blank? %>
       <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
     <% end %>

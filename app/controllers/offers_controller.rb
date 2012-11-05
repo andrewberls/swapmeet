@@ -59,13 +59,25 @@ class OffersController < ApplicationController
 
   # POST /offers/:offer_id/complete/:bid_id
   def complete
+    Response.transaction do
+      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+      raise ActiveRecord::RecordNotFound if bid_resp.nil?
+
+      # Delete out all the other children of this auction, as well as any parent offers
+      # in any other auctions.
+      @offer = Offer.find(params[:offer_id])
+      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
+      bid_resp.complete!
+      ((@offer.responses + other_offer_responses) - [bid_resp]).each do |resp|
+        resp.destroy
+      end
+    end
+    flash[:success] = 'Trade completed.'
+    respond_to do |format|
+      format.html { redirect_to offers_url }
+      format.json { render json: @offer, status: :created, location: @offer }
+    end
   end
-
-
-
-
-
-
 
   # GET /offers
   # GET /offers.json
