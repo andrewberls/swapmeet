@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
    # Virtual attribute for authenticating by either username or email
   attr_accessor :login
 
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me,
+    :up_ratings, :down_ratings
 
   validates :username, :uniqueness => true
   validates :email, :uniqueness => true
@@ -23,6 +25,14 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+
+  def add_bad_rating
+    self.down_ratings += 1
+  end
+
+  def add_good_rating
+    self.up_ratings += 1
   end
 
 end

@@ -4,4 +4,6 @@
   <% end %>
   <%= link_to offer.title, offer, class: "offer-link" %>
   <%= link_to raw("View Trade &raquo;"), offer, class: "btn btn-aqua right" %>
+  
+  <%= render :partial => "karma", :locals => { :user => offer.user } %>
 </div>
