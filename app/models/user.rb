@@ -9,8 +9,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
 
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me,
-    :up_ratings, :down_ratings
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
 
   validates :username, :uniqueness => true
   validates :email, :uniqueness => true
