@@ -78,6 +78,25 @@ class OffersController < ApplicationController
       format.json { render json: @offer, status: :created, location: @offer }
     end
   end
+  
+  def rate
+    response = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+    unless response.rated
+      user = Offer.find(params[:bid_id]).user
+      if params[:rate] == "up"
+        puts "upping rating"
+        user.add_good_rating
+      elsif params[:rate] == "down"
+        puts "downing rating"
+        user.add_bad_rating
+      else
+        raise "Bad rate choice"
+      end
+      response.update_attributes! :rated => true
+      user.save!
+      redirect_to offer_url Offer.find(params[:offer_id])
+    end
+  end
 
   # GET /offers
   # GET /offers.json
