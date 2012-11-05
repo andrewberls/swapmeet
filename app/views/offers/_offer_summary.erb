@@ -3,6 +3,15 @@
     <%= image_tag offer.image.url(:thumb) %>
   <% end %>
   <%= link_to offer.title, offer, class: "offer-link" %>
+
+  <% if offer.completed_bid %>
+    <div class="btn btn-aqua">Completed</div>
+  <% end %>
+
+  <% if offer.accepted_bid %>
+    <%= link_to 'Complete Trade', offer_complete_path(offer_id: offer.id, bid_id: offer.accepted_bid.id), method: :post, class: 'btn btn-blue' %>
+  <% end %>
+
   <%= link_to raw("View Trade &raquo;"), offer, class: "btn btn-aqua right" %>
   
   <%= render :partial => "karma", :locals => { :user => offer.user } %>
