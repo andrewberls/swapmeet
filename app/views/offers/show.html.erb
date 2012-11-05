@@ -19,7 +19,7 @@
 <div id="offers_list">
   <% @offer.bids.each do |bid| %>
     <div class="offer">
-      <%= render :partial => 'bid', :locals => { :bid => bid, :accepted_bid => @offer.accepted_bid } %>
+      <%= render :partial => 'bid', :locals => { :bid => bid, :accepted_bid => @offer.accepted_bid, :completed_bid => @offer.completed_bid } %>
     </div>
   <% end %>
 </div>
