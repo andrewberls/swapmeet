@@ -1,11 +1,16 @@
 one:
   username: CouchBurner
   email: iburn@couchs.com
+  up_ratings: 1
+  down_ratings: 2
 
 two:
   username: BeerTaster
   email: itaste@beer.com
+  up_ratings: 5
+  down_ratings: 0
 
 admin:
   username: admin
   email: admin@admins.com
+

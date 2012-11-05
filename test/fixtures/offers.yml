@@ -7,27 +7,34 @@
 offer_one: 
   title: "Couch - good condition"
   description: "Microfibre couch in pretty good condition.  I'd be interested in trading for a desk."
+  user: one
 
 offer_two:
   title: "CS130A textbook"
   description: "CS130A textbook.  Has some writing and highlighting in it, but real damage to the book.  Desire to swap for CS138 book, or a couple six packs of Pacifico."
+  user: one
 
 offer_three:
   title: "CD collection"
   description: "My entire CD collection (105 CD's from the 90's)"
+  user: one
   
 offer_four:
   title: "Totally legit stuff"
   description: "What you don't believe me?"
+  user: two
   
 offer_five:
   title: "Cigarettes"
   description: "Camels.  I just quick and have a Costco pack."
+  user: two
 
 bid_one:
   title: "CS138 book"
   description: "CS138 book in okay condition.  Has a few ripped pages."
+  user: two
 
 bid_two:
   title: "Pacifio"
   description: "One six pack of Pacifico."
+  user: two

@@ -9,7 +9,8 @@
 </p>
 
 <p>
+  User: <%= link_to @offer.user.username, user_path %><%= " +#{@offer.user.up_ratings} -#{@offer.user.down_ratings}" %>
+</p>
   <% if @offer.image.present? %>
     <%= image_tag @offer.image.url, :style => "max-width: 100%" %>
   <% end %>
-</p>

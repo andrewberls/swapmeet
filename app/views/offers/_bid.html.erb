@@ -10,20 +10,22 @@
     <%= bid.description %>
   </p>
 
+
   <p>
     <% if bid.image.present? %>
       <%= image_tag bid.image.url(:thumb) %>
     <% end %>
   </p>
 
+  <%= render :partial => "karma", :locals => { :user => bid.user } %>
+  
+  <div style="margin: 20px 0">
+    <% if bid == accepted_bid %>
+      <div class="alert alert-success">This offer has been accepted</div>
+    <% elsif accepted_bid.blank? %>
+      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
+    <% end %>
+  </div>
 
-<div style="margin: 20px 0">
-<% if bid == accepted_bid %>
-    <div class="alert alert-success">This offer has been accepted</div>
-  <% elsif accepted_bid.blank? %>
-    <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
-<% end %>
 </div>
 
-
-</div>

@@ -1,0 +1,5 @@
+<% #user passed in %>
+<div id="karma_summary" class="karma right">
+  <span class="left"><%= link_to user.username, user %></span>
+  <span class="right"><%= "+#{user.up_ratings} -#{user.down_ratings}" %></span>
+</div>
