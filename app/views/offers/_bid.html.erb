@@ -17,7 +17,8 @@
     <% end %>
   </p>
 
-
+  <%= render :partial => "karma", :locals => { :user => bid.user } %>
+  
   <div style="margin: 20px 0">
     <% if bid == accepted_bid %>
       <div class="alert alert-success">This offer has been accepted</div>
@@ -26,6 +27,5 @@
     <% end %>
   </div>
 
-  <%= render :partial => "karma", :locals => { :user => bid.user } %>
 </div>
 
