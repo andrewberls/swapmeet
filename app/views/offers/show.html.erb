@@ -15,15 +15,13 @@
   </div>
 </div>
 
-</br>
-
-  <h1>Bids</h1>
+<h1>Bids</h1>
 <div id="offers_list">
-    <% @offer.bids.each do |bid| %>
-      <div class="offer">
-        <%= render :partial => 'bid', :locals => { :bid => bid } %>
-      </div>
-    <% end %>
+  <% @offer.bids.each do |bid| %>
+    <div class="offer">
+      <%= render :partial => 'bid', :locals => { :bid => bid, :accepted_bid => @offer.accepted_bid } %>
+    </div>
+  <% end %>
 </div>
 
 <div style="margin: 20px 0;">

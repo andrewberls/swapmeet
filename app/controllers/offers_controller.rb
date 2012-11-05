@@ -13,10 +13,11 @@ class OffersController < ApplicationController
     if request.get?
       @offer = Offer.new
     else
-      # TODO: @offer = current_user.offers.build(params[:offer])
-      @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
-      response = @parent_offer.responses.create(bid: @offer)
+      @offer = current_user.offers.build(params[:offer])
 
+      response = @parent_offer.responses.new(bid: @offer) do |resp|
+        resp.status = 'open'
+      end.save
       respond_to do |format|
         if @offer.save
           flash[:success] = 'Your bid was successfully registered.'
@@ -35,9 +36,42 @@ class OffersController < ApplicationController
 
   end
 
+  # POST /offers/1/accept/:bid_id
+  def accept
+    Response.transaction do
+      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+      raise ActiveRecord::RecordNotFound if bid_resp.nil?
+
+      # Lock out all the other children of this auction, as well as any parent offers
+      # in any other auctions.
+      @offer = Offer.find(params[:offer_id])
+      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
+      bid_resp.accept!
+      ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
+    end
+
+    flash[:success] = 'You have succesfully accepted the bid'
+    respond_to do |format|
+      format.html { redirect_to @offer }
+      format.json { render json: @offer, status: :created, location: @offer }
+    end
+  end
+
+  # POST /offers/:offer_id/complete/:bid_id
+  def complete
+  end
+
+
+
+
+
+
+
   # GET /offers
   # GET /offers.json
   def index
+    # We show only 'parent' offers ("I want to get rid of my couch"),
+    # not offers posted as responses
     @offers = Offer.parent_offers.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -73,8 +107,7 @@ class OffersController < ApplicationController
   # POST /offers
   # POST /offers.json
   def create
-    # TODO: @offer = current_user.offers.build(params[:offer])
-    @offer = Offer.new(params[:offer]) { |o| o.user = User.first }
+    @offer = current_user.offers.build(params[:offer])
 
     respond_to do |format|
       if @offer.save
