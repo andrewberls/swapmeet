@@ -45,8 +45,6 @@ class Offer < ActiveRecord::Base
     completed_response.present? ? completed_response.bid : nil
   end
 
-  private
-
   def accepted_response
     responses.detect { |r| r.status == 'accepted' }
   end
