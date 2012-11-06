@@ -1,3 +1,6 @@
+//-----------------------------------
+// OFFERS LISTING
+//-----------------------------------
 #offers_list {
   @extend %whitebox;
   padding: 0;
@@ -46,17 +49,128 @@
   }
 }
 
-.karma {
-  color: grey;
 
-  a {
-    color: grey;
+
+
+
+
+
+//-----------------------------------
+// BOXES FOR DASHBOARD / OFFER BIDS
+//-----------------------------------
+.offer-box,
+.bid-box {
+  @extend %whitebox;
+  padding: 0;
+
+
+  .offer-title {
+
+  }
+
+  .offer-details {
+    padding: 10px;
+
+    .offer-title {
+      margin-bottom: 10px;
+      color: #666;
+      @include bold(1.1em);
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .offer-notifications {
+    @include clearfix;
+    background-color: #F3F3F3;
+    border: 1px solid #DCDCDC;
+    color: lighten($gray-text, 10);
+    padding: 10px 5px;
+
+    .username {
+      color: #666;
+      font-weight: bold;
+    }
+
+    p, a {
+      display: inline-block;
+    }
+
+    p { float: left; }
+
+    a {
+      float: right;
+      font-weight: bold;
+    }
   }
 }
 
-#karma_summary {
-  width: 150px; 
-  padding: 10px;
-  margin-right: 10px;
+.offer-box {
+  width: 32%;
+}
+
+
+// Bid boxes on an offer page
+.bid-box {
+  .bid-accepted {
+    color: #468847;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .bid-details {
+    padding: 10px 5px;
+  }
+
+  img {
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 630px) {
+  .offer-box {
+    margin-top: 10px;
+    width: 100%;
+
+    .offer-details  {
+      padding: 5px;
+
+      .offer-title {
+        margin: 0;
+      }
+    }
+
+
+    img {
+      display: none;
+    }
+  }
+}
+
+.user-karma {
+  color: #666;
+  display: inline-block;
+  float: right;
   font-size: smaller;
+
+  a {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+// Container for the parent offer on a page
+.parent-container img {
+  float: left;
+  max-width: 100%;
+}
+
+.bids-container  {
+  margin-top: 25px;
 }

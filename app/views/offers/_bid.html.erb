@@ -1,33 +1,23 @@
+<div class="span-4 bid-box">
+  <div class="bid-details">
+    <% if bid == accepted_bid %>
+      <div class="bid-accepted">This bid has been accepted</div>
+    <% end %>
 
-<div style ="margin: 5px 0">
-  <p style="font-size: 1.1em;">
-    <span style="font-weight: bold">Title:</span>
-    <%= bid.title %>
-  </p>
-
-  <p style="font-size: 1.1em;">
-    <span style="font-weight: bold">Description:</span>
-    <%= bid.description %>
-  </p>
-
-
-  <p>
     <% if bid.image.present? %>
       <%= image_tag bid.image.url(:thumb) %>
     <% end %>
-  </p>
 
-  <%= render :partial => "karma", :locals => { :user => bid.user } %>
-  
-  <div style="margin: 20px 0">
-    <% if bid == accepted_bid %>
-      <div class="alert alert-success">This offer has been accepted</div>
-    <% elsif bid == completed_bid %>
-      <div class="alert alert-success">This offer has been completed</div>
-    <% elsif accepted_bid.blank? %>
-      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
-    <% end %>
+    <p><%= bid.description %></p>
   </div>
 
-</div>
+  <div class="offer-notifications">
+    <p>From <span class="username"><%= bid.user.username %></span></p>
+    <%= render :partial => "karma", :locals => { :user => bid.user } %>
 
+    <%# TODO: ACCESS CONTROLS %>
+    <% if accepted_bid.blank? && current_user == @offer.user %>
+      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
+    <% end %>
+  </div>
+</div>
