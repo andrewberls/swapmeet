@@ -1,45 +1,23 @@
+<div class="span-4 bid-box">
+  <div class="bid-details">
+    <% if bid == accepted_bid %>
+      <div class="bid-accepted">This bid has been accepted</div>
+    <% end %>
 
-<div style ="margin: 5px 0">
-  <p style="font-size: 1.1em;">
-    <span style="font-weight: bold">Title:</span>
-    <%= bid.title %>
-  </p>
-
-  <p style="font-size: 1.1em;">
-    <span style="font-weight: bold">Description:</span>
-    <%= bid.description %>
-  </p>
-
-
-  <p>
     <% if bid.image.present? %>
       <%= image_tag bid.image.url(:thumb) %>
     <% end %>
-  </p>
 
-  <%= render :partial => "karma", :locals => { :user => bid.user } %>
-  <br />
-  <div style="margin: 20px 0">
-    <% if bid == accepted_bid %>
-      <div class="alert alert-success">This offer has been accepted</div>
-    <% elsif bid == completed_bid %>
-      <div class="alert alert-success">This offer has been completed</div>
-      <%  #This code seriously needs to be refactored.  There should not be db calls in the views...Out of time, sorry!
-      response = Response.where(:offer_id => @offer.id, :bid_id => bid.id).first
-      unless response.rated %>
-        <div><p>Rate this swap:</p>
-          <p>
-          <%= link_to 'Up', offer_rate_path(offer_id: @offer, bid_id: bid, rate: :up), method: :post, class: 'btn btn-blue' %>
-          <%= link_to 'Down', offer_rate_path(offer_id: @offer, bid_id: bid, rate: :down), method: :post, class: 'btn btn-blue' %>
-          </p>
-        </div>
-            
-      <% end %>
-
-    <% elsif accepted_bid.blank? %>
-      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-blue' %>
-    <% end %>
+    <p><%= bid.description %></p>
   </div>
 
-</div>
+  <div class="offer-notifications">
+    <p>From <span class="username"><%= bid.user.username %></span></p>
+    <%= render :partial => "karma", :locals => { :user => bid.user } %>
 
+    <%# TODO: ACCESS CONTROLS %>
+    <% if accepted_bid.blank? && current_user == @offer.user %>
+      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
+    <% end %>
+  </div>
+</div>
