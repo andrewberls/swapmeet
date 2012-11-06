@@ -38,9 +38,9 @@ end
 # Offers
 #--------------------
 OFFER_COUNT.times do |i|
-  Offer.create!(title: "test-offer#{i}", description: LiterateRandomizer.sentence).tap do |offer|
+  Offer.new(title: "test-offer#{i}", description: LiterateRandomizer.sentence) do |offer|
     offer.user = random_user
-  end
+  end.save!
 end
 
 
@@ -61,9 +61,9 @@ BID_COUNT.times do |i|
     user
   end
 
-  bid = Offer.create!(title: "test-bid#{i}", description: LiterateRandomizer.sentence).tap do |offer|
+  bid = Offer.new(title: "test-bid#{i}", description: LiterateRandomizer.sentence) do |offer|
     offer.user = bid_user
-  end
+  end.save!
 
   response = parent_offer.responses.create(bid: bid)
 end
