@@ -12,6 +12,7 @@ Swapmeet::Application.routes.draw do
     match 'bid', :on => :member, as: 'bid_on'                    # /offers/2/bid (matches both GET and POST)
     post 'accept/:bid_id' => "offers#accept", as: 'accept'       # /offers/2/accept/3
     post 'complete/:bid_id' => "offers#complete", as: 'complete' # /offers/2/complete/3
+    post 'rate/:bid_id' => "offers#rate", as: 'rate'             # /offers/2/rate/3
   end
   match 'dashboard' => 'offers#dashboard', as: 'dashboard'
 

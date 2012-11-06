@@ -5,7 +5,11 @@
   <%= link_to offer.title, offer, class: "offer-link" %>
 
   <% if offer.completed_bid %>
-    <div class="btn btn-aqua">Completed</div>
+    <% if offer.completed_response.rated %>
+      &nbsp;&nbsp;<div class="btn btn-aqua">Completed - unrated</div>
+    <% else %>
+      &nbsp;&nbsp;<div class="btn btn-aqua">Completed and rated</div>
+    <% end %>
   <% end %>
 
   <% if offer.accepted_bid %>
