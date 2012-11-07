@@ -1,22 +1,14 @@
-<div class="offer">
+<div class="offer-summary">
   <% if offer.image.present? %>
     <%= image_tag offer.image.url(:thumb) %>
   <% end %>
+
   <%= link_to offer.title, offer, class: "offer-link" %>
 
-  <% if offer.completed_bid %>
-    <% if offer.completed_response.rated %>
-      &nbsp;&nbsp;<div class="btn btn-aqua">Completed - unrated</div>
-    <% else %>
-      &nbsp;&nbsp;<div class="btn btn-aqua">Completed and rated</div>
-    <% end %>
-  <% end %>
-
-  <% if offer.accepted_bid %>
-    <%= link_to 'Complete Trade', offer_complete_path(offer_id: offer.id, bid_id: offer.accepted_bid.id), method: :post, class: 'btn btn-blue' %>
+  <% if offer.accepted_bid.present? %>
+    <%= link_to 'Complete Trade', offer_complete_path(offer_id: offer.id, bid_id: offer.accepted_bid.id),
+          method: :post, class: 'btn btn-blue' %>
   <% end %>
 
   <%= link_to raw("View Trade &raquo;"), offer, class: "btn btn-aqua right" %>
-
-  <%#= render :partial => "karma", :locals => { :user => offer.user } %>
 </div>
