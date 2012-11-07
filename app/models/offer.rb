@@ -36,6 +36,14 @@ class Offer < ActiveRecord::Base
   # not the stuff that is posted in response
   scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
+  def accepted_response
+    detect_response 'accepted'
+  end
+
+  def completed_response
+    detect_response 'completed'
+  end
+
   # The bid that the parent offer has accepted
   def accepted_bid
     accepted_response.present? ? accepted_response.bid : nil
@@ -45,12 +53,18 @@ class Offer < ActiveRecord::Base
     completed_response.present? ? completed_response.bid : nil
   end
 
-  def accepted_response
-    responses.detect { |r| r.status == 'accepted' }
+  def accepted?
+    accepted_bid.present?
   end
 
-  def completed_response
-    responses.detect { |r| r.status == 'completed' }
+  def completed?
+    completed_bid.present?
+  end
+
+  private
+
+  def detect_response(status)
+    responses.detect { |r| r.status == status }
   end
 
 end

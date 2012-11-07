@@ -18,6 +18,7 @@ class OffersController < ApplicationController
       response = @parent_offer.responses.new(bid: @offer) do |resp|
         resp.status = 'open'
       end.save
+
       respond_to do |format|
         if @offer.save
           flash[:success] = 'Your bid was successfully registered.'
@@ -27,25 +28,22 @@ class OffersController < ApplicationController
           format.html { render action: "bid" }
           format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
         end
+
       end
     end
   end
 
-  # GET /dashboard
-  def dashboard
-
-  end
 
   # POST /offers/1/accept/:bid_id
   def accept
     Response.transaction do
-      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
-      raise ActiveRecord::RecordNotFound if bid_resp.nil?
+      bid_resp = Response.where(offer_id: params[:offer_id], bid_id: params[:bid_id]).first
+      bid_resp.present? or raise ActiveRecord::RecordNotFound
 
       # Lock out all the other children of this auction, as well as any parent offers
       # in any other auctions.
       @offer = Offer.find(params[:offer_id])
-      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
+      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all # all responses bid is part of
       bid_resp.accept!
       ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
     end
@@ -57,46 +55,57 @@ class OffersController < ApplicationController
     end
   end
 
+
   # POST /offers/:offer_id/complete/:bid_id
   def complete
     Response.transaction do
       bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
-      raise ActiveRecord::RecordNotFound if bid_resp.nil?
+      bid_resp.present? or raise ActiveRecord::RecordNotFound
 
       # Delete out all the other children of this auction, as well as any parent offers
       # in any other auctions.
       @offer = Offer.find(params[:offer_id])
       other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
       bid_resp.complete!
-      ((@offer.responses + other_offer_responses) - [bid_resp]).each do |resp|
-        resp.destroy
-      end
+      ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:destroy)
     end
+
     flash[:success] = 'Trade completed.'
     respond_to do |format|
-      format.html { redirect_to offers_url }
+      format.html { redirect_to @offer }
       format.json { render json: @offer, status: :created, location: @offer }
     end
   end
-  
+
+
   def rate
     response = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+
     unless response.rated
-      user = Offer.find(params[:bid_id]).user
-      if params[:rate] == "up"
-        puts "upping rating"
-        user.add_good_rating
-      elsif params[:rate] == "down"
-        puts "downing rating"
-        user.add_bad_rating
+      # TODO: Can we reduce queries here?
+      offer      = Offer.find(params[:offer_id])
+      offer_user = offer.user
+      bid_user   = Offer.find(params[:bid_id]).user
+      rated_user = (current_user == offer_user) ? bid_user : offer_user
+
+      case params[:rate]
+      when 'up'   then rated_user.add_good_rating
+      when 'down' then rated_user.add_bad_rating
       else
-        raise "Bad rate choice"
+        raise "Rating #{params[:rate].inspect} not recognized"
       end
-      response.update_attributes! :rated => true
-      user.save!
-      redirect_to offer_url Offer.find(params[:offer_id])
+
+      response.update_attributes! :rated => true # TODO: BOTH USERS CAN VOTE
+      rated_user.save!
+
+      flash[:success] = 'Rating completed.'
+      respond_to do |format|
+        format.html { redirect_to offer }
+        format.json { render json: offer, location: offer }
+      end
     end
   end
+
 
   # GET /offers
   # GET /offers.json
@@ -109,6 +118,11 @@ class OffersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @offers }
     end
+  end
+
+
+  # GET /dashboard
+  def dashboard
   end
 
   # GET /offers/1
