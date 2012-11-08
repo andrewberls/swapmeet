@@ -46,11 +46,26 @@ class Offer < ActiveRecord::Base
   end
 
   def accepted_response
-    responses.detect { |r| r.status == 'accepted' }
+    detect_respond 'accepted'
   end
 
   def completed_response
-    responses.detect { |r| r.status == 'completed' }
+    detect_respond 'completed'
+  end
+
+  def sibling_responses_for(bid_resp)
+    responses - [bid_resp]
+  end
+
+  def parents(options={})
+    # options[:except] => Response to exclude
+    # return all parent responses (offers this bid is part of)
+  end
+
+  private
+
+  def detect_response(status)
+    responses.detect { |r| r.status == status }
   end
 
 end
