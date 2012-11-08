@@ -36,6 +36,10 @@ class Offer < ActiveRecord::Base
   # not the stuff that is posted in response
   scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
+  def is_parent_offer?
+    Response.find_by_bid_id(id).blank?
+  end
+
   def accepted_response
     detect_response 'accepted'
   end

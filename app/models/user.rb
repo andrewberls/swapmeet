@@ -38,12 +38,11 @@ class User < ActiveRecord::Base
     offer.user == self
   end
 
-  # You can bid on an offer if you don't own it and
-  # have not already made a bid on it
+  # You can bid on an offer if you don't own it and it is open
   def can_bid_on?(offer)
-    # TODO: CHECK
-    bids = Response.where(offer_id: offer.id).select { |r| r.bid.present? && r.bid.user == self }
-    !owns_offer?(offer) && bids.blank?
+    owns = (self == offer.user)
+    in_transaction = offer.responses.any? { |r| r.status != 'open' }
+    offer.is_parent_offer? && !owns && !in_transaction
   end
 
 
