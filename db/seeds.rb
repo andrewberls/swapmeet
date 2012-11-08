@@ -77,6 +77,9 @@ end
 #--------------------
 # Responses
 #--------------------
+
+# TODO BROKEN
+
 BID_COUNT.times do |i|
   parent_offer = Offer.all.shuffle.first
   parent_user  = random_user
@@ -90,12 +93,11 @@ BID_COUNT.times do |i|
     user
   end
 
-  bid = Offer.new(title: "test-bid#{i}", description: LiterateRandomizer.sentence) do |offer|
-    offer.user = bid_user
-  end
-  bid.save!
-
-  response = parent_offer.responses.create(bid: bid)
+  bid = bid_user.offers.build(title: "test-bid#{i}", description: LiterateRandomizer.sentence)
+  response = parent_offer.responses.new(bid: bid) do |resp|
+    resp.status = 'open'
+  end.save
+  bid.save
 end
 
 
