@@ -61,15 +61,6 @@ class Offer < ActiveRecord::Base
     completed_bid.present?
   end
 
-  def sibling_responses_for(bid_resp)
-    responses - [bid_resp]
-  end
-
-  def parents(options={})
-    # options[:except] => Response to exclude
-    # return all parent responses (offers this bid is part of)
-  end
-
   private
 
   def detect_response(status)

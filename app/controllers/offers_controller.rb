@@ -4,11 +4,11 @@ class OffersController < ApplicationController
 
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
   before_filter :find_parent_offer, only: [:bid]
+  before_filter :find_responses, only: [:accept, :complete]
+
 
   # GET /offers/1/bid
   # POST /offers/1/bid
-  # Bidding creates a nested offer relationship using an intermediary
-  # response object.
   def bid
     if request.get?
       @offer = Offer.new
@@ -35,17 +35,13 @@ class OffersController < ApplicationController
 
 
   # POST /offers/1/accept/:bid_id
+  # Mark a bid as accepted, and  lock out all the other children of this auction,
+  # as well as any parent offers in any other auctions.
+  # All heavy lifting is accomplished in find_responses
   def accept
     Response.transaction do
-      bid_resp = Response.where(offer_id: params[:offer_id], bid_id: params[:bid_id]).first
-      bid_resp.present? or raise ActiveRecord::RecordNotFound
-
-      # Lock out all the other children of this auction, as well as any parent offers
-      # in any other auctions.
-      @offer = Offer.find(params[:offer_id])
-      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all # all responses bid is part of
-      bid_resp.accept!
-      ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
+      @bid_resp.accept!
+      @response_queue.map(&:lock!)
     end
 
     flash[:success] = 'You have succesfully accepted the bid'
@@ -57,17 +53,13 @@ class OffersController < ApplicationController
 
 
   # POST /offers/:offer_id/complete/:bid_id
+  # Mark a bid as completed, and delete all the other children of this auction,
+  # as well as any parent offers in any other auctions.
+  # All heavy lifting is accomplished in find_responses
   def complete
     Response.transaction do
-      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
-      bid_resp.present? or raise ActiveRecord::RecordNotFound
-
-      # Delete out all the other children of this auction, as well as any parent offers
-      # in any other auctions.
-      @offer = Offer.find(params[:offer_id])
-      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
-      bid_resp.complete!
-      ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:destroy)
+      @bid_resp.complete!
+      @response_queue.map(&:destroy)
     end
 
     flash[:success] = 'Trade completed.'
@@ -200,6 +192,17 @@ class OffersController < ApplicationController
   def find_parent_offer
     @parent_offer = Offer.find(params[:id])
     @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+  end
+
+  # TODO: This name is horrible. It's intent is to DRY up the responses queries
+  # in the accept and complete actions
+  def find_responses
+    @bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+    @bid_resp.present? or raise ActiveRecord::RecordNotFound
+    @offer    = Offer.find(params[:offer_id])
+
+    @parent_responses = Response.where(:bid_id => params[:bid_id]).all
+    @response_queue   = (@offer.responses + @parent_responses) - [@bid_resp]
   end
 
 end
