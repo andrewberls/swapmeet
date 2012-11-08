@@ -1,8 +1,9 @@
 class OffersController < ApplicationController
 
   before_filter :authenticate_user!
-
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
+  before_filter :must_own_offer, only: [:edit, :update, :destroy]
+
   before_filter :find_parent_offer, only: [:bid]
   before_filter :find_responses, only: [:accept, :complete]
 
@@ -189,6 +190,10 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
   end
 
+  def must_own_offer
+    reject_unauthorized(current_user == @offer.user, offers_path)
+  end
+
   def find_parent_offer
     @parent_offer = Offer.find(params[:id])
     @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
@@ -197,11 +202,11 @@ class OffersController < ApplicationController
   # TODO: This name is horrible. It's intent is to DRY up the responses queries
   # in the accept and complete actions
   def find_responses
-    @bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+    @bid_resp = Response.where(offer_id: params[:offer_id], bid_id: params[:bid_id]).first
     @bid_resp.present? or raise ActiveRecord::RecordNotFound
     @offer    = Offer.find(params[:offer_id])
 
-    @parent_responses = Response.where(:bid_id => params[:bid_id]).all
+    @parent_responses = Response.where(bid_id: params[:bid_id]).all
     @response_queue   = (@offer.responses + @parent_responses) - [@bid_resp]
   end
 
