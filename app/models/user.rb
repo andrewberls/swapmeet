@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
 
   has_many :offers
-
+  has_many :messages
+  
   # Provided code to enable login with username or email
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
