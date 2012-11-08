@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
 
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :up_ratings, :down_ratings
 
   validates :username, :uniqueness => true
   validates :email, :uniqueness => true
@@ -26,12 +26,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_good_rating
+    self.up_ratings += 1
+  end
+
   def add_bad_rating
     self.down_ratings += 1
   end
 
-  def add_good_rating
-    self.up_ratings += 1
+  def owns_offer?(offer)
+    offer.user == self
   end
+
+  # You can bid on an offer if you don't own it and
+  # have not already made a bid on it
+  def can_bid_on?(offer)
+    # TODO: CHECK
+    bids = Response.where(offer_id: offer.id).select { |r| r.bid.present? && r.bid.user == self }
+    !owns_offer?(offer) && bids.blank?
+  end
+
 
 end

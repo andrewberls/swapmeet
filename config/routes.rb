@@ -9,10 +9,10 @@ Swapmeet::Application.routes.draw do
   end
 
   resources :offers do
-    match 'bid', :on => :member, as: 'bid_on'                    # /offers/2/bid (matches both GET and POST)
-    post 'accept/:bid_id' => "offers#accept", as: 'accept'       # /offers/2/accept/3
+    match 'bid', :on => :member, as: 'bid_on'                    # GET|POST /offers/2/bid
+    post 'accept/:bid_id'   => "offers#accept",   as: 'accept'   # /offers/2/accept/3
     post 'complete/:bid_id' => "offers#complete", as: 'complete' # /offers/2/complete/3
-    post 'rate/:bid_id' => "offers#rate", as: 'rate'             # /offers/2/rate/3
+    post 'rate/:bid_id'     => "offers#rate",     as: 'rate'     # /offers/2/rate/3
   end
   match 'dashboard' => 'offers#dashboard', as: 'dashboard'
 
@@ -23,67 +23,5 @@ Swapmeet::Application.routes.draw do
 
   # Route page not found to 404 page
   # match '*a' => 'static#not_found'
-
-
-
-
-
-
-
-
-
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 
 end

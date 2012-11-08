@@ -1,8 +1,8 @@
 <% provide(:title, "Offer: #{@offer.title}") %>
 
-<%= content_tag :div, flash[:success], class: 'alert alert-success' if flash[:success] %>
+<%= flash_success %>
 
-<% unless current_user == @offer.user %>
+<% if current_user.can_bid_on?(@offer) %>
   <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large', style: "display: inline-block; margin-bottom: 20px;" %>
 <% end %>
 
@@ -12,13 +12,13 @@
   </div>
 
   <div class="span-10">
-    <h2><%= @offer.title %></h2>
+    <h2><%= @offer.title %> <span style="color:red;">- <%= @offer.user.username %></span> </h2>
     <p><%= @offer.description %></p>
   </div>
 </div>
 
 <div class="row bids-container">
   <% @offer.bids.each do |bid| %>
-     <%= render :partial => 'bid', :locals => { :bid => bid, :accepted_bid => @offer.accepted_bid, :completed_bid => @offer.completed_bid } %>
+     <%= render 'bid', bid: bid, accepted_bid: @offer.accepted_bid, completed_bid: @offer.completed_bid %>
   <% end %>
 </div>
