@@ -77,9 +77,6 @@ end
 #--------------------
 # Responses
 #--------------------
-
-# TODO BROKEN
-
 BID_COUNT.times do |i|
   parent_offer = Offer.all.shuffle.first
   parent_user  = random_user
