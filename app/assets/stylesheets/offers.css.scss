@@ -54,19 +54,26 @@
 
 
 
+//-----------------------------------
+// OFFER BOXES
+//-----------------------------------
+.page-section {
+  // TODO: NEEDS RENAMING
+  @include clearfix;
+  margin-bottom: 50px;
 
-//-----------------------------------
-// BOXES FOR DASHBOARD / OFFER BIDS
-//-----------------------------------
+  @media (max-width: 630px) {
+    margin-top: 15px;
+  }
+}
+
 .offer-box,
 .bid-box {
   @extend %whitebox;
+  float: left;
+  margin: 15px 10px 0;
+  max-width: 250px;
   padding: 0;
-
-
-  .offer-title {
-
-  }
 
   .offer-details {
     padding: 10px;
@@ -94,11 +101,8 @@
       font-weight: bold;
     }
 
-    p, a {
-      display: inline-block;
-    }
-
     p {
+      display: inline-block;
       float: left;
 
       @media (max-width: 1100px) {
@@ -108,14 +112,11 @@
     }
 
     a {
+      display: inline-block;
       float: right;
       font-weight: bold;
     }
   }
-}
-
-.offer-box {
-  width: 32%;
 }
 
 
@@ -127,13 +128,8 @@
     margin-bottom: 5px;
   }
 
-  .bid-accepted {
-    color: #468847;
-  }
-
-  .bid-completed {
-    color: $blue;
-  }
+  .bid-accepted  { color: #468847; }
+  .bid-completed { color: $blue; }
 
   .bid-details {
     padding: 10px 5px;
@@ -148,26 +144,8 @@
   }
 }
 
-@media (max-width: 630px) {
-  .offer-box {
-    margin-top: 10px;
-    width: 100%;
 
-    .offer-details  {
-      padding: 5px;
-
-      .offer-title {
-        margin: 0;
-      }
-    }
-
-
-    img {
-      display: none;
-    }
-  }
-}
-
+// Karma / voting
 .feedback-container {
   margin-top: 10px;
   text-align: center;
@@ -195,16 +173,6 @@
   }
 }
 
-// Container for the parent offer on a page
-.parent-container img {
-  float: left;
-  max-width: 100%;
-}
-
-.bids-container  {
-  margin-top: 25px;
-}
-
-.vote {
+.vote-btn {
   @include bold(1.1em);
 }
