@@ -1,4 +1,5 @@
 <div class="user-karma">
+  <%= content_tag :span, "By:", class: "left" if byline %>
   <span class="left"><%= link_to user.username, user %></span>
 
   <span class="right">

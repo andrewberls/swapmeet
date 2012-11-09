@@ -3,7 +3,7 @@
 <%= flash_success %>
 
 <% if current_user.can_bid_on?(@offer) %>
-  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large', style: "display: inline-block; margin-bottom: 20px;" %>
+  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large bid-btn' %>
 <% end %>
 
 <div class="row parent-container">
@@ -12,7 +12,9 @@
   </div>
 
   <div class="span-10">
-    <h2><%= @offer.title %> <span style="color:red;">- <%= @offer.user.username %></span> </h2>
+    <h2><%= @offer.title %></h2>
+    <%= render 'karma', user: @offer.user, byline: true %>
+
     <p><%= @offer.description %></p>
   </div>
 </div>

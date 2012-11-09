@@ -63,11 +63,6 @@
   @extend %whitebox;
   padding: 0;
 
-
-  .offer-title {
-
-  }
-
   .offer-details {
     padding: 10px;
 
@@ -175,7 +170,7 @@
 
 .user-karma {
   @include clearfix;
-  color: #666;
+  color: darken($med-gray, 25);
   display: inline-block;
   float: right;
   font-size: smaller;
@@ -196,9 +191,21 @@
 }
 
 // Container for the parent offer on a page
-.parent-container img {
-  float: left;
-  max-width: 100%;
+.parent-container {
+  img {
+    float: left;
+    max-width: 100%;
+  }
+
+  h2 { margin-bottom: 5px; }
+
+  .user-karma {
+    @include bold(1.1em);
+    float: none;
+    margin-bottom: 10px;
+
+    span { margin-right: 5px; }
+  }
 }
 
 .bids-container  {
