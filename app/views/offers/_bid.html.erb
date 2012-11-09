@@ -35,8 +35,8 @@
             <%= (current_user == @offer.completed_bid.user) ? @offer.user.username : completed_bid.user.username %>:
           </p>
 
-          <%= link_to "+", offer_rate_path(@offer, completed_bid, rate: 'up'), method: :post,   class: "btn btn-green vote" %>
-          <%= link_to "-", offer_rate_path(@offer, completed_bid, rate: 'down'), method: :post, class: "btn btn-red vote" %>
+          <%= link_to "+", offer_rate_path(@offer, completed_bid, rate: 'up'), method: :post,   class: "btn btn-green vote-btn" %>
+          <%= link_to "-", offer_rate_path(@offer, completed_bid, rate: 'down'), method: :post, class: "btn btn-red vote-btn" %>
         <% end %>
       </div>
     <% end %>
