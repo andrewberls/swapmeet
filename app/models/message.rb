@@ -15,5 +15,16 @@ class Message < ActiveRecord::Base
     
   }
   
+  scope :unread_message_summary_for_user, lambda { |recipient|
+    where(
+      "sender_id, timestamp
+      IN (
+        SELECT sender_id as sender_id, MAX(timestamp) as timestamp \
+        FROM messages \
+        WHERE read = false
+        GROUP BY sender_id
+      )")
+  }
+  
   scope :order_by_recency, order('updated_at desc')
 end
