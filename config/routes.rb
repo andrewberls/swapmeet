@@ -9,14 +9,16 @@ Swapmeet::Application.routes.draw do
   end
 
   resources :offers do
-    match 'bid', :on => :member, as: 'bid_on'                    # GET|POST /offers/2/bid
+    match 'bid', on: :member, as: 'bid_on'                       # GET|POST /offers/2/bid
     post 'accept/:bid_id'   => "offers#accept",   as: 'accept'   # /offers/2/accept/3
     post 'complete/:bid_id' => "offers#complete", as: 'complete' # /offers/2/complete/3
     post 'rate/:bid_id'     => "offers#rate",     as: 'rate'     # /offers/2/rate/3
   end
   match 'dashboard' => 'offers#dashboard', as: 'dashboard'
 
-  resources :users
+  resources :users do
+    get 'offers', on: :member, as: 'offers' # /offers/2/bid
+  end
 
 
   root :to => 'offers#index'
