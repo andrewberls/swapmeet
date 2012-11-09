@@ -18,13 +18,25 @@ class Message < ActiveRecord::Base
   #A little help from: http://stackoverflow.com/questions/12027160/sql-query-for-most-recent-messages
   scope :unread_message_summary_for_user, lambda { |recipient|
     where(
-      "(sender_id, updated_at)
+      "(sender_id, recipient_id, updated_at)
       IN (
-        SELECT sender_id as sender_id, MAX(updated_at) as updated_at \
+        SELECT sender_id as sender_id, recipient_id as recipient_id, MAX(updated_at) as updated_at \
         FROM messages \
-        WHERE messages.read = 0 \ 
+        WHERE messages.read = 0 AND messages.recipient_id = #{recipient.id} \ 
         GROUP BY sender_id \
       )").order_by_recency
+  }
+  
+  scope :message_summary_for_user, lambda { |recipient|
+    where(
+      "(sender_id, recipient_id, updated_at)
+      IN (
+        SELECT sender_id as sender_id, recipient_id as recipient_id, MAX(updated_at) as updated_at \
+        FROM messages \
+        WHERE recipient_id = #{recipient.id} \ 
+        GROUP BY sender_id \
+      )").order_by_recency
+    
   }
   
   scope :order_by_recency, order('updated_at desc')

@@ -61,11 +61,39 @@ class MessageTest < ActiveSupport::TestCase
     m4 = Message.create!(sender_id: user3.id, recipient_id: users(:one).id, content: "This is my test4")  
     m4.update_attributes! :read => true
     
+    #a message that does not go to user one
+    Message.create!(sender_id: user3.id, recipient_id: users(:two).id, content: "This is my test5")  
+    
     unread_messages = Message.unread_message_summary_for_user(users(:one))
     assert_equal [m3.id, m2.id], unread_messages.map { |um| um.id }
   end
   
   test "should be able to get a list of the most recent message from each user" do
+    Message.destroy_all
     
+    #two unread from one user
+    Time.expects(:now).returns(Time.local(2012, 11, 6, 5, 5, 5)).at_least_once
+    m1 = Message.create!(sender_id: users(:two).id, recipient_id: users(:one).id, content: "This is my test")
+    Time.expects(:now).returns(Time.local(2012, 11, 7, 5, 5, 5)).at_least_once
+    m2 = Message.create!(sender_id: users(:two).id, recipient_id: users(:one).id, content: "This is my test2")
+    assert_equal false, m1.read
+    assert_equal false, m2.read
+    
+    #one unread from another user
+    Time.expects(:now).returns(Time.local(2012, 11, 8, 5, 5, 5)).at_least_once
+    m3 = Message.create!(sender_id: users(:admin).id, recipient_id: users(:one).id, content: "This is my test3")  
+    assert_equal false, m3.read
+    
+    #no unread from third user
+    user3 = User.create! email: "sarah@test.com", password: 'password'
+    Time.expects(:now).returns(Time.local(2012, 11, 9, 5, 5, 5)).at_least_once
+    m4 = Message.create!(sender_id: user3.id, recipient_id: users(:one).id, content: "This is my test4")  
+    m4.update_attributes! :read => true
+    
+    #a message that does not go to user one
+    Message.create!(sender_id: user3.id, recipient_id: users(:two).id, content: "This is my test5")  
+    
+    messages = Message.message_summary_for_user(users(:one))
+    assert_equal [m4.id, m3.id, m2.id], messages.map { |um| um.id }
   end
 end
