@@ -1,15 +1,15 @@
-<% if @offer.completed? || @offer.accepted? %>
-  <div class="feedback-container">
-    <% if (@offer.completed_response || @offer.accepted_response).rated %>
-      <p>Completed and rated</p>
-    <% else %>
-      <p style="font-weight: bold;">
-        Leave a rating for
-        <%= (current_user == @offer.completed_bid.user) ? @offer.user.username : (completed_bid || accepted_bid).user.username %>:
-      </p>
 
-      <%= link_to "+", offer_rate_path(@offer, completed_bid, rate: 'up'), method: :post,   class: "btn btn-green vote" %>
-      <%= link_to "-", offer_rate_path(@offer, completed_bid, rate: 'down'), method: :post, class: "btn btn-red vote" %>
-    <% end %>
-  </div>
-<% end %>
+<div class="feedback-container">
+  <% if @rating_state == :rated %>
+    <p>Rated</p>
+  <% elsif @rating_state == :display_rate_buttons %>
+    <p style="font-weight: bold;">
+      Leave a rating for
+      <%= @user_to_rate %>:
+    </p>
+
+    <%= link_to "+", offer_rate_path(@offer, @selected_bid, rate: 'up'), method: :post,   class: "btn btn-green vote" %>
+    <%= link_to "-", offer_rate_path(@offer, @selected_bid, rate: 'down'), method: :post, class: "btn btn-red vote" %>
+  <% end %>
+</div>
+

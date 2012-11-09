@@ -31,5 +31,9 @@ class Response < ActiveRecord::Base
   def lock!
     update_attributes! status: 'locked'
   end
+  
+  def self.response_for(offer, bid)
+    where(:offer_id => offer.id, :bid_id => bid.id).first
+  end
 
 end

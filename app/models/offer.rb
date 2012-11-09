@@ -56,6 +56,10 @@ class Offer < ActiveRecord::Base
   def completed_bid
     completed_response.present? ? completed_response.bid : nil
   end
+  
+  def completed_or_accepted_bid
+    completed_bid || accepted_bid
+  end
 
   def accepted?
     accepted_bid.present?

@@ -3,7 +3,7 @@
 <div class="span-4 bid-box">
   <div class="bid-details">
 
-    <%# TODO: Not a fan of all the state checks here %>
+<%# TODO: Not a fan of all the state checks here %>
     <% if bid == accepted_bid && completed_bid.blank? %>
       <div class="bid-accepted">This bid has been accepted</div>
     <% end %>
@@ -20,21 +20,21 @@
 
     <% if bid == accepted_bid && current_user.owns_offer?(@offer) %>
       <%= link_to 'Complete Trade', offer_complete_path(offer_id: @offer.id, bid_id: accepted_bid.id),
-            method: :post, class: 'btn btn-blue btn-full' %>
-    <% end %>
+        method: :post, class: 'btn btn-blue btn-full' %>
+      <% end %>
+
+      <% if bid == @selected_bid %>
+        <%= render :partial => "rating" %>
+      <% end %>
+    </div><!-- .bid-details -->
 
 
-    <%= render :partial => "rating" %>
+    <div class="offer-notifications">
+      <p>From <span class="username"><%= bid.user.username %></span></p>
+      <%= render :partial => "users/karma", :locals => { :user => bid.user } %>
 
-  </div><!-- .bid-details -->
-
-
-  <div class="offer-notifications">
-    <p>From <span class="username"><%= bid.user.username %></span></p>
-    <%= render :partial => "users/karma", :locals => { :user => bid.user } %>
-
-    <% if current_user.owns_offer?(@offer) && [accepted_bid, completed_bid].none? %>
-      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
-    <% end %>
-  </div>
-</div>
+      <% if current_user.owns_offer?(@offer) && [accepted_bid, completed_bid].none? %>
+        <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
+        <% end %>
+      </div>
+    </div>
