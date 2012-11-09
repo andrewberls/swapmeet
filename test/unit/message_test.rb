@@ -52,6 +52,7 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal false, m2.read
     
     #one unread from another user
+    Time.expects(:now).returns(Time.local(2012, 11, 8, 5, 5, 5)).at_least_once
     m3 = Message.create!(sender_id: users(:admin).id, recipient_id: users(:one).id, content: "This is my test3")  
     assert_equal false, m3.read
     
