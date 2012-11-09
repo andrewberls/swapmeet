@@ -91,7 +91,7 @@ class OffersControllerTest < ActionController::TestCase
     get :show, id: offers(:offer_one)
     assert_response :success
         
-    assert_select "div.feedback-container p", { :text => /Rated/}
+    assert_select "div.feedback-container p", { :text => /Feedback left/}
   end
   
   test "should display rating buttons for offerer if they have not rated the bidder" do
