@@ -66,6 +66,10 @@ class Offer < ActiveRecord::Base
     completed_bid.present?
   end
 
+  def locked?
+    Response.find_by_bid_id(id).status == 'locked'
+  end
+
   private
 
   def detect_response(status)

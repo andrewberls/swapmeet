@@ -5,10 +5,5 @@
 
   <%= link_to offer.title, offer, class: "offer-link" %>
 
-  <% if offer.accepted_bid.present? %>
-    <%= link_to 'Complete Trade', offer_complete_path(offer_id: offer.id, bid_id: offer.accepted_bid.id),
-          method: :post, class: 'btn btn-blue' %>
-  <% end %>
-
   <%= link_to raw("View Trade &raquo;"), offer, class: "btn btn-aqua right" %>
 </div>

@@ -58,13 +58,10 @@
 // OFFER BOXES
 //-----------------------------------
 .page-section {
-  // TODO: NEEDS RENAMING
   @include clearfix;
   margin-bottom: 50px;
 
-  @media (max-width: 630px) {
-    margin-top: 15px;
-  }
+  @media (max-width: 630px) { margin-top: 15px; }
 }
 
 .offer-box,
@@ -85,9 +82,7 @@
     }
   }
 
-  img {
-    max-width: 100%;
-  }
+  img { max-width: 100%; }
 
   .offer-notifications {
     @include clearfix;
@@ -122,8 +117,7 @@
 
 // Bid boxes on an offer page
 .bid-box {
-  .bid-accepted,
-  .bid-completed {
+  .bid-status {
     font-weight: bold;
     margin-bottom: 5px;
   }
@@ -135,13 +129,9 @@
     padding: 10px 5px;
   }
 
-  img {
-    margin-bottom: 5px;
-  }
+  img { margin-bottom: 5px; }
 
-  .btn {
-    margin-top: 10px;
-  }
+  .btn { margin-top: 10px; }
 }
 
 
@@ -150,6 +140,8 @@
   margin-top: 10px;
   text-align: center;
 }
+
+.vote-btn { @include bold(1.1em); }
 
 .user-karma {
   @include clearfix;
@@ -189,12 +181,4 @@
 
     span { margin-right: 5px; }
   }
-}
-
-.bids-container  {
-  margin-top: 25px;
-}
-
-.vote-btn {
-  @include bold(1.1em);
 }

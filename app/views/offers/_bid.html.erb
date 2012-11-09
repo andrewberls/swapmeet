@@ -3,13 +3,18 @@
 <div class="span-4 bid-box">
   <div class="bid-details">
 
+
+    <% if bid.locked? %>
+      <p class="bid-status" style="color: red;">locked</p>
+    <% end %>
+
     <%# TODO: Not a fan of all the state checks here %>
     <% if bid == accepted_bid && completed_bid.blank? %>
-      <div class="bid-accepted">This bid has been accepted</div>
+      <div class="bid-status bid-accepted">This bid has been accepted</div>
     <% end %>
 
     <% if bid == completed_bid %>
-      <div class="bid-completed">This bid has been completed</div>
+      <div class="bid-status bid-completed">This bid has been completed</div>
     <% end %>
 
     <% if bid.image.present? %>

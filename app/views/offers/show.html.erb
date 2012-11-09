@@ -6,17 +6,19 @@
   <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large bid-btn' %>
 <% end %>
 
-<div class="page-section">
+<div class="page-section parent-container">
   <div class="row">
+
     <div class="span-6">
       <img src="http://placehold.it/350x250" style="max-width: 100%">
     </div>
 
-  <div class="span-10">
-    <h2><%= @offer.title %></h2>
-    <%= render 'karma', user: @offer.user, byline: true %>
+    <div class="span-10">
+      <h2><%= @offer.title %></h2>
+      <%= render 'karma', user: @offer.user, byline: true %>
+      <p><%= @offer.description %></p>
+    </div>
 
-    <p><%= @offer.description %></p>
   </div>
 </div>
 
