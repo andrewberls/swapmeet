@@ -2,7 +2,7 @@ class Response < ActiveRecord::Base
 
   VALID_STATES = %w( open accepted locked completed )
 
-  attr_accessible :offer, :bid, :status, :rated
+  attr_accessible :offer, :bid, :status, :offerer_rated, :bidder_rated
 
   belongs_to :offer
   belongs_to :bid, class_name: "Offer"

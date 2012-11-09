@@ -24,29 +24,14 @@
     <% end %>
 
 
-    <%# TODO: extract into partial  %>
-    <% if @offer.completed? %>
-      <div class="feedback-container">
-        <% if @offer.completed_response.rated %>
-          <p>Completed and rated</p>
-        <% else %>
-          <p style="font-weight: bold;">
-            Leave a rating for
-            <%= (current_user == @offer.completed_bid.user) ? @offer.user.username : completed_bid.user.username %>:
-          </p>
-
-          <%= link_to "+", offer_rate_path(@offer, completed_bid, rate: 'up'), method: :post,   class: "btn btn-green vote" %>
-          <%= link_to "-", offer_rate_path(@offer, completed_bid, rate: 'down'), method: :post, class: "btn btn-red vote" %>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render :partial => "rating" %>
 
   </div><!-- .bid-details -->
 
 
   <div class="offer-notifications">
     <p>From <span class="username"><%= bid.user.username %></span></p>
-    <%= render :partial => "karma", :locals => { :user => bid.user } %>
+    <%= render :partial => "users/karma", :locals => { :user => bid.user } %>
 
     <% if current_user.owns_offer?(@offer) && [accepted_bid, completed_bid].none? %>
       <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
