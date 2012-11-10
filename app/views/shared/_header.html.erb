@@ -13,9 +13,8 @@
       <% if user_signed_in? %>
         Signed in as <%= current_user.username %>. &nbsp;&nbsp;<%= link_to "Not you?", logout_path %>
       <% else %>
-        <%= link_to_unless_current "Sign up", signup_path %>
-        <span class="link-separator">|</span>
-        <%= link_to "Log in", login_path %>
+        <%= link_to "Sign up", signup_path, class: "btn btn-blue #{current_page?(signup_path) ? 'disabled' : '' }" %>
+        <%= link_to "Log in", login_path, class: "btn btn-green #{current_page?(login_path) ? 'disabled' : '' }" %>
       <% end %>
     </span>
 
