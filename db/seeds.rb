@@ -93,8 +93,8 @@ BID_COUNT.times do |i|
   bid = bid_user.offers.build(title: "test-bid#{i}", description: LiterateRandomizer.sentence)
   response = parent_offer.responses.new(bid: bid) do |resp|
     resp.status = 'open'
-  end.save
-  bid.save
+  end.save!
+  bid.save!
 end
 
 

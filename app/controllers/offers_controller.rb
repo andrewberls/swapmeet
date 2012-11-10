@@ -116,6 +116,8 @@ class OffersController < ApplicationController
 
   # GET /dashboard
   def dashboard
+    # TODO: GET USERS TRADES
+    @recent_offers = Offer.parent_offers.last(8)
   end
 
   # GET /offers/1

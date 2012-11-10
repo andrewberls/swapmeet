@@ -3,13 +3,19 @@
 <div class="span-4 bid-box">
   <div class="bid-details">
 
-<%# TODO: Not a fan of all the state checks here %>
+
+    <% if bid.locked? %>
+      <p class="bid-status" style="color: red;">locked</p>
+    <% end %>
+
+    <%# TODO: Not a fan of all the state checks here %>
+
     <% if bid == accepted_bid && completed_bid.blank? %>
-      <div class="bid-accepted">This bid has been accepted</div>
+      <div class="bid-status bid-accepted">This bid has been accepted</div>
     <% end %>
 
     <% if bid == completed_bid %>
-      <div class="bid-completed">This bid has been completed</div>
+      <div class="bid-status bid-completed">This bid has been completed</div>
     <% end %>
 
     <% if bid.image.present? %>
@@ -33,8 +39,29 @@
       <p>From <span class="username"><%= bid.user.username %></span></p>
       <%= render :partial => "users/karma", :locals => { :user => bid.user } %>
 
+<<<<<<< HEAD
       <% if current_user.owns_offer?(@offer) && [accepted_bid, completed_bid].none? %>
         <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
         <% end %>
       </div>
     </div>
+=======
+          <%= link_to "+", offer_rate_path(@offer, completed_bid, rate: 'up'), method: :post,   class: "btn btn-green vote-btn" %>
+          <%= link_to "-", offer_rate_path(@offer, completed_bid, rate: 'down'), method: :post, class: "btn btn-red vote-btn" %>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div><!-- .bid-details -->
+
+
+  <div class="offer-notifications">
+    <p>From <span class="username"><%= bid.user.username %></span></p>
+    <%= render 'karma', user: bid.user, byline: false %>
+
+    <% if current_user.owns_offer?(@offer) && [accepted_bid, completed_bid].none? %>
+      <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>
+    <% end %>
+  </div>
+</div>
+>>>>>>> master

@@ -12,9 +12,9 @@ class Response < ActiveRecord::Base
 
   validates_inclusion_of :status, :in => VALID_STATES, :message => "Status is not valid"
 
-  validates_each :offer do |record, attr, value|
-    record.errors.add(attr, " cannot receive bids") if not value.can_receive_bids?
-  end
+  # validates_each :offer do |record, attr, value|
+  #   record.errors.add(attr, "#{value.title} cannot receive bids") if not value.can_receive_bids?
+  # end
 
   # Accept a bid
   def accept!
