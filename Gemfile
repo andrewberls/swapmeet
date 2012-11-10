@@ -44,3 +44,8 @@ gem 'brakeman'
 # gem 'capistrano'
 
 gem 'debugger'
+
+
+group :test do
+  gem "mocha", :require => false
+end
