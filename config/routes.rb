@@ -16,9 +16,7 @@ Swapmeet::Application.routes.draw do
   end
   match 'dashboard' => 'offers#dashboard', as: 'dashboard'
 
-  resources :users do
-    get 'offers', on: :member, as: 'offers' # /offers/2/bid
-  end
+  resources :users
 
 
   root :to => 'offers#index'

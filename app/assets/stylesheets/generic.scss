@@ -19,6 +19,11 @@ body > .container {
 
 .left  { float: left }
 .right { float: right }
+.bold  { font-weight: bold; }
+.green { color: $green; }
+.blue  { color: $blue; }
+.red  { color: $red; }
+
 
 %noise {
   background: #f6f2e8 url('/images/noise.png');

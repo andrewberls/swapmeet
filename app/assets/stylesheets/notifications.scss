@@ -1,0 +1,41 @@
+.user-notifications {
+  @extend %whitebox;
+  @include bold(1.1em);
+  color: lighten($gray-text, 20);
+  padding: 0;
+
+  h3 { color: $gray-text; }
+
+  .split-left,
+  .split-right {
+    @include border-box;
+    float: left;
+    padding: 15px;
+    width: 50%;
+
+    @media (max-width: 630px) {
+      float: none;
+      width: 100%;
+    }
+  }
+
+  .split-left {
+    border-right: 1px solid $med-gray;
+
+    @media (max-width: 630px) {
+      border-right: none;
+      border-bottom: 1px solid $med-gray;
+    }
+  }
+
+  .split-right {}
+
+  .notif-num {
+    font-size: 1.2em;
+  }
+
+  .notif-link {
+    font-style: italic;
+  }
+}
+
