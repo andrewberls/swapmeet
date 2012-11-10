@@ -72,8 +72,8 @@ class OffersController < ApplicationController
 
 
   def rate
-    response = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
-
+    response = Response.response_for(params[:offer_id], params[:bid_id])
+    
     unless response.rated
       # TODO: Can we reduce queries here?
       offer      = Offer.find(params[:offer_id])
@@ -123,6 +123,7 @@ class OffersController < ApplicationController
   # GET /offers/1
   # GET /offers/1.json
   def show
+    setup_ratings
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @offer }
@@ -203,6 +204,7 @@ class OffersController < ApplicationController
 
   # TODO: This name is horrible. It's intent is to DRY up the responses queries
   # in the accept and complete actions
+  #? Perhaps move some of this to the model?
   def find_responses
     @bid_resp = Response.where(offer_id: params[:offer_id], bid_id: params[:bid_id]).first
     @bid_resp.present? or raise ActiveRecord::RecordNotFound
@@ -210,6 +212,29 @@ class OffersController < ApplicationController
 
     @parent_responses = Response.where(bid_id: params[:bid_id]).all
     @response_queue   = (@offer.responses + @parent_responses) - [@bid_resp]
+  end
+  
+  def setup_ratings
+    @selected_bid = @offer.completed_or_accepted_bid
+    @rating_state =
+      if @selected_bid.nil?
+        :none
+      elsif current_user == @selected_bid.user
+        if Response.response_for(@offer, @selected_bid).offerer_rated
+          :rated
+        else
+          @user_to_rate = @offer.user.username
+          :display_rate_buttons
+          
+        end
+      elsif current_user == @offer.user 
+        if Response.response_for(@offer, @selected_bid).bidder_rated
+          :rated
+        else
+          @user_to_rate = @selected_bid.user.username
+          :display_rate_buttons
+        end
+      end
   end
 
 end

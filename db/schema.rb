@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108020421) do
+
+ActiveRecord::Schema.define(:version => 20121109003042) do
+
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
@@ -38,9 +40,10 @@ ActiveRecord::Schema.define(:version => 20121108020421) do
     t.integer  "offer_id"
     t.integer  "bid_id"
     t.string   "status"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "rated",      :default => false, :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "offerer_rated", :default => false, :null => false
+    t.boolean  "bidder_rated",  :default => false, :null => false
   end
 
   create_table "users", :force => true do |t|

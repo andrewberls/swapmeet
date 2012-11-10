@@ -46,5 +46,9 @@ gem 'brakeman'
 gem 'debugger'
 
 
-#Test mocking
-gem "mocha", :require => false
+
+group :test do
+  #test mocking
+  gem "mocha", :require => false
+end
+
