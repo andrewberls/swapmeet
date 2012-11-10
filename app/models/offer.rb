@@ -26,15 +26,28 @@ class Offer < ActiveRecord::Base
   has_many :responses
   has_many :bids, through: :responses
 
+  # We show only the original public offers ("I want to get rid of my couch") on the home page,
+  # not the stuff that is posted in response
+  scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
+
   # Can you make a bid on this offer?
   # i.e., you can't bid on bids
   def can_receive_bids?
     Response.find_by_bid_id(self.id).blank?
   end
 
-  # We show only the original public offers ("I want to get rid of my couch") on the home page,
-  # not the stuff that is posted in response
-  scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
+
+  def is_parent_offer?
+    Response.find_by_bid_id(id).blank?
+  end
+
+  def accepted_response
+    detect_response 'accepted'
+  end
+
+  def completed_response
+    detect_response 'completed'
+  end
 
   # The bid that the parent offer has accepted
   def accepted_bid
@@ -45,12 +58,22 @@ class Offer < ActiveRecord::Base
     completed_response.present? ? completed_response.bid : nil
   end
 
-  def accepted_response
-    responses.detect { |r| r.status == 'accepted' }
+  def accepted?
+    accepted_bid.present?
   end
 
-  def completed_response
-    responses.detect { |r| r.status == 'completed' }
+  def completed?
+    completed_bid.present?
+  end
+
+  def locked?
+    Response.find_by_bid_id(id).status == 'locked'
+  end
+
+  private
+
+  def detect_response(status)
+    responses.detect { |r| r.status == status }
   end
 
 end

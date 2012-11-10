@@ -1,24 +1,36 @@
 <% provide(:title, "Offer: #{@offer.title}") %>
 
-<%= content_tag :div, flash[:success], class: 'alert alert-success' if flash[:success] %>
+<%= flash_success %>
 
-<% unless current_user == @offer.user %>
-  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large', style: "display: inline-block; margin-bottom: 20px;" %>
+<% if current_user.can_bid_on?(@offer) %>
+  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large bid-btn' %>
 <% end %>
 
-<div class="row parent-container">
-  <div class="span-6">
+<div class="page-section parent-container">
+  <div class="row">
+
+    <div class="span-6">
       <img src="http://placehold.it/350x250" style="max-width: 100%">
-  </div>
+    </div>
 
-  <div class="span-10">
-    <h2><%= @offer.title %></h2>
-    <p><%= @offer.description %></p>
+    <div class="span-10">
+      <h2><%= @offer.title %></h2>
+      <%= render 'karma', user: @offer.user, byline: true %>
+      <p><%= @offer.description %></p>
+    </div>
+
   </div>
 </div>
 
-<div class="row bids-container">
-  <% @offer.bids.each do |bid| %>
-     <%= render :partial => 'bid', :locals => { :bid => bid, :accepted_bid => @offer.accepted_bid, :completed_bid => @offer.completed_bid } %>
-  <% end %>
-</div>
+
+<% if @offer.bids.blank? %>
+  <h2>There are currently no bids on this offer. <%= link_to "Be the first!", bid_on_offer_path(@offer) %></h2>
+<% else %>
+  <div class="page-section">
+    <div class="bids-masonry">
+      <% @offer.bids.each do |bid| %>
+         <%= render 'bid', bid: bid, accepted_bid: @offer.accepted_bid, completed_bid: @offer.completed_bid %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

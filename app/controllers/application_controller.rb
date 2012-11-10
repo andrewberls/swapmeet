@@ -6,4 +6,15 @@ class ApplicationController < ActionController::Base
     login_path
   end
 
+  def reject_unauthorized(authorized, path="/")
+    unless authorized
+      logger.warn "WARNING: Unauthorized access attempt"
+
+      respond_to do |format|
+        format.html { return redirect_to path }
+        format.json { return render json: {} }
+      end
+    end
+  end
+
 end

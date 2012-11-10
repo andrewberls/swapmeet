@@ -20,19 +20,28 @@ puts "\nCreating managed seeds.. "
 
 admin_user = User.new(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password")
 admin_user.save!
-good_user  = User.new(username: "gooduser", email: "gooduser@email.com", password: "password", password_confirmation: "password")
+good_user  = User.new(username: "gooduser", email: "gooduser@email.com", password: "password", password_confirmation: "password", up_ratings: 14)
 good_user.save!
+bad_user   = User.new(username: "baduser", email: "baduser@email.com", password: "password", password_confirmation: "password", down_ratings: 49)
+bad_user.save!
 
 awesome_offer = Offer.new(title: "Awesome offer", description: "I need to get rid of my really awesome stuff.") do |offer|
-  offer.user = random_user
+  offer.user = admin_user
 end
 
-cool_bid = Offer.new(title: "Cool bid", description: "I will give you really cool stuff for your awesome stuff") do |offer|
+good_bid = Offer.new(title: "Good bid", description: "I will give you really cool stuff for your awesome stuff") do |offer|
   offer.user = good_user
 end
 
+bad_bid = Offer.new(title: "Bad bid", description: "I will probably rip you off or back out") do |offer|
+  offer.user = bad_user
+end
+
+
+
 awesome_offer.save!
-awesome_offer.responses.new(bid: cool_bid) { |resp| resp.status = 'open' }.save!
+awesome_offer.responses.new(bid: good_bid) { |resp| resp.status = 'open' }.save!
+awesome_offer.responses.new(bid: bad_bid) { |resp| resp.status = 'open' }.save!
 
 
 
@@ -81,12 +90,11 @@ BID_COUNT.times do |i|
     user
   end
 
-  bid = Offer.new(title: "test-bid#{i}", description: LiterateRandomizer.sentence) do |offer|
-    offer.user = bid_user
-  end
+  bid = bid_user.offers.build(title: "test-bid#{i}", description: LiterateRandomizer.sentence)
+  response = parent_offer.responses.new(bid: bid) do |resp|
+    resp.status = 'open'
+  end.save!
   bid.save!
-
-  response = parent_offer.responses.create(bid: bid)
 end
 
 

@@ -46,6 +46,12 @@ header {
       display: inline-block;
       margin: 0 5px;
     }
+
+    .btn {
+      padding-top: 6px; padding-bottom: 6px;
+
+      &:first-child { margin-right: 20px; }
+    }
   }
 }
 

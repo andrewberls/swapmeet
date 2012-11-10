@@ -231,3 +231,10 @@ button.btn {
     padding: 0;
   }
 }
+
+
+// Button that lives on top of a page, e.g. "Make a bid"
+.action-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+}

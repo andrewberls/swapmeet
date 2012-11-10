@@ -1,14 +1,15 @@
 class OffersController < ApplicationController
 
   before_filter :authenticate_user!
-
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
+  before_filter :must_own_offer, only: [:edit, :update, :destroy]
+
   before_filter :find_parent_offer, only: [:bid]
+  before_filter :find_responses, only: [:accept, :complete]
+
 
   # GET /offers/1/bid
   # POST /offers/1/bid
-  # Bidding creates a nested offer relationship using an intermediary
-  # response object.
   def bid
     if request.get?
       @offer = Offer.new
@@ -18,6 +19,7 @@ class OffersController < ApplicationController
       response = @parent_offer.responses.new(bid: @offer) do |resp|
         resp.status = 'open'
       end.save
+
       respond_to do |format|
         if @offer.save
           flash[:success] = 'Your bid was successfully registered.'
@@ -27,27 +29,20 @@ class OffersController < ApplicationController
           format.html { render action: "bid" }
           format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
         end
+
       end
     end
   end
 
-  # GET /dashboard
-  def dashboard
-
-  end
 
   # POST /offers/1/accept/:bid_id
+  # Mark a bid as accepted, and  lock out all the other children of this auction,
+  # as well as any parent offers in any other auctions.
+  # All heavy lifting is accomplished in find_responses
   def accept
     Response.transaction do
-      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
-      raise ActiveRecord::RecordNotFound if bid_resp.nil?
-
-      # Lock out all the other children of this auction, as well as any parent offers
-      # in any other auctions.
-      @offer = Offer.find(params[:offer_id])
-      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
-      bid_resp.accept!
-      ((@offer.responses + other_offer_responses) - [bid_resp]).map(&:lock!)
+      @bid_resp.accept!
+      @response_queue.map(&:lock!)
     end
 
     flash[:success] = 'You have succesfully accepted the bid'
@@ -57,46 +52,53 @@ class OffersController < ApplicationController
     end
   end
 
+
   # POST /offers/:offer_id/complete/:bid_id
+  # Mark a bid as completed, and delete all the other children of this auction,
+  # as well as any parent offers in any other auctions.
+  # All heavy lifting is accomplished in find_responses
   def complete
     Response.transaction do
-      bid_resp = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
-      raise ActiveRecord::RecordNotFound if bid_resp.nil?
-
-      # Delete out all the other children of this auction, as well as any parent offers
-      # in any other auctions.
-      @offer = Offer.find(params[:offer_id])
-      other_offer_responses = Response.where(:bid_id => params[:bid_id]).all
-      bid_resp.complete!
-      ((@offer.responses + other_offer_responses) - [bid_resp]).each do |resp|
-        resp.destroy
-      end
+      @bid_resp.complete!
+      @response_queue.map(&:destroy)
     end
+
     flash[:success] = 'Trade completed.'
     respond_to do |format|
-      format.html { redirect_to offers_url }
+      format.html { redirect_to @offer }
       format.json { render json: @offer, status: :created, location: @offer }
     end
   end
-  
+
+
   def rate
     response = Response.where(:offer_id => params[:offer_id], :bid_id => params[:bid_id]).first
+
     unless response.rated
-      user = Offer.find(params[:bid_id]).user
-      if params[:rate] == "up"
-        puts "upping rating"
-        user.add_good_rating
-      elsif params[:rate] == "down"
-        puts "downing rating"
-        user.add_bad_rating
+      # TODO: Can we reduce queries here?
+      offer      = Offer.find(params[:offer_id])
+      offer_user = offer.user
+      bid_user   = Offer.find(params[:bid_id]).user
+      rated_user = (current_user == offer_user) ? bid_user : offer_user
+
+      case params[:rate]
+      when 'up'   then rated_user.add_good_rating
+      when 'down' then rated_user.add_bad_rating
       else
-        raise "Bad rate choice"
+        raise "Rating #{params[:rate].inspect} not recognized"
       end
-      response.update_attributes! :rated => true
-      user.save!
-      redirect_to offer_url Offer.find(params[:offer_id])
+
+      response.update_attributes! :rated => true # TODO: BOTH USERS CAN VOTE
+      rated_user.save!
+
+      flash[:success] = 'Rating completed.'
+      respond_to do |format|
+        format.html { redirect_to offer }
+        format.json { render json: offer, location: offer }
+      end
     end
   end
+
 
   # GET /offers
   # GET /offers.json
@@ -109,6 +111,13 @@ class OffersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @offers }
     end
+  end
+
+
+  # GET /dashboard
+  def dashboard
+    # TODO: GET USERS TRADES
+    @recent_offers = Offer.parent_offers.last(8)
   end
 
   # GET /offers/1
@@ -183,9 +192,24 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
   end
 
+  def must_own_offer
+    reject_unauthorized(current_user == @offer.user, offers_path)
+  end
+
   def find_parent_offer
     @parent_offer = Offer.find(params[:id])
     @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+  end
+
+  # TODO: This name is horrible. It's intent is to DRY up the responses queries
+  # in the accept and complete actions
+  def find_responses
+    @bid_resp = Response.where(offer_id: params[:offer_id], bid_id: params[:bid_id]).first
+    @bid_resp.present? or raise ActiveRecord::RecordNotFound
+    @offer    = Offer.find(params[:offer_id])
+
+    @parent_responses = Response.where(bid_id: params[:bid_id]).all
+    @response_queue   = (@offer.responses + @parent_responses) - [@bid_resp]
   end
 
 end

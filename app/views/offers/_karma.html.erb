@@ -1,5 +1,9 @@
-<% #user passed in %>
 <div class="user-karma">
+  <%= content_tag :span, "By:", class: "left" if byline %>
   <span class="left"><%= link_to user.username, user %></span>
-  <span class="right"><%= "+#{user.up_ratings} -#{user.down_ratings}" %></span>
+
+  <span class="right">
+    <span class="karma-up"><%= "+#{user.up_ratings}" %></span>
+    <span class="karma-down"><%= "-#{user.down_ratings}" %></span>
+  </span>
 </div>
