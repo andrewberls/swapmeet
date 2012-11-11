@@ -4,7 +4,6 @@
 
 #messages {
   @extend %whitebox;
-  @include clearfix;
 }
 
 div.message {
