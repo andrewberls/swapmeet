@@ -3,7 +3,7 @@
 <%= flash_success %>
 
 <% if current_user.can_bid_on?(@offer) %>
-  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large bid-btn' %>
+  <%= link_to 'Bid on this trade', bid_on_offer_path(@offer), class: 'btn btn-blue action-btn' %>
 <% end %>
 
 <div class="page-section parent-container">
