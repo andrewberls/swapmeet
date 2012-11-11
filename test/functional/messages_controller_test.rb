@@ -17,23 +17,18 @@ class MessagesControllerTest < ActionController::TestCase
     assert_response :success
 
   end
-  
-  test "should get new" do
-    sign_in @user
-    get :new
-    assert_response :success
-  end
 
   test "should create message" do
     sign_in @user
     assert_difference('Message.count') do
-      post :create, message: { recipient: users(:two), content: "blah blah blah" }
+      post :create, message: { recipient_id: users(:two).id, content: "blah blah blah" }
+      assert_redirected_to messages_inbox_path
+      assert_equal "Message sent.", flash[:notice]
     end
 
-    assert_redirected_to message_inbox_path(assigns(:offer))
   end
   
-  test "index should display all messages" do
+  test "inbox should display all unread messages" do
     sign_in @user
     get :inbox
     assert_response :success
