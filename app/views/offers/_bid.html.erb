@@ -37,7 +37,7 @@
 
     <div class="offer-notifications">
       <p>From <span class="username"><%= bid.user.username %></span></p>
-      <%= render :partial => "users/karma", :locals => { :user => bid.user } %>
+      <%= render :partial => "users/karma", :locals => { :user => bid.user, :byline => false } %>
 
       <% if current_user.owns_offer?(@offer) && [accepted_bid, completed_bid].none? %>
         <%= link_to 'Accept', offer_accept_path(offer_id: @offer, bid_id: bid), method: :post, class: 'btn btn-green btn-full' %>

@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20121109003042) do
-
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"

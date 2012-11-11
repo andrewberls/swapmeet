@@ -40,10 +40,8 @@ class OffersControllerTest < ActionController::TestCase
     
   end
   
-  test "should paginate with ten items per page" do
-    sign_in @user
-    
-  end
+  #TODO
+  test "should paginate with ten items per page"
 
   test "should show offer" do
     sign_in @user

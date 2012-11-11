@@ -1,0 +1,7 @@
+<% @messages.each do |message| %>
+  <%= render :partial => "message_summary", :locals => { :message => message } %>
+<% end %>
+
+<% if @messages.empty? %>
+  You have no messages.
+<% end %>

@@ -17,6 +17,7 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.create!(sender_id: users(:one).id, recipient_id: users(:two).id, content: "This is my test")
     assert_equal false, message.read
     message.mark_as_read!
+    message.reload
     assert_equal true, message.read
   end
   

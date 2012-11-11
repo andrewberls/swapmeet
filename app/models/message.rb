@@ -5,8 +5,19 @@ class Message < ActiveRecord::Base
   belongs_to :sender,   class_name: "User", foreign_key: "sender_id"
   belongs_to :recipient, class_name: "User", foreign_key: "recipient_id"
   
+  
+  validates_presence_of :content
+  validate :valid_recipient_and_sender
+  
+  def valid_recipient_and_sender
+    errors.add(:recipient_id, 'No Recipient exists with that id') if recipient.nil?
+    errors.add(:sender_id, 'No Sender exists with that id') if sender.nil?
+  end
+
+  
   def mark_as_read!
     self.read = true
+    save!
   end
   
   scope :all_between, lambda { |user1, user2| 
