@@ -220,18 +220,17 @@ class OffersController < ApplicationController
       if @selected_bid.nil?
         :none
       elsif current_user == @selected_bid.user
+        @user_to_rate = @offer.user
         if Response.response_for(@offer, @selected_bid).offerer_rated
           :rated
         else
-          @user_to_rate = @offer.user.username
           :display_rate_buttons
-          
         end
       elsif current_user == @offer.user 
+        @user_to_rate = @selected_bid.user
         if Response.response_for(@offer, @selected_bid).bidder_rated
           :rated
         else
-          @user_to_rate = @selected_bid.user.username
           :display_rate_buttons
         end
       end

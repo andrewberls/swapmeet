@@ -40,10 +40,8 @@ class OffersControllerTest < ActionController::TestCase
     
   end
   
-  test "should paginate with ten items per page" do
-    sign_in @user
-    
-  end
+  #TODO
+  #test "should paginate with ten items per page"
 
   test "should show offer" do
     sign_in @user
@@ -83,7 +81,7 @@ class OffersControllerTest < ActionController::TestCase
     assert_select "div.feedback-container p", { :text => /Leave a rating for\s+#{users(:one).username}:/}
   end
   
-  test "should not display rating buttons for bidder if they have not rated the offerer" do 
+  test "should not display rating buttons for bidder if they have rated the offerer" do 
     sign_in users(:two)
     response = responses(:offer_one_to_bid_one)
     response.accept!

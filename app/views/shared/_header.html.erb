@@ -6,6 +6,7 @@
         <li><%= link_to "My Trades", offers_path,       class: (current_page? offers_path)    ? 'current' : '' %></li>
         <li><%= link_to "Post a Trade", new_offer_path, class: (current_page? new_offer_path) ? 'current' : '' %></li>
         <li><%= link_to "Browse Trades", offers_path,   class: (current_page? offers_path)    ? 'current' : '' %></li>
+        <li><%= link_to "Messages", messages_inbox_path, class: (current_page? offers_path)    ? 'current' : '' %></li>
       </ul>
     <% end %>
 
