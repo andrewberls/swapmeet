@@ -1,3 +1,8 @@
-From: <%= message.sender.username %>
-<br />
-<%= message.content %>
+<div class="message">
+  <p>From: <%= message.sender.username %></p>
+  <div class="right">
+    <%= message.updated_at %>
+  </div>
+  <br />
+  <p class="content"><%= link_to message.content[0..100], message_path(message.sender.id) %></p>
+</div>

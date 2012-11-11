@@ -1,7 +1,15 @@
-<% @messages.each do |message| %>
-  <%= render :partial => "message_summary", :locals => { :message => message } %>
-<% end %>
+<% provide(:title, 'All Messages') %>
 
-<% if @messages.empty? %>
-  You have no messages.
-<% end %>
+<h1><%= link_to "Inbox", messages_inbox_path %> -  All</h1>
+
+<div id="messages">
+  <% @messages.each do |message| %>
+    <%= render :partial => "message_summary", :locals => { :message => message } %>
+  <% end %>
+
+
+  <% if @messages.empty? %>
+    You have no messages.
+  <% end %>
+  
+</div>
