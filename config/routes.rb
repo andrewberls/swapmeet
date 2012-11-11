@@ -18,7 +18,10 @@ Swapmeet::Application.routes.draw do
 
   resources :users
 
-
+  get 'messages/inbox'
+  resources :messages do
+  end
+  
   root :to => 'offers#index'
 
   # Route page not found to 404 page

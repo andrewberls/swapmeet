@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-gem 'sqlite3'
 gem 'mysql2'
 
 gem 'jquery-rails'
@@ -46,6 +45,9 @@ gem 'brakeman'
 gem 'debugger'
 
 
+
 group :test do
+  #test mocking
   gem "mocha", :require => false
 end
+
