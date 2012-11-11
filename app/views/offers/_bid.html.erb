@@ -31,6 +31,7 @@
 
       <% if bid == @selected_bid %>
         <%= render :partial => "rating" %>
+        <%= link_to "Contact #{@user_to_rate.username}",  message_path(@user_to_rate.id)  %>
       <% end %>
     </div><!-- .bid-details -->
 

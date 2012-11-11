@@ -2,15 +2,6 @@ class MessagesController < ApplicationController
   before_filter :authenticate_user!
 
   
-  def new
-    @message = Message.new(:recipient_id => params[:recipient_id])
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @message }
-    end
-  end
-  
   def create
     @message = Message.new(recipient_id: params[:message][:recipient_id], sender_id: current_user.id, content: params[:message][:content] )
     
@@ -30,10 +21,20 @@ class MessagesController < ApplicationController
     user = User.find(params[:id])
     @messages = Message.all_between(current_user, user)
     @messages.each { |m| m.mark_as_read! }
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @message }
+    
+    #new message at bottom
+    @message = Message.new(:recipient_id => params[:id])
+    if @message.recipient.nil?
+      flash[:error] = 'Invalid recipient.'
+      redirect_to messages_path
+    else 
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @message }
+      end
     end
+    
+
   end
   
   def inbox

@@ -223,7 +223,7 @@ class OffersController < ApplicationController
         if Response.response_for(@offer, @selected_bid).offerer_rated
           :rated
         else
-          @user_to_rate = @offer.user.username
+          @user_to_rate = @offer.user
           :display_rate_buttons
           
         end
@@ -231,7 +231,7 @@ class OffersController < ApplicationController
         if Response.response_for(@offer, @selected_bid).bidder_rated
           :rated
         else
-          @user_to_rate = @selected_bid.user.username
+          @user_to_rate = @selected_bid.user
           :display_rate_buttons
         end
       end
