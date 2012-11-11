@@ -15,7 +15,7 @@
 
     <div class="span-10">
       <h2><%= @offer.title %></h2>
-      <%= render 'karma', user: @offer.user, byline: true %>
+      <%= render 'users/karma', user: @offer.user, byline: true %>
       <p><%= @offer.description %></p>
     </div>
 

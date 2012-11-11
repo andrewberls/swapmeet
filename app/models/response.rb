@@ -2,7 +2,7 @@ class Response < ActiveRecord::Base
 
   VALID_STATES = %w( open accepted locked completed )
 
-  attr_accessible :offer, :bid, :status, :rated
+  attr_accessible :offer, :bid, :status, :offerer_rated, :bidder_rated
 
   belongs_to :offer
   belongs_to :bid, class_name: "Offer"
@@ -30,6 +30,10 @@ class Response < ActiveRecord::Base
   # has been accepted
   def lock!
     update_attributes! status: 'locked'
+  end
+  
+  def self.response_for(offer, bid)
+    where(:offer_id => offer.id, :bid_id => bid.id).first
   end
 
 end

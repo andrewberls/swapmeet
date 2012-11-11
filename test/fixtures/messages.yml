@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  sender: one
+  recipient: two
+  content: "This is my fake message from one to two"
+# column: value
+#
+two:
+  sender: two
+  recipient: one
+  content: "This is my other fake message from two to one"
+  
+three:
+  sender: one
+  recipient: two
+  content: "This is another fake message from one to two"
+four:
+  sender: one
+  recipient: admin
+  content: "help me!"
+#  column: value

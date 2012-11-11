@@ -1,0 +1,25 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#messages {
+  @extend %whitebox;
+}
+
+div.message {
+    margin: 20px 10px;
+
+}
+
+p.sender {
+  margin: 10px 0px;
+  font-weight: bold;
+}
+
+.content {
+    padding-left: 20px;
+}
+
+#contact {
+    text-align: center;
+}

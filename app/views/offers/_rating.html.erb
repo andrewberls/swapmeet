@@ -1,0 +1,15 @@
+
+<div class="feedback-container">
+  <% if @rating_state == :rated %>
+    <p>Feedback left</p>
+  <% elsif @rating_state == :display_rate_buttons %>
+    <p style="font-weight: bold;">
+      Leave a rating for
+      <%= @user_to_rate.username %>:
+    </p>
+
+    <%= link_to "+", offer_rate_path(@offer, @selected_bid, rate: 'up'), method: :post,   class: "btn btn-green vote" %>
+    <%= link_to "-", offer_rate_path(@offer, @selected_bid, rate: 'down'), method: :post, class: "btn btn-red vote" %>
+  <% end %>
+</div>
+

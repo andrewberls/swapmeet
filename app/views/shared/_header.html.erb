@@ -2,9 +2,10 @@
   <div class="container">
     <% if user_signed_in? %>
       <ul>
-        <li><%= link_to "Dashboard", dashboard_path,    class: (current_page? dashboard_path)   ? 'current' : '' %></li>
-        <li><%= link_to "Post a Trade", new_offer_path, class: (current_page? new_offer_path)   ? 'current' : '' %></li>
-        <li><%= link_to "Browse Trades", offers_path,   class: (current_page? offers_path)      ? 'current' : '' %></li>
+        <li><%= link_to "Dashboard", dashboard_path,     class: (current_page? dashboard_path) ? 'current' : '' %></li>
+        <li><%= link_to "Post a Trade", new_offer_path,  class: (current_page? new_offer_path) ? 'current' : '' %></li>
+        <li><%= link_to "Browse Trades", offers_path,    class: (current_page? offers_path)    ? 'current' : '' %></li>
+        <li><%= link_to "Messages", messages_inbox_path, class: (current_page? messages_inbox_path)    ? 'current' : '' %></li>
       </ul>
     <% end %>
 
