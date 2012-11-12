@@ -11,4 +11,4 @@
 //-- SITE SCRIPTS
 //------------------------------------
 //= require validation
-//= require dashboard
+//= require masonry

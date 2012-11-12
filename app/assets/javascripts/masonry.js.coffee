@@ -1,4 +1,4 @@
-$dashboardContainer = $('.dashboard-masonry');
+$dashboardContainer = $('.offer-masonry');
 $dashboardContainer.imagesLoaded ->
   $dashboardContainer.masonry {
     itemSelector : '.offer-box',
@@ -7,7 +7,7 @@ $dashboardContainer.imagesLoaded ->
 
   }
 
-$bidsContainer = $('.bids-masonry');
+$bidsContainer = $('.bid-masonry');
 $bidsContainer.imagesLoaded ->
   $bidsContainer.masonry {
     itemSelector : '.bid-box',

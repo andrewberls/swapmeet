@@ -3,7 +3,7 @@
 <%= flash_success %>
 
 <% if current_user.can_bid_on?(@offer) %>
-  <%= link_to 'Make a bid', bid_on_offer_path(@offer), class: 'btn btn-blue btn-large bid-btn' %>
+  <%= link_to 'Bid on this trade', bid_on_offer_path(@offer), class: 'btn btn-blue action-btn' %>
 <% end %>
 
 <div class="page-section parent-container">
@@ -27,7 +27,7 @@
   <h2>There are currently no bids on this offer. <%= link_to "Be the first!", bid_on_offer_path(@offer) %></h2>
 <% else %>
   <div class="page-section">
-    <div class="bids-masonry">
+    <div class="bid-masonry">
       <% @offer.bids.each do |bid| %>
          <%= render 'bid', bid: bid, accepted_bid: @offer.accepted_bid, completed_bid: @offer.completed_bid %>
       <% end %>

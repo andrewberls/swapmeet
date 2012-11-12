@@ -10,13 +10,22 @@
 
 
 <div class="page-section">
-  <h1 class="section-title">Your Trades</h1>
+
+   <div class="user-notifications">
+    <div class="split-left">
+      <h3>Your Offers</h3>
+      <span class="notif-num blue">2</span> new bids on <%= link_to current_user.offers.first.title, current_user.offers.first, class: 'notif-link' %>
+    </div>
+
+    <div class="split-right">
+      <h3>Your Bids</h3>
+      <!-- <span class="notif-num green">1</span> message from <%#= link_to User.last.username, User.last, class: 'notif-link' %> -->
+      <span class="">Your bid on <%= link_to Offer.last.title, Offer.last, style: 'font-style: italic' %> has been accepted!</span>
+    </div>
+  </div><!-- .user-notifications -->
 
 
-  <h2 style="color: red;">TODO: FILL ME IN</h2>
-
-
-  <div class="dashboard-masonry">
+  <div class="offer-masonry">
     <% [].each do |offer| %>
       <div class="offer-box">
         <div class="offer-details">
@@ -39,7 +48,7 @@
 <div class="page-section">
   <h1 class="section-title">Recently posted for: Santa Barbara</h1>
 
-  <div class="dashboard-masonry">
+  <div class="offer-masonry">
     <% @recent_offers.each do |offer| %>
       <div class="offer-box">
         <div class="offer-details">
