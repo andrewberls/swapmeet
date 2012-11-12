@@ -5,7 +5,7 @@
 
 
     <% if bid.locked? %>
-      <p class="bid-status" style="color: red;">locked</p>
+      <p class="bid-status" style="color: red;">Locked</p>
     <% end %>
 
     <%# TODO: Not a fan of all the state checks here %>
@@ -22,7 +22,7 @@
       <%= image_tag bid.image.url(:thumb) %>
     <% end %>
 
-    <p><%= bid.title %></p>
+    <p class="bold"><%= bid.title %></p>
     <p><%= bid.description %></p>
 
     <% if bid == accepted_bid && current_user.owns_offer?(@offer) %>
