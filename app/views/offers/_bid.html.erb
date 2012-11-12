@@ -25,13 +25,17 @@
     <p><%= bid.description %></p>
 
     <% if bid == accepted_bid && current_user.owns_offer?(@offer) %>
+
+      <%= link_to raw("Send a message to #{@user_to_rate.username} &raquo;"),  message_path(@user_to_rate.id), class: 'contact'  %>
+
       <%= link_to 'Complete Trade', offer_complete_path(offer_id: @offer.id, bid_id: accepted_bid.id),
         method: :post, class: 'btn btn-blue btn-full' %>
       <% end %>
 
-      <% if bid == @selected_bid %>
-        <div id="contact"><%= link_to "Contact #{@user_to_rate.username}",  message_path(@user_to_rate.id)  %></div>
-        <%= render :partial => "rating" %> 
+
+
+      <% if bid == completed_bid %>
+        <%= render 'rating' %>
       <% end %>
     </div><!-- .bid-details -->
 
