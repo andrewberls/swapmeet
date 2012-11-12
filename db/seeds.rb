@@ -10,13 +10,17 @@ BID_COUNT   = 175
 # Utilites
 #--------------------
 def random_user
-  User.all.shuffle.first
+  User.find(rand(1..User.count))
+end
+
+def random_offer
+  Offer.find(rand(1..Offer.count))
 end
 
 mark = " -> "
 
 
-puts "\nCreating managed seeds.. "
+print "\nCreating managed seeds..."
 
 admin_user = User.new(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password")
 admin_user.save!
@@ -46,47 +50,57 @@ awesome_offer.responses.new(bid: bad_bid) { |resp| resp.status = 'open' }.save!
 
 
 
-puts "Done."
+print "Done.\n"
 puts "Starting random seed generation. Configuration: "
-puts "#{mark}user count:  #{USER_COUNT}"
-puts "#{mark}offer count: #{OFFER_COUNT}"
-puts "#{mark}bid count:   #{BID_COUNT}"
+puts "#{mark}User count:  #{USER_COUNT}"
+puts "#{mark}Offer count: #{OFFER_COUNT}"
+puts "#{mark}Bid count:   #{BID_COUNT}"
 puts ""
 beginning_time = Time.now
 
 #--------------------
 # Users
 #--------------------
+print "Creating users..."
 USER_COUNT.times do |i|
   User.create!(username: "user#{i}", email: "user#{i}@fake.com", password: "password", password_confirmation: "password")
 end
+print "Done.\n"
 
 
 
 #--------------------
 # Offers
 #--------------------
+print "Creating offers..."
 OFFER_COUNT.times do |i|
   Offer.new(title: "test-offer#{i}", description: LiterateRandomizer.sentence) do |offer|
     offer.user = random_user
   end.save!
 end
-
+print "Done.\n"
 
 
 #--------------------
 # Responses
 #--------------------
+# Extra bit of shuffling to ensure only parent offers receive bids,
+# and users dont bid on their own offers
+print "Creating bids..."
+
 BID_COUNT.times do |i|
-  parent_offer = Offer.all.shuffle.first
+  parent_offer = random_offer
+  while !parent_offer.is_parent_offer?
+    parent_offer = random_offer
+  end
+
   parent_user  = random_user
   bid_user = begin
     user = random_user
-    # Since we're choosing random users, make sure a user isn't bidding on its own offer
     while user == parent_user
-      puts "#{mark}bid_user was equal to parent_user, shuffling"
       user = random_user
     end
+
     user
   end
 
@@ -96,6 +110,6 @@ BID_COUNT.times do |i|
   end.save!
   bid.save!
 end
-
+print "Done.\n"
 
 puts "Seed generation completed: #{Time.now - beginning_time}s"
