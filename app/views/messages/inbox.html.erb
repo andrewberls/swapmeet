@@ -1,13 +1,11 @@
 <h1>Inbox - <%= link_to "All", messages_path %> </h1>
 
-<div id="messages">
-  <%  @messages.each do |message| %>
-    <%= render :partial => "message_summary", :locals => { :message => message} %>
-  <% end %>
-
-
+<div id="messages-inbox">
   <% if @messages.empty? %>
-    Inbox empty.  You have no unread messages.
+    You have no unread messages.
   <% end %>
-  
+
+  <%  @messages.each do |message| %>
+    <%= render 'message_summary', message: message %>
+  <% end %>
 </div>

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   has_many :offers
   has_many :messages
-  
+
   # Provided code to enable login with username or email
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     owns = (self == offer.user)
     in_transaction = offer.responses.any? { |r| r.status != 'open' }
     offer.is_parent_offer? && !owns && !in_transaction
+  end
+
+  def unread_messages
+    Message.unread_message_summary_for_user(self)
   end
 
 

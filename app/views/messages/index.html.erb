@@ -4,12 +4,10 @@
 
 <div id="messages">
   <% @messages.each do |message| %>
-    <%= render :partial => "message_summary", :locals => { :message => message } %>
+    <%= render 'message_summary', message: message %>
   <% end %>
-
 
   <% if @messages.empty? %>
     You have no messages.
   <% end %>
-  
 </div>
