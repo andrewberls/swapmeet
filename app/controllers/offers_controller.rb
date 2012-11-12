@@ -14,8 +14,16 @@ class OffersController < ApplicationController
     if request.get?
       return redirect_to @parent_offer if current_user == @parent_offer.user
       @offer = Offer.new
+      
+      # Allow user to choose any of their items not already bid for this trade.
+      bid_ids = Response.where(:offer_id => params[:id]).pluck("bid_id")
+      @reusable_offers = Offer.where(['id not in (?)', bid_ids]).where(:user_id => current_user.id)
     else
-      @offer = current_user.offers.build(params[:offer])
+      if params[:reused_offer_id].blank?
+        @offer = current_user.offers.build(params[:offer])
+      else
+        @offer = Offer.where({:id => params[:reused_offer_id], :user_id => current_user.id}).first
+      end
 
       response = @parent_offer.responses.new(bid: @offer) do |resp|
         resp.status = 'open'

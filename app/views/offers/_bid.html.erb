@@ -22,6 +22,7 @@
       <%= image_tag bid.image.url(:thumb) %>
     <% end %>
 
+    <p><%= bid.title %></p>
     <p><%= bid.description %></p>
 
     <% if bid == accepted_bid && current_user.owns_offer?(@offer) %>
