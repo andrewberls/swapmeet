@@ -4,7 +4,7 @@ Swapmeet::Application.routes.draw do
 
   devise_scope :user do
     get "signup", :to => "devise/registrations#new"
-    get "login", :to => "devise/sessions#new"
+    get "login",  :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy"
   end
 
@@ -18,10 +18,9 @@ Swapmeet::Application.routes.draw do
 
   resources :users
 
-  get 'messages/inbox'
-  resources :messages do
-  end
-  
+  get 'messages/inbox' => "messages#inbox", as: 'inbox'
+  resources :messages
+
   root :to => 'offers#index'
 
   # Route page not found to 404 page
