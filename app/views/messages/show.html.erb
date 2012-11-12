@@ -1,8 +1,10 @@
 <h2>Conversation with: <span class="blue"><%= @message.recipient.username %></span></h2>
 
-<div id="messages">
-  <%= render @messages %>
-</div>
+<% if @messages.present? %>
+  <div id="messages">
+    <%= render @messages %>
+  </div>
+<% end %>
 
 <%= form_for(@message) do |f| %>
   <h2 style="font-weight: normal">New Message</h2>
