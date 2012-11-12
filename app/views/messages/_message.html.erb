@@ -1,7 +1,5 @@
 <div class="message">
-  <p class="sender"><%= message.sender.username %></p>
-  <div class="right"><%= message.updated_at %></div>
+  <p class="msg-sender"><%= message.sender.username %></p>
+  <div class="msg-timestamp"><%= message_timestamp(message.updated_at) %></div>
   <p><%= message.content  %></p>
-  
-  
 </div>

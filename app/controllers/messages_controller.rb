@@ -18,12 +18,13 @@ class MessagesController < ApplicationController
   end
 
   def show
-    #raise "params = #{params.inspect}"
-    user = User.find(params[:id])
+    user      = User.find(params[:id])
     @messages = Message.all_between(current_user, user)
-    @messages.each { |m| m.mark_as_read! }
 
-    #new message at bottom
+    # TODO: this marks a message as read for both users even if the sender re-views the message
+    @messages.map(&:mark_as_read!)
+
+    # New message at bottom
     @message = Message.new(:recipient_id => params[:id])
     if @message.recipient.nil?
       flash[:error] = 'Invalid recipient.'
@@ -39,7 +40,7 @@ class MessagesController < ApplicationController
   end
 
   def inbox
-    @messages = Message.unread_message_summary_for_user(current_user)
+    @messages = current_user.unread_messages
 
     respond_to do |format|
       format.html # inbox.html.erb
