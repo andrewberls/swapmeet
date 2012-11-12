@@ -42,6 +42,13 @@ header {
     line-height: $header-height;
     color: $med-gray;
 
+    .profile-link {
+      color: $green;
+      text-decoration: none;
+
+      &:hover { text-decoration: underline; }
+    }
+
     .link-separator {
       color: darken($med-gray, 20);
       display: inline-block;

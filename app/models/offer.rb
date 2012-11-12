@@ -30,15 +30,14 @@ class Offer < ActiveRecord::Base
   # not the stuff that is posted in response
   scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
-  # Can you make a bid on this offer?
-  # i.e., you can't bid on bids
-  def can_receive_bids?
-    Response.find_by_bid_id(self.id).blank?
-  end
-
 
   def is_parent_offer?
     Response.find_by_bid_id(id).blank?
+  end
+
+  # You can only bid on open parent offers
+  def can_receive_bids?
+    is_parent_offer? && bids.empty?
   end
 
   def accepted_response
@@ -57,7 +56,7 @@ class Offer < ActiveRecord::Base
   def completed_bid
     completed_response.present? ? completed_response.bid : nil
   end
-  
+
   def completed_or_accepted_bid
     completed_bid || accepted_bid
   end

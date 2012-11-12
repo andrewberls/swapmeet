@@ -12,6 +12,7 @@ class OffersController < ApplicationController
   # POST /offers/1/bid
   def bid
     if request.get?
+      return redirect_to @parent_offer if current_user == @parent_offer.user
       @offer = Offer.new
     else
       @offer = current_user.offers.build(params[:offer])
@@ -73,7 +74,7 @@ class OffersController < ApplicationController
 
   def rate
     response = Response.response_for(params[:offer_id], params[:bid_id])
-    
+
     unless response.rated
       # TODO: Can we reduce queries here?
       offer      = Offer.find(params[:offer_id])
@@ -199,7 +200,7 @@ class OffersController < ApplicationController
 
   def find_parent_offer
     @parent_offer = Offer.find(params[:id])
-    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+    @parent_offer.is_parent_offer? or raise "Cannot bid on this offer"
   end
 
   # TODO: This name is horrible. It's intent is to DRY up the responses queries
@@ -213,7 +214,7 @@ class OffersController < ApplicationController
     @parent_responses = Response.where(bid_id: params[:bid_id]).all
     @response_queue   = (@offer.responses + @parent_responses) - [@bid_resp]
   end
-  
+
   def setup_ratings
     @selected_bid = @offer.completed_or_accepted_bid
     @rating_state =
@@ -226,7 +227,7 @@ class OffersController < ApplicationController
         else
           :display_rate_buttons
         end
-      elsif current_user == @offer.user 
+      elsif current_user == @offer.user
         @user_to_rate = @selected_bid.user
         if Response.response_for(@offer, @selected_bid).bidder_rated
           :rated

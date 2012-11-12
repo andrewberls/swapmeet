@@ -37,3 +37,28 @@ body > .container {
   border: 1px solid $med-gray; // outline
   padding: 20px;
 }
+
+// Split a whitebox into left and right halves
+.split-left,
+.split-right {
+  @include border-box;
+  float: left;
+  padding: 15px;
+  width: 50%;
+
+  @media (max-width: 630px) {
+    float: none;
+    width: 100%;
+  }
+}
+
+.split-left {
+  border-right: 1px solid $med-gray;
+
+  @media (max-width: 630px) {
+    border-right: none;
+    border-bottom: 1px solid $med-gray;
+  }
+}
+
+.split-right {}

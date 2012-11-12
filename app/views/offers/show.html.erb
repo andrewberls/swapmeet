@@ -23,7 +23,7 @@
 </div>
 
 
-<% if @offer.bids.blank? %>
+<% if @offer.bids.blank? && current_user != @offer.user %>
   <h2>There are currently no bids on this offer. <%= link_to "Be the first!", bid_on_offer_path(@offer) %></h2>
 <% else %>
   <div class="page-section">

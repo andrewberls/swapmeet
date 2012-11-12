@@ -17,7 +17,7 @@
 
     <span class="user-links">
       <% if user_signed_in? %>
-        Signed in as <%= current_user.username %>. &nbsp;&nbsp;<%= link_to "Not you?", logout_path %>
+        Signed in as <%= link_to current_user.username, current_user, class: 'profile-link' %>. &nbsp;&nbsp;<%= link_to "Not you?", logout_path %>
       <% else %>
         <%= link_to "Sign up", signup_path, class: "btn btn-blue #{current_page?(signup_path) ? 'disabled' : '' }" %>
         <%= link_to "Log in", login_path, class: "btn btn-green #{current_page?(login_path) ? 'disabled' : '' }" %>

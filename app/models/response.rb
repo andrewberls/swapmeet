@@ -13,7 +13,7 @@ class Response < ActiveRecord::Base
   validates_inclusion_of :status, :in => VALID_STATES, :message => "Status is not valid"
 
   # validates_each :offer do |record, attr, value|
-  #   record.errors.add(attr, "#{value.title} cannot receive bids") if not value.can_receive_bids?
+  #   record.errors.add(attr, "#{value.title} cannot receive bids") if not value.is_parent_offer?
   # end
 
   # Accept a bid
@@ -31,7 +31,7 @@ class Response < ActiveRecord::Base
   def lock!
     update_attributes! status: 'locked'
   end
-  
+
   def self.response_for(offer, bid)
     where(:offer_id => offer.id, :bid_id => bid.id).first
   end

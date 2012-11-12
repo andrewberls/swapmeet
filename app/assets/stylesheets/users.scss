@@ -1,0 +1,14 @@
+.user-profile {
+  @extend %whitebox;
+  padding: 0;
+  text-align: center;
+}
+
+.karma-large {
+  display: inline-block;
+  font-size: 3.5em;
+
+  &:first-of-type {
+    margin-right: 20px;
+  }
+}
