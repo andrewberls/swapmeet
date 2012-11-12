@@ -18,8 +18,9 @@ Swapmeet::Application.routes.draw do
 
   resources :users
 
-  get 'messages/inbox' => "messages#inbox", as: 'inbox'
-  resources :messages
+  resources :messages do
+    get 'inbox', on: :collection
+  end
 
   root :to => 'offers#index'
 

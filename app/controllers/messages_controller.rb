@@ -8,10 +8,10 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to messages_inbox_path, notice: 'Message sent.' }
-        format.json { render json: messages_inbox_path, status: :created, location: messages_inbox_path }
+        format.html { redirect_to inbox_messages_path, notice: 'Message sent.' }
+        format.json { render json: inbox_messages_path, status: :created, location: inbox_messages_path }
       else
-        format.html { redirect_to messages_inbox_path, notice: 'Error: Unable to send.' }
+        format.html { redirect_to inbox_messages_path, notice: 'Error: Unable to send.' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
