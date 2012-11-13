@@ -21,8 +21,7 @@ class MessagesController < ApplicationController
     user      = User.find(params[:id])
     @messages = Message.all_between(current_user, user)
 
-    # TODO: this marks a message as read for both users even if the sender re-views the message
-    @messages.map(&:mark_as_read!)
+    @messages.recipient_is(current_user).map(&:mark_as_read!)
 
     # New message at bottom
     @message = Message.new(:recipient_id => params[:id])
