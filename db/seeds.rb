@@ -40,7 +40,7 @@ mark = " -> "
 #-------------------------------------------
 # MANAGED SEEDS
 #-------------------------------------------
-print "Creating managed seeds..."
+print "\nCreating managed seeds..."
 managed_start = Time.now
 
 admin_user = User.new(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password"); admin_user.save!
@@ -106,30 +106,29 @@ print "Done. (#{Time.now - offer_start}s)\n"
 #--------------------
 # Responses
 #--------------------
-# TODO: MOST OF GEN TIME STILL SPENT HERE
-
 # Extra bit of shuffling to ensure only parent offers receive bids,
 # and users dont bid on their own offers
 print "Creating bids..."
 
 bid_start = Time.now
 BID_COUNT.times do |i|
-  parent_user = random_user
-  parent_id   = parent_user.id
-  bid_user = begin
-    user = random_user
-    while user == parent_user
-      user = random_user
+
+  parent_offer_id = random_offer_id
+  parent_user_id   = Offer.find(parent_offer_id).user.id
+  bid_user_id = begin
+    id = random_user_id
+    while id == parent_user_id
+      id = random_user_id
     end
-    user
+    id
   end
 
   desc      = LiterateRandomizer.sentence
-  bid_query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `title`, `updated_at`, `user_id`) VALUES ('#{Time.now.to_s(:db)}', "#{desc}", NULL, NULL, NULL, NULL, 'test-bid#{i}', '#{Time.now.to_s(:db)}', #{bid_user.id})}
+  bid_query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `title`, `updated_at`, `user_id`) VALUES ('#{Time.now.to_s(:db)}', "#{desc}", NULL, NULL, NULL, NULL, 'test-bid#{i}', '#{Time.now.to_s(:db)}', #{bid_user_id})}
   execute(bid_query)
 
   bid_id = Offer.last.id # TODO
-  resp_query = %Q{INSERT INTO `responses` (`bid_id`, `bidder_rated`, `created_at`, `offer_id`, `offerer_rated`, `status`, `updated_at`) VALUES (#{bid_id}, 0, '#{Time.now.to_s(:db)}', #{parent_id}, 0, 'open', '#{Time.now.to_s(:db)}')}
+  resp_query = %Q{INSERT INTO `responses` (`bid_id`, `bidder_rated`, `created_at`, `offer_id`, `offerer_rated`, `status`, `updated_at`) VALUES (#{bid_id}, 0, '#{Time.now.to_s(:db)}', #{parent_offer_id}, 0, 'open', '#{Time.now.to_s(:db)}')}
   execute(resp_query)
 
 end
