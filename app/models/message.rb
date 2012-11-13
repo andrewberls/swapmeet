@@ -16,7 +16,9 @@ class Message < ActiveRecord::Base
 
 
   def mark_as_read!
-    update_attributes! read: true
+    unless self.read
+      update_attributes! read: true
+    end
   end
 
   scope :all_between, lambda { |user1, user2|
@@ -47,6 +49,10 @@ class Message < ActiveRecord::Base
         GROUP BY sender_id \
       )").order_by_recency
 
+  }
+  
+  scope :recipient_is, lambda { |recipient|
+    where(:recipient_id => recipient.id)
   }
 
   scope :order_by_recency, order('updated_at desc')
