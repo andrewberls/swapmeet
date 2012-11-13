@@ -23,6 +23,7 @@ body > .container {
 .green { color: $green; }
 .blue  { color: $blue; }
 .red  { color: $red; }
+.dark-green { color: #468847; }
 
 
 %noise {
@@ -45,6 +46,7 @@ body > .container {
   float: left;
   padding: 15px;
   width: 50%;
+  min-height: 100px;
 
   @media (max-width: 630px) {
     float: none;
@@ -61,4 +63,6 @@ body > .container {
   }
 }
 
-.split-right {}
+.split-right {
+  border-left: 1px solid $med-gray;
+}

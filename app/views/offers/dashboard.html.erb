@@ -1,8 +1,8 @@
 <div class="page-section">
   <div class="row">
     <div class="span-10 offset-3">
-      <%= link_to "Post an offer", new_offer_path, class: "btn btn-blue btn-large left" %>
-      <%= link_to "Browse open offers", offers_path, class: "btn btn-blue btn-large right" %>
+      <%= link_to "Post a Trade", new_offer_path, class: "btn btn-blue btn-large left" %>
+      <%= link_to "Browse open trades", offers_path, class: "btn btn-blue btn-large right" %>
     </div>
   </div>
 </div>
@@ -13,14 +13,27 @@
 
    <div class="user-notifications">
     <div class="split-left">
-      <h3>Your Offers</h3>
-      <span class="notif-num blue">2</span> new bids on <%= link_to current_user.offers.first.title, current_user.offers.first, class: 'notif-link' %>
+      <h3>Your Trades</h3>
+      <ul>
+        <% @user_parents.each do |offer| %>
+          <li>
+            <%= link_to offer.title, offer %>
+            <%= content_tag :span, "- #{pluralize(offer.bids.count, 'bid')}", style: 'color: #666' if offer.bids.present? %>
+          </li>
+        <% end %>
+      </ul>
     </div>
 
     <div class="split-right">
       <h3>Your Bids</h3>
-      <!-- <span class="notif-num green">1</span> message from <%#= link_to User.last.username, User.last, class: 'notif-link' %> -->
-      <span class="">Your bid on <%= link_to Offer.last.title, Offer.last, style: 'font-style: italic' %> has been accepted!</span>
+      <ul>
+        <% @user_bids.each do |bid| %>
+          <li>
+            <%= link_to bid.title, Response.find_by_bid_id(bid).offer %>
+            <%= content_tag :span, "- Accepted!", class: 'green' if bid.accepted? %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div><!-- .user-notifications -->
 

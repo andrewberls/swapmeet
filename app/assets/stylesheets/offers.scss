@@ -94,6 +94,14 @@
     .username {
       color: #666;
       font-weight: bold;
+
+      &.username-blue { color: $blue; }
+
+      a {
+        color: inherit;
+        float: none;
+        &:hover { color: $aqua; }
+      }
     }
 
     p {

@@ -127,13 +127,15 @@ class OffersController < ApplicationController
 
   # GET /dashboard
   def dashboard
-    # TODO: GET USERS TRADES
+    @user_parents  = current_user.offers.select(&:is_parent_offer?)
+    @user_bids     = current_user.offers.reject(&:is_parent_offer?)
     @recent_offers = Offer.parent_offers.last(8)
   end
 
   # GET /offers/1
   # GET /offers/1.json
   def show
+    # return redirect_to offers_path unless @offer.is_parent_offer?
     setup_ratings
     respond_to do |format|
       format.html # show.html.erb
