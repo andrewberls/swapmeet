@@ -4,6 +4,7 @@ set :repository,  "git@github.com:andrewberls/swapmeet.git"
 #added by Sarah
 set :branch, "sj_capistrano"
 set :deploy_to, "/home/ubuntu"
+set :user, "swapmeet290@gmail.com"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
