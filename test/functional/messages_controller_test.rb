@@ -30,4 +30,16 @@ class MessagesControllerTest < ActionController::TestCase
     assert_response :success
 
   end
+  
+  test "should only mark messages as read if user is the sender" do
+    sign_in @user
+    get :show, :id => users(:two).id
+    assert_response :success
+    
+    assert_equal true, messages(:two).read
+    assert_equal false, messages(:one).read
+    assert_equal false, messages(:three).read
+    
+    
+  end
 end
