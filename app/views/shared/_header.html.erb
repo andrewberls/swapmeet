@@ -2,17 +2,22 @@
   <div class="container">
     <% if user_signed_in? %>
       <ul>
-        <li><%= link_to "Dashboard", dashboard_path,    class: (current_page? dashboard_path) ? 'current' : '' %></li>
-        <li><%= link_to "My Trades", offers_path,       class: (current_page? offers_path)    ? 'current' : '' %></li>
-        <li><%= link_to "Post a Trade", new_offer_path, class: (current_page? new_offer_path) ? 'current' : '' %></li>
-        <li><%= link_to "Browse Trades", offers_path,   class: (current_page? offers_path)    ? 'current' : '' %></li>
-        <li><%= link_to "Messages", messages_inbox_path, class: (current_page? offers_path)    ? 'current' : '' %></li>
+        <li><%= link_to "Dashboard", dashboard_path,     class: (current_page? dashboard_path) ? 'current' : '' %></li>
+        <li><%= link_to "Post a Trade", new_offer_path,  class: (current_page? new_offer_path) ? 'current' : '' %></li>
+        <li><%= link_to "Browse Trades", offers_path,    class: (current_page? offers_path)    ? 'current' : '' %></li>
+        <li>
+          <%= link_to "Messages", inbox_messages_path, class: (current_page? inbox_messages_path)    ? 'current' : '' %>
+
+          <% if current_user.unread_messages.present? %>
+            <span class="badge badge-red"><%= current_user.unread_messages.count %></span>
+          <% end %>
+        </li>
       </ul>
     <% end %>
 
     <span class="user-links">
       <% if user_signed_in? %>
-        Signed in as <%= current_user.username %>. &nbsp;&nbsp;<%= link_to "Not you?", logout_path %>
+        Signed in as <%= link_to current_user.username, current_user, class: 'profile-link' %>. &nbsp;&nbsp;<%= link_to "Not you?", logout_path %>
       <% else %>
         <%= link_to "Sign up", signup_path, class: "btn btn-blue #{current_page?(signup_path) ? 'disabled' : '' }" %>
         <%= link_to "Log in", login_path, class: "btn btn-green #{current_page?(login_path) ? 'disabled' : '' }" %>

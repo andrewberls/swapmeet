@@ -1,0 +1,25 @@
+.user-notifications {
+  @extend %whitebox;
+  @include bold(1.1em);
+  padding: 0;
+
+  li {
+    padding-left: 10px;
+  }
+}
+
+
+.user-profile {
+  @extend %whitebox;
+  padding: 0;
+  text-align: center;
+}
+
+.karma-large {
+  display: inline-block;
+  font-size: 3.5em;
+
+  &:first-of-type {
+    margin-right: 20px;
+  }
+}

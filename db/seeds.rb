@@ -1,101 +1,139 @@
 #--------------------
 # Config options
 #--------------------
-USER_COUNT  = 100
-OFFER_COUNT = 100
-BID_COUNT   = 175
+# Micro: 100, 100, 175     (1.243559s)
+# Small: 1000, 1000, 1750  (8.704556s - old 93.520896s)
+# Medium: 4500, 5000, 6000 (46.315948s)
+
+USER_COUNT  = 1000
+OFFER_COUNT = 1000
+BID_COUNT   = 1750
 
 
 #--------------------
 # Utilites
 #--------------------
+def execute(query)
+  ActiveRecord::Base.connection.execute(query)
+end
+
+def random_user_id
+  rand(1..User.count)
+end
+
+def random_offer_id
+  rand(1..Offer.count)
+end
+
 def random_user
-  User.all.shuffle.first
+  User.find(random_user_id)
+end
+
+def random_offer
+  Offer.find(random_offer_id)
 end
 
 mark = " -> "
 
 
-puts "\nCreating managed seeds.. "
 
-admin_user = User.new(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password")
-admin_user.save!
-good_user  = User.new(username: "gooduser", email: "gooduser@email.com", password: "password", password_confirmation: "password", up_ratings: 14)
-good_user.save!
-bad_user   = User.new(username: "baduser", email: "baduser@email.com", password: "password", password_confirmation: "password", down_ratings: 49)
-bad_user.save!
+#-------------------------------------------
+# MANAGED SEEDS
+#-------------------------------------------
+print "Creating managed seeds..."
+managed_start = Time.now
 
-awesome_offer = Offer.new(title: "Awesome offer", description: "I need to get rid of my really awesome stuff.") do |offer|
-  offer.user = admin_user
-end
+admin_user = User.new(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password"); admin_user.save!
+good_user  = User.new(username: "gooduser", email: "gooduser@email.com", password: "password", password_confirmation: "password", up_ratings: 14); good_user.save!
+bad_user   = User.new(username: "baduser", email: "baduser@email.com", password: "password", password_confirmation: "password", down_ratings: 49); bad_user.save!
 
-good_bid = Offer.new(title: "Good bid", description: "I will give you really cool stuff for your awesome stuff") do |offer|
-  offer.user = good_user
-end
-
-bad_bid = Offer.new(title: "Bad bid", description: "I will probably rip you off or back out") do |offer|
-  offer.user = bad_user
-end
-
-
+awesome_offer = Offer.new(title: "Awesome offer", description: "I need to get rid of my really awesome stuff.") { |o| o.user = admin_user }
+good_bid      = Offer.new(title: "Good bid", description: "I will give you really cool stuff for your awesome stuff") { |o| o.user = good_user }
+bad_bid       = Offer.new(title: "Bad bid", description: "I will probably rip you off or back out") { |o| o.user = bad_user }
 
 awesome_offer.save!
 awesome_offer.responses.new(bid: good_bid) { |resp| resp.status = 'open' }.save!
 awesome_offer.responses.new(bid: bad_bid) { |resp| resp.status = 'open' }.save!
 
+print "Done. (#{Time.now - managed_start}s)\n"
 
 
 
-puts "Done."
+#-------------------------------------------
+# RANDOM SEEDS
+#-------------------------------------------
+# Random seed generation with Ruby/Rails methods is very slow,
+# so here we enjoy a brief detour into the land of SQL.
 puts "Starting random seed generation. Configuration: "
-puts "#{mark}user count:  #{USER_COUNT}"
-puts "#{mark}offer count: #{OFFER_COUNT}"
-puts "#{mark}bid count:   #{BID_COUNT}"
-puts ""
+puts "#{mark}User count:  #{USER_COUNT}"
+puts "#{mark}Offer count: #{OFFER_COUNT}"
+puts "#{mark}Bid count:   #{BID_COUNT}\n\n"
+
 beginning_time = Time.now
 
 #--------------------
 # Users
 #--------------------
+# Password hardcoded to 'password'
+
+print "Creating users..."
+user_start = Time.now
 USER_COUNT.times do |i|
-  User.create!(username: "user#{i}", email: "user#{i}@fake.com", password: "password", password_confirmation: "password")
+  query = %Q{INSERT INTO `users` (`created_at`, `current_sign_in_at`, `current_sign_in_ip`, `down_ratings`, `email`, `encrypted_password`, `last_sign_in_at`, `last_sign_in_ip`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `up_ratings`, `updated_at`, `username`) VALUES ('#{Time.now.to_s(:db)}', NULL, NULL, 0, 'user#{i}@fake.com', '$2a$10$pvCaaiZW5O43M/r7xCeKkOJ3Vlgv8pUgvl77C6SFrot4Ml1eBeN1a', NULL, NULL, NULL, NULL, NULL, 0, 0, '#{Time.now.to_s(:db)}', 'user#{i}')}
+
+  execute(query)
 end
+print "Done. (#{Time.now - user_start}s)\n"
 
 
 
 #--------------------
 # Offers
 #--------------------
+offer_start = Time.now
+print "Creating offers..."
 OFFER_COUNT.times do |i|
-  Offer.new(title: "test-offer#{i}", description: LiterateRandomizer.sentence) do |offer|
-    offer.user = random_user
-  end.save!
+  desc    = LiterateRandomizer.sentence
+  user_id = random_user_id
+  query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `title`, `updated_at`, `user_id`) VALUES ('#{Time.now.to_s(:db)}', "#{desc}", NULL, NULL, NULL, NULL, 'test-offer#{i}', '#{Time.now.to_s(:db)}', #{user_id})}
+
+  execute(query)
 end
+print "Done. (#{Time.now - offer_start}s)\n"
 
 
 
 #--------------------
 # Responses
 #--------------------
+# TODO: MOST OF GEN TIME STILL SPENT HERE
+
+# Extra bit of shuffling to ensure only parent offers receive bids,
+# and users dont bid on their own offers
+print "Creating bids..."
+
+bid_start = Time.now
 BID_COUNT.times do |i|
-  parent_offer = Offer.all.shuffle.first
-  parent_user  = random_user
+  parent_user = random_user
+  parent_id   = parent_user.id
   bid_user = begin
     user = random_user
-    # Since we're choosing random users, make sure a user isn't bidding on its own offer
     while user == parent_user
-      puts "#{mark}bid_user was equal to parent_user, shuffling"
       user = random_user
     end
     user
   end
 
-  bid = bid_user.offers.build(title: "test-bid#{i}", description: LiterateRandomizer.sentence)
-  response = parent_offer.responses.new(bid: bid) do |resp|
-    resp.status = 'open'
-  end.save!
-  bid.save!
+  desc      = LiterateRandomizer.sentence
+  bid_query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `title`, `updated_at`, `user_id`) VALUES ('#{Time.now.to_s(:db)}', "#{desc}", NULL, NULL, NULL, NULL, 'test-bid#{i}', '#{Time.now.to_s(:db)}', #{bid_user.id})}
+  execute(bid_query)
+
+  bid_id = Offer.last.id # TODO
+  resp_query = %Q{INSERT INTO `responses` (`bid_id`, `bidder_rated`, `created_at`, `offer_id`, `offerer_rated`, `status`, `updated_at`) VALUES (#{bid_id}, 0, '#{Time.now.to_s(:db)}', #{parent_id}, 0, 'open', '#{Time.now.to_s(:db)}')}
+  execute(resp_query)
+
 end
+print "Done. (#{Time.now - bid_start}s)\n"
 
 
 puts "Seed generation completed: #{Time.now - beginning_time}s"

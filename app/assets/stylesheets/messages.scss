@@ -1,0 +1,39 @@
+#messages,
+#messages-inbox {
+  @extend %whitebox;
+}
+
+#messages {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 5px 10px 0;
+
+  .message:first-child  {
+    margin-top: 0;
+  }
+}
+
+#new_message {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding-top: 15px;
+}
+
+.message {
+  margin: 20px 10px;
+
+  .msg-sender {
+    font-weight: bold;
+    margin: 10px 0 5px;
+  }
+
+  .msg-content {
+    padding-left: 20px;
+  }
+
+  .msg-timestamp {
+    color: darken($med-gray, 40);
+    float: right;
+  }
+}

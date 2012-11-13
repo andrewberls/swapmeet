@@ -16,6 +16,7 @@ header {
   li {
     line-height: $header-height;
     margin-right: 10px;
+    position: relative;
 
     a {
       font-size: 11px;
@@ -40,6 +41,13 @@ header {
     float: right;
     line-height: $header-height;
     color: $med-gray;
+
+    .profile-link {
+      color: $green;
+      text-decoration: none;
+
+      &:hover { text-decoration: underline; }
+    }
 
     .link-separator {
       color: darken($med-gray, 20);

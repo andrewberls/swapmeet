@@ -32,5 +32,11 @@ end
   <%= f.label :image %>
   <%= f.file_field :image, :accept => 'image/png,image/gif,image/jpeg' %>
 
+  <% if @parent_offer %>
+    <p>Or bid one of your existing items:</p>
+    <%= select_tag :reused_offer_id, options_from_collection_for_select(@reusable_offers, "id", "title"), :prompt => "Choose..." %>
+
+  <% end %>
+
   <%= f.submit submit_button_text, class: 'btn btn-blue' %>
 <% end %>

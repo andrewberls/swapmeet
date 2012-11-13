@@ -94,6 +94,14 @@
     .username {
       color: #666;
       font-weight: bold;
+
+      &.username-blue { color: $blue; }
+
+      a {
+        color: inherit;
+        float: none;
+        &:hover { color: $aqua; }
+      }
     }
 
     p {
@@ -127,6 +135,10 @@
 
   .bid-details {
     padding: 10px 5px;
+
+    p {
+      margin-bottom: 5px;
+    }
   }
 
   img { margin-bottom: 5px; }
@@ -135,7 +147,15 @@
 }
 
 
-// Karma / voting
+// Feedback + voting
+.contact {
+  display: block;
+  font-weight: bold;
+  margin: 5px 0 0;
+  text-align: center;
+}
+
+
 .feedback-container {
   margin-top: 10px;
   text-align: center;
@@ -154,9 +174,6 @@
     display: inline-block;
     margin-right: 5px;
   }
-
-  .karma-up { color: $green; }
-  .karma-down { color: $red; }
 
   @media (max-width: 1100px) {
     display: block;

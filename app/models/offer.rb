@@ -30,15 +30,48 @@ class Offer < ActiveRecord::Base
   # not the stuff that is posted in response
   scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
-  # Can you make a bid on this offer?
-  # i.e., you can't bid on bids
+  # -----------------
+  # PARENT OFFERS
+  # -----------------
+  def is_parent_offer?
+    Response.find_by_bid_id(id).blank?
+  end
+
+  # You can only bid on open parent offers
   def can_receive_bids?
-    Response.find_by_bid_id(self.id).blank?
+    is_parent_offer? && bids.empty?
+  end
+
+  # Bid that has been accepted
+  def accepted_bid
+    accepted_response.present? ? accepted_response.bid : nil
+  end
+
+  # Bid that has been completed
+  def completed_bid
+    completed_response.present? ? completed_response.bid : nil
+  end
+
+  def completed_or_accepted_bid
+    completed_bid || accepted_bid
   end
 
 
-  def is_parent_offer?
-    Response.find_by_bid_id(id).blank?
+  # -----------------
+  # BIDS
+  # -----------------
+  def locked?
+    bid_response.status == 'locked'
+  end
+
+  def accepted?
+    bid_response.status == 'accepted'
+  end
+
+  private
+
+  def detect_response(status)
+    responses.detect { |r| r.status == status }
   end
 
   def accepted_response
@@ -49,35 +82,8 @@ class Offer < ActiveRecord::Base
     detect_response 'completed'
   end
 
-  # The bid that the parent offer has accepted
-  def accepted_bid
-    accepted_response.present? ? accepted_response.bid : nil
-  end
-
-  def completed_bid
-    completed_response.present? ? completed_response.bid : nil
-  end
-  
-  def completed_or_accepted_bid
-    completed_bid || accepted_bid
-  end
-
-  def accepted?
-    accepted_bid.present?
-  end
-
-  def completed?
-    completed_bid.present?
-  end
-
-  def locked?
-    Response.find_by_bid_id(id).status == 'locked'
-  end
-
-  private
-
-  def detect_response(status)
-    responses.detect { |r| r.status == status }
+  def bid_response
+    Response.find_by_bid_id(id)
   end
 
 end

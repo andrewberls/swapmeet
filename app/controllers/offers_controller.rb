@@ -12,9 +12,20 @@ class OffersController < ApplicationController
   # POST /offers/1/bid
   def bid
     if request.get?
+      return redirect_to @parent_offer if current_user == @parent_offer.user
       @offer = Offer.new
+
+      # You can reuse offers that are not already on this trade and do not have any bids on them
+      bid_ids = Response.where(:offer_id => params[:id]).pluck("bid_id")
+      @reusable_offers = current_user.offers.where(['id not in (?)', bid_ids]).reject do |offer|
+        offer.is_parent_offer?
+      end
     else
-      @offer = current_user.offers.build(params[:offer])
+      if params[:reused_offer_id].blank?
+        @offer = current_user.offers.build(params[:offer])
+      else
+        @offer = Offer.where({:id => params[:reused_offer_id], :user_id => current_user.id}).first
+      end
 
       response = @parent_offer.responses.new(bid: @offer) do |resp|
         resp.status = 'open'
@@ -73,7 +84,7 @@ class OffersController < ApplicationController
 
   def rate
     response = Response.response_for(params[:offer_id], params[:bid_id])
-    
+
     unless response.rated
       # TODO: Can we reduce queries here?
       offer      = Offer.find(params[:offer_id])
@@ -116,13 +127,15 @@ class OffersController < ApplicationController
 
   # GET /dashboard
   def dashboard
-    # TODO: GET USERS TRADES
+    @user_parents  = current_user.offers.select(&:is_parent_offer?)
+    @user_bids     = current_user.offers.reject(&:is_parent_offer?)
     @recent_offers = Offer.parent_offers.last(8)
   end
 
   # GET /offers/1
   # GET /offers/1.json
   def show
+    # return redirect_to offers_path unless @offer.is_parent_offer?
     setup_ratings
     respond_to do |format|
       format.html # show.html.erb
@@ -199,7 +212,7 @@ class OffersController < ApplicationController
 
   def find_parent_offer
     @parent_offer = Offer.find(params[:id])
-    @parent_offer.can_receive_bids? or raise "Cannot bid on this offer"
+    @parent_offer.is_parent_offer? or raise "Cannot bid on this offer"
   end
 
   # TODO: This name is horrible. It's intent is to DRY up the responses queries
@@ -213,7 +226,7 @@ class OffersController < ApplicationController
     @parent_responses = Response.where(bid_id: params[:bid_id]).all
     @response_queue   = (@offer.responses + @parent_responses) - [@bid_resp]
   end
-  
+
   def setup_ratings
     @selected_bid = @offer.completed_or_accepted_bid
     @rating_state =
@@ -226,7 +239,7 @@ class OffersController < ApplicationController
         else
           :display_rate_buttons
         end
-      elsif current_user == @offer.user 
+      elsif current_user == @offer.user
         @user_to_rate = @selected_bid.user
         if Response.response_for(@offer, @selected_bid).bidder_rated
           :rated

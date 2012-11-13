@@ -1,24 +1,45 @@
-<% provide(:title, "User: #{@user.username}") %>
+<% provide(:title, @user.username) %>
 
-<p id="notice"><%= notice %></p>
+<div class="row">
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+  <div class="span-10 offset-3 page-section">
+    <h2 style="font-size: 2.3em; margin-bottom: 15px;">User: <span class="blue"><%= @user.username %></span></h2>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+    <div class="user-profile">
+      <div class="split-left">
+        <span class="karma-large green">+ <%= @user.up_ratings %></span>
+      </div>
 
-<p id="karma">
-  <b>Up Ratings:</b>
-  <%= @user.up_ratings  %>
-  <br />
-  <b>Down Ratings:</b>
-  <%= @user.down_ratings %>
-</p>
+      <div class="split-right">
+        <span class="karma-large red">- <%= @user.down_ratings %></span>
+      </div>
+    </div><!-- .user-profile -->
+  </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+  <% if @offers.present? %>
+    <h2><%= @user.username %>'s trades:</h2>
+    <div class="page-section">
+      <div class="offer-masonry">
+
+        <% @offers.each do |offer| %>
+          <div class="offer-box">
+            <div class="offer-details">
+              <p class="offer-title"><%= offer.title %></p>
+              <img src="http://placehold.it/350x175">
+            </div>
+
+            <div class="offer-notifications">
+              <p><%= offer.description %></p>
+              <%= link_to raw("More info &raquo;"), offer %>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div><!-- .page-section -->
+
+  <% end %>
+
+</div>
+
