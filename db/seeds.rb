@@ -25,13 +25,25 @@ def random_offer_id
   rand(1..Offer.count)
 end
 
-mark = " -> "
+record_count   = USER_COUNT + OFFER_COUNT + BID_COUNT
+avg_per_record = 0.0028751566
 
+puts "\nStarting seed generation. Configuration: "
+puts " -> User count:  #{USER_COUNT}"
+puts " -> Offer count: #{OFFER_COUNT}"
+puts " -> Bid count:   #{BID_COUNT}"
+
+est_time = '%.4f' % ( avg_per_record * (record_count + 8) )
+puts "\n#----------------------------------------------"
+puts "  WARNING: LONG GENERATION TIME PREDICTED" if record_count > 100_000
+puts "  Estimated Time: #{est_time}s"
+puts "#----------------------------------------------"
 
 
 #-------------------------------------------
 # MANAGED SEEDS
 #-------------------------------------------
+
 print "\nCreating managed seeds..."
 managed_start = Time.now
 
@@ -56,10 +68,6 @@ print "Done. (#{Time.now - managed_start}s)\n"
 #-------------------------------------------
 # Random seed generation with Ruby/Rails methods is very slow,
 # so here we enjoy a brief detour into the land of SQL.
-puts "Starting random seed generation. Configuration: "
-puts "#{mark}User count:  #{USER_COUNT}"
-puts "#{mark}Offer count: #{OFFER_COUNT}"
-puts "#{mark}Bid count:   #{BID_COUNT}\n\n"
 
 beginning_time = Time.now
 
@@ -68,7 +76,7 @@ beginning_time = Time.now
 #--------------------
 # Password hardcoded to 'password'
 
-print "Creating users..."
+print "Creating users..........."
 user_start = Time.now
 USER_COUNT.times do |i|
   time  = Time.now.to_s(:db)
@@ -84,7 +92,7 @@ print "Done. (#{Time.now - user_start}s)\n"
 # Offers
 #--------------------
 offer_start = Time.now
-print "Creating offers..."
+print "Creating offers.........."
 OFFER_COUNT.times do |i|
   desc  = LiterateRandomizer.sentence
   time  = Time.now.to_s(:db)
@@ -102,7 +110,7 @@ print "Done. (#{Time.now - offer_start}s)\n"
 # Extra bit of shuffling to ensure only parent offers receive bids,
 # and users dont bid on their own offers
 
-print "Creating bids..."
+print "Creating bids............"
 
 bid_start = Time.now
 BID_COUNT.times do |i|
