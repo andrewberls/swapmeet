@@ -3,7 +3,7 @@ require "bundler/capistrano"
 set :application, "Swapmeet"
 set :repository,  "git@github.com:andrewberls/swapmeet.git"
 
-set :branch, "sj_capistrano"
+set :branch, "master"
 set :deploy_to, "/home/ubuntu"
 set :user, "ubuntu"
 
