@@ -40,7 +40,7 @@ gem 'brakeman'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 gem 'debugger'
 
