@@ -28,3 +28,6 @@ role :db,  "swapmeet.dnsdynamic.net", :primary => true # This is where Rails mig
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
    end
  end
+
+
+ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
