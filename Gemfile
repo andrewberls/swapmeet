@@ -34,6 +34,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+# Query comments
+gem 'marginalia'
+
 gem 'brakeman'
 
 # Use unicorn as the app server
