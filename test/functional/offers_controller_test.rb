@@ -124,4 +124,34 @@ class OffersControllerTest < ActionController::TestCase
 
     assert_select "div.feedback-container p", { :text => /Leave a rating for\s+#{users(:one).username}:/}
   end
+  
+  test "bidder should be able to leave a rating for offerer" do
+    sign_in users(:two)
+    response = responses(:offer_one_to_bid_one)
+    response.complete!
+    assert_equal false, response.offerer_rated
+    assert_equal 1, users(:one).up_ratings
+    post :rate, offer_id: response.offer.id, bid_id: response.bid.id, rate: 'up'
+    
+    assert_redirected_to offer_path(response.offer)
+    response.reload
+    
+    assert_equal true, response.offerer_rated
+    assert_equal 2, users(:one).reload.up_ratings
+  end
+  
+  test "offerer should be able to leave a rating for offerer" do
+    sign_in users(:one) #offerer
+    response = responses(:offer_one_to_bid_one)
+    response.complete!
+    assert_equal 5, users(:two).up_ratings
+    assert_equal false, response.bidder_rated
+    post :rate, offer_id: response.offer.id, bid_id: response.bid.id, rate: 'up'
+    
+    assert_redirected_to offer_path(response.offer)
+    response.reload
+
+    assert_equal 6, users(:two).reload.up_ratings
+    assert_equal true, response.bidder_rated
+  end
 end

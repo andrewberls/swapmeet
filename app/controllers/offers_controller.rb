@@ -100,7 +100,11 @@ class OffersController < ApplicationController
         raise "Rating #{params[:rate].inspect} not recognized"
       end
 
-      response.update_attributes! :rated => true # TODO: BOTH USERS CAN VOTE
+      if rated_user == bid_user
+        response.update_attributes! :bidder_rated => true
+      elsif rated_user == offer_user
+        response.update_attributes! :offerer_rated => true
+      end
       rated_user.save!
 
       flash[:success] = 'Rating completed.'
