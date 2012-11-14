@@ -31,3 +31,4 @@ role :db,  "swapmeet.dnsdynamic.net", :primary => true # This is where Rails mig
 
 
 ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
+ssh_options[:forward_agent] = true
