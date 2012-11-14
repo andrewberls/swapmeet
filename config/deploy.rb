@@ -1,7 +1,8 @@
+require "bundler/capistrano"
+
 set :application, "Swapmeet"
 set :repository,  "git@github.com:andrewberls/swapmeet.git"
 
-#added by Sarah
 set :branch, "sj_capistrano"
 set :deploy_to, "/home/ubuntu"
 set :user, "ubuntu"
