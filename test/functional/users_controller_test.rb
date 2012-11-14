@@ -17,8 +17,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should get index" do
     sign_in @admin_user
     get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
+    assert_redirected_to dashboard_path
   end
 
   test "should get new" do
@@ -39,8 +38,8 @@ class UsersControllerTest < ActionController::TestCase
     get :show, id: @user
     assert_response :success
     
-    assert_select "p#karma" do |p|
-      assert_select p[0], "p", { :text => /Up Ratings:\s+1\s+Down Ratings:\s+2/}
+    assert_select "div.user-profile" do |p|
+      assert_select p[0], "div", { :text => /\+ 1\s+\- 2/}
     end
   end
   

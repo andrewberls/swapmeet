@@ -28,7 +28,8 @@
             method: :post, class: 'btn btn-blue btn-full' %>
     <% end %>
 
-    <%= render 'rating' if bid == completed_bid %>
+    <%= @selected_bid.inspect %>
+    <%= render 'rating' if bid == @selected_bid %>
 
   </div><!-- .bid-details -->
 

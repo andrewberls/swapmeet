@@ -83,13 +83,14 @@ class OffersController < ApplicationController
 
 
   def rate
-    response = Response.response_for(params[:offer_id], params[:bid_id])
+    offer = Offer.find(params[:offer_id])
+    bid = Offer.find(params[:bid_id])
+    response = Response.response_for(offer, bid)
 
-    unless response.rated
+    if (current_user == offer.user && !response.bidder_rated) || (current_user == bid.user && !response.offerer_rated)
       # TODO: Can we reduce queries here?
-      offer      = Offer.find(params[:offer_id])
       offer_user = offer.user
-      bid_user   = Offer.find(params[:bid_id]).user
+      bid_user   = bid.user
       rated_user = (current_user == offer_user) ? bid_user : offer_user
 
       case params[:rate]
