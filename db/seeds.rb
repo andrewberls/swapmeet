@@ -5,9 +5,9 @@
 # Small: 1000, 1000, 1750  (8.704556s - old 93.520896s)
 # Medium: 4500, 5000, 6000 (46.315948s)
 
-USER_COUNT  = 1000
-OFFER_COUNT = 1000
-BID_COUNT   = 1750
+USER_COUNT  = 5000
+OFFER_COUNT = 5500
+BID_COUNT   = 6000
 
 
 #--------------------
