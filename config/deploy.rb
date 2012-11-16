@@ -7,6 +7,7 @@ set :branch, "master"
 
 set :deploy_to, "/home/ubuntu"
 set :user, "ubuntu"
+set :use_sudo, false
 
 
 role :web, "swapmeet.dnsdynamic.net"                          # Your HTTP server, Apache/etc
