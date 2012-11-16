@@ -18,7 +18,10 @@ role :db,  "swapmeet.dnsdynamic.net", :primary => true # This is where Rails mig
 # after "deploy:restart", "deploy:cleanup"
 
 #Move the aws credentials from where RightScript put them to where it should be
-after "deploy:update_code", "deploy:symlink_aws.yml"
+after "deploy:update_code", "deploy:symlink_aws"
+
+#migrate
+after "deploy:update_code", "deploy:migrate"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -32,6 +35,9 @@ namespace :deploy do
   end
   task :symlink_aws do
     run "ln -nfs #{shared_path}/config/aws.yml #{release_path}/config/aws.yml"
+  end
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 end
 
