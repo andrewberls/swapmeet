@@ -43,7 +43,11 @@
       <div class="offer-box">
         <div class="offer-details">
           <p class="offer-title"><%= offer.title %></p>
-          <img src="http://placehold.it/350x175">
+          <% if offer.image.present? %>
+            <%= link_to image_tag(offer.image.url(:w350)), offer.image.url(:original) %>
+          <% else %>
+            No image available
+          <% end %>
         </div>
 
         <div class="offer-notifications">
@@ -66,7 +70,11 @@
       <div class="offer-box">
         <div class="offer-details">
           <p class="offer-title"><%= offer.title %></p>
-          <img src="http://placehold.it/350x175">
+          <% if offer.image.present? %>
+            <%= link_to image_tag(offer.image.url(:w350)), offer.image.url(:original) %>
+          <% else %>
+            No image available
+          <% end %>
         </div>
 
         <div class="offer-notifications">
