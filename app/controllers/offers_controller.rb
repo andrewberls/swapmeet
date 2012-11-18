@@ -121,7 +121,7 @@ class OffersController < ApplicationController
   def index
     # We show only 'parent' offers ("I want to get rid of my couch"),
     # not offers posted as responses
-    @offers = Offer.parent_offers.page(params[:page]).per(10)
+    @offers = Offer.parent_offers.search(params[:q]).page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

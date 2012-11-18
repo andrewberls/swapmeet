@@ -4,6 +4,13 @@
 
 <%= link_to 'Start a new trade', new_offer_path, class: 'btn btn-green action-btn' %>
 
+<div>
+  <%= form_tag offers_path,:method => "get" do %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>
+
 <div id="offers_list">
   <% @offers.each do |offer| %>
     <%= render 'offer_summary', offer: offer %>
