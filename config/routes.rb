@@ -13,6 +13,7 @@ Swapmeet::Application.routes.draw do
     post 'accept/:bid_id'   => "offers#accept",   as: 'accept'   # /offers/2/accept/3
     post 'complete/:bid_id' => "offers#complete", as: 'complete' # /offers/2/complete/3
     post 'rate/:bid_id'     => "offers#rate",     as: 'rate'     # /offers/2/rate/3
+    get :autocomplete_tag_name, :on => :collection
   end
   match 'dashboard' => 'offers#dashboard', as: 'dashboard'
 

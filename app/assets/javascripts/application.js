@@ -1,6 +1,10 @@
 //= require jquery
 //= require jquery_ujs
 
+//-- For tags
+//= require jquery-ui
+//= require autocomplete-rails
+
 
 //-- VENDOR PLUGINS
 //------------------------------------
