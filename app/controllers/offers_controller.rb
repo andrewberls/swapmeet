@@ -8,6 +8,8 @@ class OffersController < ApplicationController
   before_filter :find_responses, only: [:accept, :complete]
 
 
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
+
   # GET /offers/1/bid
   # POST /offers/1/bid
   def bid

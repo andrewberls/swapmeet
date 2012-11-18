@@ -1,6 +1,6 @@
 class Offer < ActiveRecord::Base
 
-  attr_accessible :title, :description, :image
+  attr_accessible :title, :description, :image, :tag_list
 
   has_attached_file :image, :styles => { :thumb => "100x100>" }
 
@@ -25,6 +25,8 @@ class Offer < ActiveRecord::Base
   belongs_to :user
   has_many :responses
   has_many :bids, through: :responses
+
+  acts_as_taggable_on :tags
 
   # We show only the original public offers ("I want to get rid of my couch") on the home page,
   # not the stuff that is posted in response
