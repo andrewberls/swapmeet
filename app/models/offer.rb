@@ -33,11 +33,18 @@ class Offer < ActiveRecord::Base
   scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
   def self.search(q)
+    known_tags = ActsAsTaggableOn::Tag.pluck(:name)
+    ret = scoped
     if q
-      where("title LIKE '%#{q}%'")
-    else
-      scoped
+      q.split.each do |w|
+        if known_tags.include?(w)
+          ret = ret.tagged_with(w)
+        else
+          ret = ret.where("title LIKE '%#{w}%'")
+        end
+      end
     end
+    ret
   end
 
 
