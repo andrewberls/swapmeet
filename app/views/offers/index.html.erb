@@ -5,8 +5,8 @@
 <%= link_to 'Start a new trade', new_offer_path, class: 'btn btn-green action-btn' %>
 
 <div>
-  <%= form_tag offers_path,:method => "get" do %>
-    <%= text_field_tag :q, params[:q] %>
+  <%= form_for offers_path,:method => "get" do %>
+    <%= autocomplete_field_tag :q, params['q'], autocomplete_tag_name_offers_path, :"data-delimiter" => ' ' %>
     <%= submit_tag "Search", :name => nil %>
   <% end %>
 </div>
