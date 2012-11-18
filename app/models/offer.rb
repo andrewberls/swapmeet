@@ -30,6 +30,15 @@ class Offer < ActiveRecord::Base
   # not the stuff that is posted in response
   scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
 
+  def self.search(q)
+    if q
+      where("title LIKE '%#{q}%'")
+    else
+      scoped
+    end
+  end
+
+
   # -----------------
   # PARENT OFFERS
   # -----------------
