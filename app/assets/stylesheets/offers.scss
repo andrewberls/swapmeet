@@ -1,8 +1,24 @@
 //-----------------------------------
 // OFFERS LISTING
 //-----------------------------------
+#offers_search {
+  @include clearfix;
+
+  form {
+    background: none;
+    border: none;
+  }
+
+  input {
+    font-size: 1.1em;
+    line-height: 1.6;
+  }
+}
+
 #offers_list {
   @extend %whitebox;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   padding: 0;
 }
 

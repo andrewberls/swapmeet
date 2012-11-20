@@ -1,8 +1,29 @@
 <% provide(:title, 'Offers') %>
 
-<h1>Listing offers</h1>
+<h1 style="font-size: 2.5em; margin-bottom: 20px">
+  <%= params[:q].present? ? "Search results for: #{params[:q]}" : "All Trades" %>
+</h1>
 
-<%= link_to 'Start a new trade', new_offer_path, class: 'btn btn-green action-btn' %>
+<%= link_to 'Post a new trade', new_offer_path, class: 'btn btn-green action-btn' %>
+
+
+<div id="offers_search">
+  <div class="row">
+
+    <%= form_for offers_path, method: 'get' do %>
+      <div class="span-8 offset-3">
+        <%= autocomplete_field_tag :q, params['q'], autocomplete_tag_name_offers_path,
+              :placeholder => "Search for trades..", :"data-delimiter" => ' ' %>
+      </div>
+
+      <div class="span-2">
+        <%= submit_tag "Search", name: nil, class: 'btn btn-blue btn-full' %>
+      </div>
+    <% end %>
+
+
+  </div>
+</div>
 
 <div>
   <%= form_for offers_path,:method => "get" do %>

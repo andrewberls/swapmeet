@@ -2,7 +2,7 @@ class Offer < ActiveRecord::Base
 
   attr_accessible :title, :description, :image, :tag_list
 
-  has_attached_file :image, :styles => { :thumb => "100x100>" }
+  has_attached_file :image, :styles => { :thumb => "100x100>", :w350 => "350x150>" }  # Shrinks if necessary
 
   validates :title,
     presence: true,
