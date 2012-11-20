@@ -44,9 +44,8 @@ class OffersController < ApplicationController
           format.html { redirect_to @parent_offer }
           format.json { render json: @offer, status: :created, location: @parent_offer }
         
-          # Send confirmation email.
-          offer_user = @parent_offer.user
-          OfferMailer.welcome_email(offer_user).deliver
+          # Send bid received email.
+          OfferMailer.bid_received_email(@parent_offer).deliver
         else
           format.html { render action: "bid" }
           format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
@@ -72,9 +71,8 @@ class OffersController < ApplicationController
       format.json { render json: @offer, status: :created, location: @offer }
     end
 
-    # Send alert email.
-    bid_user = Offer.find(params[:bid_id]).user
-    OfferMailer.welcome_email(bid_user).deliver
+    # Send bid accepted email.
+    OfferMailer.bid_accepted_email(Offer.find(params[:bid_id])).deliver
   end
 
 
