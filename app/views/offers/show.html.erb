@@ -17,11 +17,12 @@
       <h2><%= @offer.title %></h2>
       <%= render 'users/karma', user: @offer.user, byline: true %>
       <p><%= @offer.description %></p>
-      <p>
-      <% @offer.tags.each do |tag| %>
-        <%= link_to tag.name, offers_url(q: tag.name) %>
-      <% end %>
-      </p>
+
+      <div class="tag-container">
+        <% @offer.tags.each do |tag| %>
+          <%= link_to tag.name, offers_url(q: tag.name), class: 'tag' %>
+        <% end %>
+      </div>
     </div>
 
   </div>

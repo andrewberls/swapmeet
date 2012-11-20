@@ -122,6 +122,19 @@
   }
 }
 
+.tag-container {
+  margin-top: 10px;
+
+  .tag {
+    @include border-radius;
+    background-color: #DDD;
+    color: #666;
+    display: inline-block;
+    font-weight: bold;
+    padding: 3px 5px;
+  }
+}
+
 
 // Bid boxes on an offer page
 .bid-box {
