@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119040056) do
+ActiveRecord::Schema.define(:version => 20121125231618) do
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(:version => 20121119040056) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
+
+  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "offers", :force => true do |t|
     t.string   "title"
@@ -34,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20121119040056) do
     t.datetime "image_updated_at"
   end
 
+  add_index "offers", ["user_id"], :name => "index_offers_on_user_id"
+
   create_table "responses", :force => true do |t|
     t.integer  "offer_id"
     t.integer  "bid_id"
@@ -45,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20121119040056) do
   end
 
   add_index "responses", ["bid_id"], :name => "bid_id"
+  add_index "responses", ["bid_id"], :name => "index_responses_on_bid_id"
   add_index "responses", ["offer_id"], :name => "index_responses_on_offer_id"
 
   create_table "taggings", :force => true do |t|
