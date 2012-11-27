@@ -17,7 +17,12 @@ class OffersController < ApplicationController
       return redirect_to @parent_offer if current_user == @parent_offer.user
       @offer = Offer.new
 
-      # You can reuse offers that are not already on this trade and do not have any bids on them
+      # You can reuse offers that:
+      #    - are not already on this trade
+      #    - are not involved in another transaction:
+      #         - they do not have any bids on them
+      #         - and have not been accepted
+      # TODO: The filter is now too restrictive
       bid_ids = Response.where(:offer_id => params[:id]).pluck("bid_id")
       @reusable_offers = current_user.offers.where(['id not in (?)', bid_ids]).reject do |offer|
         offer.is_parent_offer?
