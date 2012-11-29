@@ -6,9 +6,13 @@
 # Medium: 4500, 5000, 6000 (46.315948s)
 # Large: 4500, 5000, 6000 (46.315948s)
 
-USER_COUNT  = 50000
-OFFER_COUNT = 55000
-BID_COUNT   = 60000
+USER_COUNT, OFFER_COUNT, BID_COUNT =
+if Rails.env == 'development'
+  [ 500, 550, 600 ]       # Keep small data for development
+else
+  [ 50000, 55000, 60000 ] # Production configuration
+end
+
 
 
 #--------------------
