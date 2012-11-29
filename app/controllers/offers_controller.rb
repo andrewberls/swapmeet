@@ -139,8 +139,9 @@ class OffersController < ApplicationController
 
   # GET /dashboard
   def dashboard
-    @user_parents  = current_user.offers.select(&:is_parent_offer?)
-    @user_bids     = current_user.offers.reject(&:is_parent_offer?)
+    offers = current_user.offers
+    @user_parents  = offers.select(&:is_parent_offer?)
+    @user_bids     = offers - @user_parents # If it's not a parent, it's a bid
     @recent_offers = Offer.parent_offers.last(8)
   end
 
