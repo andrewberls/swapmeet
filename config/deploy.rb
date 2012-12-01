@@ -3,16 +3,16 @@ require "bundler/capistrano"
 set :application, "Swapmeet"
 set :repository,  "git@github.com:andrewberls/swapmeet.git"
 set :scm, :git 
-set :branch, "master"
+set :branch, "dalli"
 
 set :deploy_to, "/home/ubuntu"
 set :user, "ubuntu"
 set :use_sudo, false
 
 
-role :web, "swapmeet.dnsdynamic.net"                          # Your HTTP server, Apache/etc
-role :app, "swapmeet.dnsdynamic.net"                          # This may be the same as your `Web` server
-role :db,  "swapmeet.dnsdynamic.net", :primary => true # This is where Rails migrations will run
+role :web, "swapmeetandrew.dnsdynamic.net"                          # Your HTTP server, Apache/etc
+role :app, "swapmeetandrew.dnsdynamic.net"                          # This may be the same as your `Web` server
+role :db,  "swapmeetandrew.dnsdynamic.net", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 
 # if you want to clean up old releases on each deploy uncomment this:
