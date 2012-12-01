@@ -7,4 +7,4 @@ Swapmeet::Application.config.session_store :cookie_store, key: '_swapmeet_sessio
 # (create the session table with "rails generate session_migration")
 # Swapmeet::Application.config.session_store :active_record_store
 
-Rails.application.config.session_store ActionDispatch::Session::CacheStore, :expire_after => 20.minutes
+#Rails.application.config.session_store ActionDispatch::Session::CacheStore, :expire_after => 20.minutes
