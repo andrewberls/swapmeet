@@ -264,29 +264,26 @@ class OffersController < ApplicationController
       end
   end
 
-  def get_rand_offer
-    current_user.offers.sample
-  end
-
   def fix_666_params
     rand_offer = nil
     if params.has_key?(:id)
-      if params[:id] == 666
-        rand_offer = get_rand_offer()
-        params[:id] = rand_offer.id
+      if params[:id] == '666'
+        rand_offer = current_user.offers.sample
+        params[:id] = rand_offer.id.to_s()
       end
     end
     if params.has_key?(:offer_id)
-      if params[:offer_id] == 666
-        if rand_offer
-          rand_offer = get_rand_offer()
+      if params[:offer_id] == '666'
+        if rand_offer.nil?
+          rand_offer = current_user.offers_with_bids.sample
         end
-        params[:offer_id] = rand_offer.id
+        params[:offer_id] = rand_offer.id.to_s()
       end
     end
     if params.has_key?(:bid_id)
-      if params[:bid_id] == 666
-        params[:bid_id] = rand_offer.bids.sample.id
+      if params[:bid_id] == '666'
+        debugger
+        params[:bid_id] = rand_offer.bids.sample.id.to_s()
       end
     end
   end
