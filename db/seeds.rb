@@ -10,7 +10,7 @@ USER_COUNT, OFFER_COUNT, BID_COUNT =
 if Rails.env == 'development'
   [ 500, 550, 600 ]       # Keep small data for development
 else
-  [ 50000, 55000, 60000 ] # Production configuration
+  [ 5000, 5500, 6000 ]    # Production configuration
 end
 
 
