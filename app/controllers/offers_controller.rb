@@ -40,6 +40,7 @@ class OffersController < ApplicationController
 
       respond_to do |format|
         if @offer.save
+          Rails.cache.expire "user#{current_user.id}_bids"
           flash[:success] = 'Your bid was successfully registered.'
           format.html { redirect_to @parent_offer }
           format.json { render json: @offer, status: :created, location: @parent_offer }
@@ -178,6 +179,7 @@ class OffersController < ApplicationController
 
     respond_to do |format|
       if @offer.save
+        Rails.cache.expire "user#{current_user.id}_parents"
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
         format.json { render json: @offer, status: :created, location: @offer }
       else
