@@ -179,6 +179,7 @@ class OffersController < ApplicationController
 
     respond_to do |format|
       if @offer.save
+        expire_fragment "recent_offers" # TODO: this probably doesn't need to be expired after every single offer
         expire_fragment "user#{current_user.id}_parents"
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
         format.json { render json: @offer, status: :created, location: @offer }
