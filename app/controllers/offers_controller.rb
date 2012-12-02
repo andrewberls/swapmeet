@@ -1,7 +1,6 @@
 class OffersController < ApplicationController
 
-  prepend_before_filter :fix_666_params_for_accept, only: [:bid,:accept,:show,:index]
-  prepend_before_filter :fix_666_params_for_complete, only: [:complete]
+  prepend_before_filter :fix_666_params
 
   before_filter :authenticate_user!
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
@@ -265,17 +264,11 @@ class OffersController < ApplicationController
       end
   end
 
-  def fix_666_params_for_accept
-    fix_666_params(false)
-  end
-  def fix_666_params_for_complete
-    fix_666_params(true)
-  end
-  def fix_666_params(for_complete)
+  def fix_666_params
     rand_offer = nil
     assert((not params.has_key?(:id)) or (params[:id] != '666'))
     if params.has_key?(:offer_id) and params[:offer_id] == '666'
-      offers_with_bids = current_user.offers.join()
+      offers_with_bids = current_user.parent_offers
       params[:offer_id] = rand_offer.id.to_s()
     end
     if params.has_key?(:bid_id) and params[:bid_id] == '666'
