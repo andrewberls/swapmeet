@@ -37,7 +37,7 @@ class CriticalPath(FunkLoadTestCase):
         # /tmp/tmpxcCX8v_funkload/watch0005.request
         self.post(server_url+"/users/sign_in", params=[
             ['utf8', '\xe2\x9c\x93'],
-            ['user[login]', 'user'+str(random.randint(20,1000))],
+            ['user[login]', 'user'+str(random.randint(1,19))],
             ['user[password]', 'password'],
             ['user[remember_me]', '0'],
             ['commit', 'Log in']],
@@ -82,6 +82,8 @@ class CriticalPath(FunkLoadTestCase):
             ['utf8', '\xe2\x9c\x93'],
             ],
             description="Complete a bid")
+        self.get(server_url+"/logout",
+            description="Logout")
 
         # end of test -----------------------------------------------
 
