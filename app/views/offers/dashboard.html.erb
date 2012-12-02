@@ -1,3 +1,5 @@
+<% provide(:title, 'Dashboard') %>
+
 <div class="page-section">
   <div class="row">
     <div class="span-10 offset-3">
@@ -43,7 +45,6 @@
 
 </div>
 
-
 <div class="page-section">
   <h1 class="section-title">Recently posted for: Santa Barbara</h1>
 
@@ -54,7 +55,7 @@
           <div class="offer-details">
             <p class="offer-title"><%= offer.title %></p>
             <% if offer.image.present? %>
-              <%= link_to image_tag(offer.image.url(:w350)), offer.image.url(:original) %>
+              <%= link_to image_tag(offer.image.url(:w350)), offer %>
             <% else %>
               No image available
             <% end %>
@@ -62,7 +63,7 @@
 
           <div class="offer-notifications">
             <p><%= offer.description %></p>
-            <%= link_to raw("More info &raquo;"), offer %>
+            <%= link_to raw("More info &raquo;"), offer, class: 'more-info' %>
           </div>
         </div>
       <% end %>
