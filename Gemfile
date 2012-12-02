@@ -36,6 +36,9 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  # Asset compression.
+  gem 'yui-compressor'
 end
 
 # Query comments
@@ -50,10 +53,6 @@ gem 'brakeman'
 gem 'capistrano'
 
 gem 'debugger'
-
-# Asset compression.
-gem 'yui-compressor'
-
 
 group :test do
   #test mocking
