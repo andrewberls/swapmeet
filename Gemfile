@@ -51,6 +51,8 @@ gem 'capistrano'
 
 gem 'debugger'
 
+# Asset compression.
+gem 'yui-compressor'
 
 
 group :test do
