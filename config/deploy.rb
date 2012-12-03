@@ -45,5 +45,5 @@ namespace :deploy do
 end
 
 #Need this if using ssh keys
-#ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
-#ssh_options[:forward_agent] = true
+ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
+ssh_options[:forward_agent] = true
