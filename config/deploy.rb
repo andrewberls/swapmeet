@@ -1,22 +1,26 @@
 require "bundler/capistrano"
 
+#use -s branch=BRANCHNAME to change branches
+
 set :application, "Swapmeet"
 #set :repository,  "git@github.com:andrewberls/swapmeet.git"
 #use read only to avoid SSH key issues
 set :repository, "git://github.com/andrewberls/swapmeet.git"
 set :scm, :git 
-set :branch, "split_server"
+
+set :branch, "master"
 
 set :deploy_to, "/home/ubuntu"
 set :user, "ubuntu"
 set :use_sudo, false
 
 
-role :web, "swapmeetapp2.dnsdynamic.net"                          # Your HTTP server, Apache/etc
-role :app, "swapmeetapp2.dnsdynamic.net"                         # This may be the same as your `Web` server
-role :db,  "swapmeetapp2.dnsdynamic.net", :primary => true # This is where Rails migrations will run
-role :db,  "swapmeetdb.dnsdynamic.net", :no_release => true #actual db server
-#role :db,  "your slave db-server here"
+  role :web, "swapmeetapp1.dnsdynamic.net", "swapmeetapp2.dnsdynamic.net"                          # Your HTTP server, Apache/etc
+  role :app, "swapmeetapp1.dnsdynamic.net", "swapmeetapp2.dnsdynamic.net"                         # This may be the same as your `Web` server
+  role :db,  "swapmeetapp2.dnsdynamic.net", :primary => true # This is where Rails migrations will run
+  #role :db,  "swapmeetdb.dnsdynamic.net", :no_release => true #actual db server
+  #role :db,  "your slave db-server here"
+
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -40,11 +44,14 @@ namespace :deploy do
   task :symlink_aws do
     run "ln -nfs #{shared_path}/config/aws.yml #{release_path}/config/aws.yml"
   end
-  task :seed do
+end
+
+namespace :db do
+  task :seed, :only => { :primary => true } do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 end
 
-#Need this if using ssh keys
+
 ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
 ssh_options[:forward_agent] = true
