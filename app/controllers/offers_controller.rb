@@ -296,7 +296,7 @@ class OffersController < ApplicationController
       params[:offer_id] = rand_offer.id.to_s()
     end
     if params.has_key?(:bid_id) and (params[:bid_id] == '666')
-      params[:bid_id] = rand_offer.bids..order("RANDOM()").first.id.to_s()
+      params[:bid_id] = rand_offer.bids.order("RANDOM()").first.id.to_s()
     end
   end
 end
