@@ -1,7 +1,6 @@
 class OffersController < ApplicationController
 
   before_filter :authenticate_user!
-
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
   before_filter :must_own_offer, only: [:edit, :update, :destroy]
 
@@ -262,4 +261,5 @@ class OffersController < ApplicationController
         end
       end
   end
+
 end
