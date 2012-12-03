@@ -52,6 +52,5 @@ namespace :db do
   end
 end
 
-
 ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
 ssh_options[:forward_agent] = true
