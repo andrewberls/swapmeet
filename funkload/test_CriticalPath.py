@@ -31,7 +31,7 @@ class CriticalPath(FunkLoadTestCase):
         self.current_user = 0
 
     def pick_user(self):
-        self.current_user = (self.current_user + 1) % 200
+        self.current_user = random.randint(1,280)
         return self.current_user + 1
 
     def test_critical_path(self):
