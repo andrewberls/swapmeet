@@ -280,7 +280,7 @@ class OffersController < ApplicationController
       else
         candidate_offers = Offer.where("user_id <> #{current_user.id}")
       end
-      rand_offer = candidate_offers.parent_offers.order("RANDOM()").first
+      rand_offer = candidate_offers.parent_offers.order("RAND()").first
       params[:id] = rand_offer.id.to_s()
     end
     if params.has_key?(:offer_id) and (params[:offer_id] == '666')
@@ -291,12 +291,12 @@ class OffersController < ApplicationController
         else
           candidate_offers = Offer.where("user_id <> #{current_user.id}")
         end
-        rand_offer = candidate_offers.parent_offers.order("RANDOM()").first
+        rand_offer = candidate_offers.parent_offers.order("RAND()").first
       end
       params[:offer_id] = rand_offer.id.to_s()
     end
     if params.has_key?(:bid_id) and (params[:bid_id] == '666')
-      params[:bid_id] = rand_offer.bids.order("RANDOM()").first.id.to_s()
+      params[:bid_id] = rand_offer.bids.order("RAND()").first.id.to_s()
     end
   end
 end
