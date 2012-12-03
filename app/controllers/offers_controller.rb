@@ -284,8 +284,14 @@ class OffersController < ApplicationController
       params[:id] = rand_offer.id.to_s()
     end
     if params.has_key?(:offer_id) and (params[:offer_id] == '666')
+      # I don't understand when it uses :id and when :offer_id
       if rand_offer.nil?
-        rand_offer = current_user.offers.parent_offers.sample
+        if own_offer
+          candidate_offers = current_user.offers
+        else
+          candidate_offers = Offer.where("user_id <> #{current_user.id}")
+        end
+        rand_offer = candidate_offers.parent_offers.sample
       end
       params[:offer_id] = rand_offer.id.to_s()
     end

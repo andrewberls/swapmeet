@@ -28,6 +28,11 @@ class CriticalPath(FunkLoadTestCase):
         #                                                   credential_port,
         # XXX replace with a valid group
         #                                                   'members')
+        self.current_user = 0
+
+    def pick_user(self):
+        self.current_user = (self.current_user + 1) % 200
+        return self.current_user + 1
 
     def test_critical_path(self):
         # The description should be set in the configuration file
@@ -37,7 +42,7 @@ class CriticalPath(FunkLoadTestCase):
         # /tmp/tmpxcCX8v_funkload/watch0005.request
         self.post(server_url+"/users/sign_in", params=[
             ['utf8', '\xe2\x9c\x93'],
-            ['user[login]', 'user'+str(random.randint(1,19))],
+            ['user[login]', 'user'+str(self.pick_user())],
             ['user[password]', 'password'],
             ['user[remember_me]', '0'],
             ['commit', 'Log in']],
@@ -72,16 +77,16 @@ class CriticalPath(FunkLoadTestCase):
         # /tmp/tmpxcCX8v_funkload/watch0035.request
         self.get(server_url+"/offers/666",
             description="Get random offer")
+        # # /tmp/tmpxcCX8v_funkload/watch0036.request
+        # self.post(server_url+"/offers/666/accept/666", params=[
+        #     ['utf8', '\xe2\x9c\x93'],
+        #     ],
+        #     description="Accept a bid")
         # /tmp/tmpxcCX8v_funkload/watch0036.request
-        self.post(server_url+"/offers/666/accept/666", params=[
-            ['utf8', '\xe2\x9c\x93'],
-            ],
-            description="Accept a bid")
-        # /tmp/tmpxcCX8v_funkload/watch0036.request
-        self.post(server_url+"/offers/666/complete/666", params=[
-            ['utf8', '\xe2\x9c\x93'],
-            ],
-            description="Complete a bid")
+        # self.post(server_url+"/offers/666/complete/666", params=[
+        #     ['utf8', '\xe2\x9c\x93'],
+        #     ],
+        #     description="Complete a bid")
         self.get(server_url+"/logout",
             description="Logout")
 

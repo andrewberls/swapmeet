@@ -8,7 +8,7 @@
 
 USER_COUNT, PER_USER_PARENT_OFFER_COUNT, PER_PARENT_OFFER_BID_COUNT =
 if Rails.env == 'development'
-  [ 20, 10, 3 ]       # Keep small data for development
+  [ 10000, 10, 3 ] # Keep small data for development
 else
   [ 10000, 10, 3 ] # Production configuration
 end
