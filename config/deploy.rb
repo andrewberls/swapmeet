@@ -1,7 +1,9 @@
 require "bundler/capistrano"
 
 set :application, "Swapmeet"
-set :repository,  "git@github.com:andrewberls/swapmeet.git"
+#set :repository,  "git@github.com:andrewberls/swapmeet.git"
+#use read only to avoid SSH key issues
+set :repository, "git://github.com/andrewberls/swapmeet.git"
 set :scm, :git 
 set :branch, "dalli"
 
@@ -42,6 +44,6 @@ namespace :deploy do
   end
 end
 
-
-ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
-ssh_options[:forward_agent] = true
+#Need this if using ssh keys
+#ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
+#ssh_options[:forward_agent] = true
