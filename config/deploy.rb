@@ -5,16 +5,17 @@ set :application, "Swapmeet"
 #use read only to avoid SSH key issues
 set :repository, "git://github.com/andrewberls/swapmeet.git"
 set :scm, :git 
-set :branch, "master"
+set :branch, "split_server"
 
 set :deploy_to, "/home/ubuntu"
 set :user, "ubuntu"
 set :use_sudo, false
 
 
-role :web, "swapmeet.dnsdynamic.net"                          # Your HTTP server, Apache/etc
-role :app, "swapmeet.dnsdynamic.net"                          # This may be the same as your `Web` server
-role :db,  "swapmeet.dnsdynamic.net", :primary => true # This is where Rails migrations will run
+role :web, "swapmeetapp2.dnsdynamic.net"                          # Your HTTP server, Apache/etc
+role :app, "swapmeetapp2.dnsdynamic.net"                         # This may be the same as your `Web` server
+role :db,  "swapmeetapp2.dnsdynamic.net", :primary => true # This is where Rails migrations will run
+role :db,  "swapmeetdb.dnsdynamic.net", :no_release => true #actual db server
 #role :db,  "your slave db-server here"
 
 # if you want to clean up old releases on each deploy uncomment this:
@@ -45,5 +46,5 @@ namespace :deploy do
 end
 
 #Need this if using ssh keys
-#ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
-#ssh_options[:forward_agent] = true
+ssh_options[:keys] = ["~/.ssh/our-key-from-rightscale"]
+ssh_options[:forward_agent] = true
