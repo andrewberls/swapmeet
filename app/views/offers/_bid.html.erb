@@ -3,6 +3,8 @@
 <div class="span-4 bid-box">
   <div class="bid-details">
 
+    <!-- BID_ID:<%= bid.id %> -->
+
     <%# TODO: Not a fan of all the state checks here %>
     <% if bid.locked? %>
       <p class="bid-status" style="color: red;">Locked</p>
