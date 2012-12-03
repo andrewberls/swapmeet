@@ -25,6 +25,6 @@ production:
   reconnect: false
   database: swapmeet_production
   pool: 5
-  username: root
+  username: swapmeet
   password:
   #socket: /var/run/mysqld/mysqld.sock
