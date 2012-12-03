@@ -2,9 +2,6 @@ class OffersController < ApplicationController
 
   before_filter :authenticate_user!
 
-  before_filter :fix_666_params_for_accept, only: [:accept, :complete, :rate, :index, :dashboard, :show, :new, :create, :update, :destroy]
-  before_filter :fix_666_params_for_bidding, only: [:bid]
-
   before_filter :find_offer, only: [:show, :edit, :update, :destroy]
   before_filter :must_own_offer, only: [:edit, :update, :destroy]
 
@@ -264,39 +261,5 @@ class OffersController < ApplicationController
           :display_rate_buttons
         end
       end
-  end
-
-  def fix_666_params_for_accept
-    fix_666_params(false)
-  end
-  def fix_666_params_for_bidding
-    fix_666_params(false)
-  end
-  def fix_666_params(own_offer)
-    rand_offer = nil
-    if params.has_key?(:id) and (params[:id] == '666')
-      if own_offer
-        candidate_offers = current_user.offers
-      else
-        candidate_offers = Offer.where("user_id <> #{current_user.id}")
-      end
-      rand_offer = candidate_offers.parent_offers.order("RAND()").first
-      params[:id] = rand_offer.id.to_s()
-    end
-    if params.has_key?(:offer_id) and (params[:offer_id] == '666')
-      # I don't understand when it uses :id and when :offer_id
-      if rand_offer.nil?
-        if own_offer
-          candidate_offers = current_user.offers
-        else
-          candidate_offers = Offer.where("user_id <> #{current_user.id}")
-        end
-        rand_offer = candidate_offers.parent_offers.order("RAND()").first
-      end
-      params[:offer_id] = rand_offer.id.to_s()
-    end
-    if params.has_key?(:bid_id) and (params[:bid_id] == '666')
-      params[:bid_id] = rand_offer.bids.order("RAND()").first.id.to_s()
-    end
   end
 end

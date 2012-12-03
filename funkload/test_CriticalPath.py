@@ -39,56 +39,79 @@ class CriticalPath(FunkLoadTestCase):
         server_url = self.server_url
         # begin of test ---------------------------------------------
 
-        # /tmp/tmpxcCX8v_funkload/watch0005.request
+        first_user_id = self.pick_user()
+        second_user_id = first_user_id + 1
+
         self.post(server_url+"/users/sign_in", params=[
             ['utf8', '\xe2\x9c\x93'],
-            ['user[login]', 'user'+str(self.pick_user())],
+            ['user[login]', 'user'+str(first_user_id)],
             ['user[password]', 'password'],
             ['user[remember_me]', '0'],
             ['commit', 'Log in']],
-            description="Post /users/sign_in")
-        # /tmp/tmpxcCX8v_funkload/watch0007.request
+            description="Login as the seller")
         self.get(server_url+"/offers/new",
-            description="Get /offers/new")
-        # /tmp/tmpxcCX8v_funkload/watch0008.request
-        self.post(server_url+"/offers", params=[
+            description="Prepare a new trade")
+        posted_offer_response = self.post(server_url+"/offers", params=[
             ['utf8', '\xe2\x9c\x93'],
             ['offer[title]', 'TestingOffer'],
             ['offer[description]', 'Just for testing'],
             ['offer[image]', Upload("")],
             ['offer[tag_list]', 'test'],
             ['commit', 'Create Offer']],
-            description="Post /offers")
-        # /tmp/tmpxcCX8v_funkload/watch0007.request
-        self.get(server_url+"/offers/666/bid",
+            description="Post a new trade")
+        posted_offer_id = int(posted_offer_response.url.split('/')[2])
+        self.get(server_url+"/logout",
+            description="Logout 1")
+
+
+        self.post(server_url+"/users/sign_in", params=[
+            ['utf8', '\xe2\x9c\x93'],
+            ['user[login]', 'user'+str(second_user_id)],
+            ['user[password]', 'password'],
+            ['user[remember_me]', '0'],
+            ['commit', 'Log in']],
+            description="Login as the buyer")
+        self.get(server_url+"/offers",
+            description="Browse trades")
+        self.get(server_url+"/offers/"+str(posted_offer_id),
+            description="Look at an offer")
+        self.get(server_url+"/offers/"+str(posted_offer_id)+"/bid",
             description="Load the new bid page")
-        # /tmp/tmpxcCX8v_funkload/watch0008.request
-        self.post(server_url+"/offers/666/bid", params=[
+        bid_response = self.post(server_url+"/offers/"+str(posted_offer_id)+"/bid", params=[
             ['utf8', '\xe2\x9c\x93'],
             ['offer[title]', 'TestingBid'],
             ['offer[description]', 'Just for testing'],
             ['offer[image]', Upload("")],
             ['offer[tag_list]', 'test'],
             ['commit', 'Bid on something']],
-            description="Post /offers")
-        # /tmp/tmpxcCX8v_funkload/watch0034.request
+            description="Bid")
+        marker = 'BID_ID:'
+        start_index = bid_response.body.index(marker) + len(marker)
+        bid_id=int(bid_response.body[start_index:start_index+20].split()[0])
+
+        self.get(server_url+"/logout",
+            description="Logout 2")
+        self.post(server_url+"/users/sign_in", params=[
+            ['utf8', '\xe2\x9c\x93'],
+            ['user[login]', 'user'+str(first_user_id)],
+            ['user[password]', 'password'],
+            ['user[remember_me]', '0'],
+            ['commit', 'Log in']],
+            description="Login as the seller again")
         self.get(server_url+"/dashboard",
             description="Get /dashboard")
-        # /tmp/tmpxcCX8v_funkload/watch0035.request
-        self.get(server_url+"/offers/666",
-            description="Get random offer")
-        # # /tmp/tmpxcCX8v_funkload/watch0036.request
-        # self.post(server_url+"/offers/666/accept/666", params=[
-        #     ['utf8', '\xe2\x9c\x93'],
-        #     ],
-        #     description="Accept a bid")
-        # /tmp/tmpxcCX8v_funkload/watch0036.request
-        # self.post(server_url+"/offers/666/complete/666", params=[
-        #     ['utf8', '\xe2\x9c\x93'],
-        #     ],
-        #     description="Complete a bid")
+        self.get(server_url+"/offers/"+str(posted_offer_id),
+            description="Look at the offer again")
+        self.post(server_url+"/offers/"+str(posted_offer_id)+"/accept/"+str(bid_id), params=[
+            ['utf8', '\xe2\x9c\x93'],
+            ],
+            description="Accept a bid")
+        self.post(server_url+"/offers/"+str(posted_offer_id)+"/complete/"+str(bid_id), params=[
+            ['utf8', '\xe2\x9c\x93'],
+            ],
+            description="Complete a bid")
         self.get(server_url+"/logout",
-            description="Logout")
+            description="Logout 3")
 
         # end of test -----------------------------------------------
 
