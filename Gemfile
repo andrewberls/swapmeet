@@ -9,11 +9,11 @@ gem 'jquery-rails'
 # Authentication
 gem 'devise'
 
+# Memcached client
+gem 'dalli'
+
 # Pagination
 gem 'kaminari'
-
-# To use ActiveModel has_secure_password
-#gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Seed data generation
 gem 'literate_randomizer'
