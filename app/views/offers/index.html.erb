@@ -1,5 +1,7 @@
 <% provide(:title, 'Offers') %>
 
+<div style="margin-bottom: 50px"><!-- Hack to flesh out the page a bit -->
+
 <h1 style="font-size: 2.5em; margin-bottom: 20px">
   <%= params[:q].present? ? "Search results for: #{params[:q]}" : "All Trades" %>
 </h1>
@@ -32,3 +34,4 @@
 
 <%= paginate @offers %>
 
+</div>
