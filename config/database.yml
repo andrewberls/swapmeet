@@ -18,11 +18,13 @@ test:
   pool: 5
 
 production:
+  host: swapmeetdb.dnsdynamic.net
+  #port: 3306
   adapter: mysql2
   encoding: utf8
   reconnect: false
   database: swapmeet_production
   pool: 5
-  username: root
+  username: swapmeet
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
