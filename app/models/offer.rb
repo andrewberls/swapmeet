@@ -1,6 +1,6 @@
 class Offer < ActiveRecord::Base
 
-  attr_accessible :title, :description, :image, :tag_list
+  attr_accessible :title, :description, :image, :tag_list, :is_parent_offer
 
   has_attached_file :image, :styles => { :thumb => "100x100>", :w350 => "350x150>" }  # Shrinks if necessary
 
@@ -30,7 +30,11 @@ class Offer < ActiveRecord::Base
 
   # We show only the original public offers ("I want to get rid of my couch") on the home page,
   # not the stuff that is posted in response
-  scope :parent_offers, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
+  scope :old_parents, joins("LEFT OUTER JOIN responses ON offers.id = responses.bid_id").where("responses.bid_id IS NULL")
+
+  def self.parent_offers
+    where is_parent_offer: true
+  end
 
   def self.search(q)
     known_tags = ActsAsTaggableOn::Tag.pluck(:name)

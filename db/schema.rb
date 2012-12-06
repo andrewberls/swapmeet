@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125231618) do
+ActiveRecord::Schema.define(:version => 20121206043145) do
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
@@ -29,14 +29,16 @@ ActiveRecord::Schema.define(:version => 20121125231618) do
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "is_parent_offer",    :default => false
   end
 
+  add_index "offers", ["is_parent_offer"], :name => "index_offers_on_is_parent_offer"
   add_index "offers", ["user_id"], :name => "index_offers_on_user_id"
 
   create_table "responses", :force => true do |t|

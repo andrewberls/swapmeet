@@ -174,7 +174,9 @@ class OffersController < ApplicationController
   # POST /offers
   # POST /offers.json
   def create
-    @offer = current_user.offers.build(params[:offer])
+    @offer = current_user.offers.build(params[:offer]) do |offer|
+      offer.is_parent_offer = true
+    end
 
     respond_to do |format|
       if @offer.save
