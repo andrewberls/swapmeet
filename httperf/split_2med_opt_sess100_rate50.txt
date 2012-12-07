@@ -1,0 +1,219 @@
+ubuntu@01-esn6op1h4s0qb:~$ httperf --session-cookie --server=swapmeetlb.dnsdynamic.net --wsesslog=100,0,reads.list --rate 50
+httperf --client=0/1 --server=swapmeetlb.dnsdynamic.net --port=80 --uri=/ --rate=50 --send-buffer=4096 --recv-buffer=16384 --session-cookies --wsesslog=100,0.000,reads.list
+httperf: warning: open file limit > FD_SETSIZE; limiting max. # of open files to FD_SETSIZE
+Maximum connect burst length: 1
+
+Total: connections 235 requests 1835 replies 1700 test-duration 25.873 s
+
+Connection rate: 9.1 conn/s (110.1 ms/conn, <=101 concurrent connections)
+Connection time [ms]: min 3074.0 avg 9817.6 max 25038.2 median 5004.5 stddev 8112.8
+Connection time [ms]: connect 0.9
+Connection length [replies/conn]: 7.234
+
+Request rate: 70.9 req/s (14.1 ms/req)
+Request size [B]: 405.0
+
+Reply rate [replies/s]: min 22.2 avg 64.0 max 137.0 stddev 44.0 (5 samples)
+Reply time [ms]: response 1355.4 transfer 0.2
+Reply size [B]: header 803.0 content 2037.0 footer 0.0 (total 2840.0)
+Reply status: 1xx=0 2xx=960 3xx=605 4xx=0 5xx=135
+
+CPU time [s]: user 1.74 system 24.13 (user 6.7% system 93.3% total 100.0%)
+Net I/O: 210.4 KB/s (1.7*10^6 bps)
+
+Errors: total 135 client-timo 0 socket-timo 0 connrefused 0 connreset 135
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
+
+Session rate [sess/s]: min 0.00 avg 3.87 max 14.40 stddev 6.42 (100/100)
+Session: avg 2.35 connections/session
+Session lifetime [s]: 23.1
+Session failtime [s]: 0.0
+Session length histogram: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Request duration - by sum                          ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#.                                                 ┃  209 ┃  1m30s ┃  0.43s ┃  0.58s ┃  0.00s ┃  2.92s ┃ 0.00s-2.41s
+OffersController#index.HTML                        ┃   63 ┃  1m12s ┃  1.14s ┃  1.04s ┃  0.00s ┃  4.50s ┃ 0.00s-3.85s
+OffersController#show.HTML                         ┃   80 ┃ 32.47s ┃  0.41s ┃  0.31s ┃  0.00s ┃  1.02s ┃ 0.00s-1.01s
+Devise::SessionsController#create.HTML             ┃   16 ┃ 19.86s ┃  1.24s ┃  1.23s ┃  0.03s ┃  2.91s ┃ 0.03s-2.92s
+OffersController#dashboard.HTML                    ┃   21 ┃ 10.20s ┃  0.49s ┃  0.69s ┃  0.00s ┃  2.42s ┃ 0.00s-2.45s
+Devise::SessionsController#new.HTML                ┃   12 ┃  1.45s ┃  0.12s ┃  0.08s ┃  0.01s ┃  0.32s ┃ 0.01s-0.32s
+Devise::SessionsController#destroy.HTML            ┃   16 ┃  0.86s ┃  0.05s ┃  0.16s ┃  0.00s ┃  0.62s ┃ 0.00s-0.62s
+OffersController#new.HTML                          ┃    1 ┃  0.02s ┃  0.02s ┃  0.00s ┃  0.02s ┃  0.02s ┃ 0.02s-0.02s
+MessagesController#inbox.HTML                      ┃    1 ┃  0.01s ┃  0.01s ┃  0.00s ┃  0.01s ┃  0.01s ┃ 0.01s-0.01s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Request duration - by mean                         ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Devise::SessionsController#create.HTML             ┃   16 ┃ 19.86s ┃  1.24s ┃  1.23s ┃  0.03s ┃  2.91s ┃ 0.03s-2.92s
+OffersController#index.HTML                        ┃   63 ┃  1m12s ┃  1.14s ┃  1.04s ┃  0.00s ┃  4.50s ┃ 0.00s-3.85s
+OffersController#dashboard.HTML                    ┃   21 ┃ 10.20s ┃  0.49s ┃  0.69s ┃  0.00s ┃  2.42s ┃ 0.00s-2.45s
+#.                                                 ┃  209 ┃  1m30s ┃  0.43s ┃  0.58s ┃  0.00s ┃  2.92s ┃ 0.00s-2.41s
+OffersController#show.HTML                         ┃   80 ┃ 32.47s ┃  0.41s ┃  0.31s ┃  0.00s ┃  1.02s ┃ 0.00s-1.01s
+Devise::SessionsController#new.HTML                ┃   12 ┃  1.45s ┃  0.12s ┃  0.08s ┃  0.01s ┃  0.32s ┃ 0.01s-0.32s
+Devise::SessionsController#destroy.HTML            ┃   16 ┃  0.86s ┃  0.05s ┃  0.16s ┃  0.00s ┃  0.62s ┃ 0.00s-0.62s
+OffersController#new.HTML                          ┃    1 ┃  0.02s ┃  0.02s ┃  0.00s ┃  0.02s ┃  0.02s ┃ 0.02s-0.02s
+MessagesController#inbox.HTML                      ┃    1 ┃  0.01s ┃  0.01s ┃  0.00s ┃  0.01s ┃  0.01s ┃ 0.01s-0.01s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+View rendering time - by sum                       ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#.                                                 ┃  107 ┃ 46.45s ┃  0.43s ┃  0.42s ┃  0.07s ┃  2.31s ┃ 0.12s-1.75s
+OffersController#index.HTML                        ┃   43 ┃ 33.73s ┃  0.78s ┃  0.55s ┃  0.04s ┃  2.02s ┃ 0.14s-2.05s
+OffersController#show.HTML                         ┃   55 ┃ 13.82s ┃  0.25s ┃  0.15s ┃  0.12s ┃  0.90s ┃ 0.13s-0.81s
+OffersController#dashboard.HTML                    ┃   11 ┃  7.08s ┃  0.64s ┃  0.79s ┃  0.13s ┃  2.25s ┃ 0.13s-2.26s
+Devise::SessionsController#create.HTML             ┃    9 ┃  1.70s ┃  0.19s ┃  0.12s ┃  0.03s ┃  0.47s ┃ 0.03s-0.47s
+Devise::SessionsController#new.HTML                ┃   12 ┃  1.42s ┃  0.12s ┃  0.08s ┃  0.01s ┃  0.32s ┃ 0.01s-0.32s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.30s ┃  0.15s ┃  0.18s ┃  0.02s ┃  0.28s ┃ 0.02s-0.28s
+OffersController#new.HTML                          ┃    1 ┃  0.02s ┃  0.02s ┃  0.00s ┃  0.02s ┃  0.02s ┃ 0.02s-0.02s
+MessagesController#inbox.HTML                      ┃    1 ┃  0.01s ┃  0.01s ┃  0.00s ┃  0.01s ┃  0.01s ┃ 0.01s-0.01s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+View rendering time - by mean                      ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OffersController#index.HTML                        ┃   43 ┃ 33.73s ┃  0.78s ┃  0.55s ┃  0.04s ┃  2.02s ┃ 0.14s-2.05s
+OffersController#dashboard.HTML                    ┃   11 ┃  7.08s ┃  0.64s ┃  0.79s ┃  0.13s ┃  2.25s ┃ 0.13s-2.26s
+#.                                                 ┃  107 ┃ 46.45s ┃  0.43s ┃  0.42s ┃  0.07s ┃  2.31s ┃ 0.12s-1.75s
+OffersController#show.HTML                         ┃   55 ┃ 13.82s ┃  0.25s ┃  0.15s ┃  0.12s ┃  0.90s ┃ 0.13s-0.81s
+Devise::SessionsController#create.HTML             ┃    9 ┃  1.70s ┃  0.19s ┃  0.12s ┃  0.03s ┃  0.47s ┃ 0.03s-0.47s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.30s ┃  0.15s ┃  0.18s ┃  0.02s ┃  0.28s ┃ 0.02s-0.28s
+Devise::SessionsController#new.HTML                ┃   12 ┃  1.42s ┃  0.12s ┃  0.08s ┃  0.01s ┃  0.32s ┃ 0.01s-0.3
+OffersController#new.HTML                          ┃    1 ┃  0.02s ┃  0.02s ┃  0.00s ┃  0.02s ┃  0.02s ┃ 0.02s-0.02s
+MessagesController#inbox.HTML                      ┃    1 ┃  0.01s ┃  0.01s ┃  0.00s ┃  0.01s ┃  0.01s ┃ 0.01s-0.01s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Database time - by sum                             ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#.                                                 ┃  107 ┃ 26.80s ┃  0.25s ┃  0.10s ┃  0.00s ┃  0.45s ┃ 0.00s-0.44s
+OffersController#show.HTML                         ┃   55 ┃ 16.30s ┃  0.30s ┃  0.08s ┃  0.11s ┃  0.49s ┃ 0.18s-0.49s
+OffersController#index.HTML                        ┃   43 ┃  8.38s ┃  0.19s ┃  0.07s ┃  0.02s ┃  0.34s ┃ 0.10s-0.34s
+OffersController#dashboard.HTML                    ┃   11 ┃  2.60s ┃  0.24s ┃  0.08s ┃  0.12s ┃  0.39s ┃ 0.12s-0.40s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.35s ┃  0.17s ┃  0.18s ┃  0.05s ┃  0.30s ┃ 0.05s-0.30s
+Devise::SessionsController#create.HTML             ┃    9 ┃  0.22s ┃  0.02s ┃  0.07s ┃  0.00s ┃  0.22s ┃ 0.00s-0.22s
+OffersController#new.HTML                          ┃    1 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+MessagesController#inbox.HTML                      ┃    1 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+Devise::SessionsController#new.HTML                ┃   12 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Database time - by mean                            ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OffersController#show.HTML                         ┃   55 ┃ 16.30s ┃  0.30s ┃  0.08s ┃  0.11s ┃  0.49s ┃ 0.18s-0.49s
+#.                                                 ┃  107 ┃ 26.80s ┃  0.25s ┃  0.10s ┃  0.00s ┃  0.45s ┃ 0.00s-0.44s
+OffersController#dashboard.HTML                    ┃   11 ┃  2.60s ┃  0.24s ┃  0.08s ┃  0.12s ┃  0.39s ┃ 0.12s-0.40s
+OffersController#index.HTML                        ┃   43 ┃  8.38s ┃  0.19s ┃  0.07s ┃  0.02s ┃  0.34s ┃ 0.10s-0.34s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.35s ┃  0.17s ┃  0.18s ┃  0.05s ┃  0.:30s ┃ 0.05s-0.30s
+Devise::SessionsController#create.HTML             ┃    9 ┃  0.22s ┃  0.02s ┃  0.07s ┃  0.00s ┃  0.22s ┃ 0.00s-0.22s
+OffersController#new.HTML                          ┃    1 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+MessagesController#inbox.HTML                      ┃    1 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+Devise::SessionsController#new.HTML                ┃   12 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Request duration - by sum                          ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#.                                                 ┃  123 ┃  1m32s ┃  0.75s ┃  0.81s ┃  0.00s ┃  3.48s ┃ 0.00s-3.49s
+OffersController#index.HTML                        ┃   60 ┃  1m22s ┃  1.36s ┃  0.96s ┃  0.00s ┃  3.51s ┃ 0.00s-3.49s
+OffersController#show.HTML                         ┃   80 ┃ 49.39s ┃  0.62s ┃  0.55s ┃  0.00s ┃  2.62s ┃ 0.00s-2.30s
+Devise::SessionsController#create.HTML             ┃   11 ┃ 19.12s ┃  1.74s ┃  1.55s ┃  0.03s ┃  3.37s ┃ 0.03s-3.38s
+OffersController#dashboard.HTML                    ┃   25 ┃ 13.02s ┃  0.52s ┃  0.37s ┃  0.00s ┃  1.08s ┃ 0.00s-1.09s
+Devise::SessionsController#new.HTML                ┃   22 ┃  7.34s ┃  0.33s ┃  0.61s ┃  0.01s ┃  2.27s ┃ 0.01s-2.30s
+Devise::SessionsController#destroy.HTML            ┃   11 ┃  1.69s ┃  0.15s ┃  0.34s ┃  0.00s ┃  1.03s ┃ 0.00s-1.04s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Request duration - by mean                         ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Devise::SessionsController#create.HTML             ┃   11 ┃ 19.12s ┃  1.74s ┃  1.55s ┃  0.03s ┃  3.37s ┃ 0.03s-3.38s
+OffersController#index.HTML                        ┃   60 ┃  1m22s ┃  1.36s ┃  0.96s ┃  0.00s ┃  3.51s ┃ 0.00s-3.49s
+#.                                                 ┃  123 ┃  1m32s ┃  0.75s ┃  0.81s ┃  0.00s ┃  3.48s ┃ 0.00s-3.49s
+OffersController#show.HTML                         ┃   80 ┃ 49.39s ┃  0.62s ┃  0.55s ┃  0.00s ┃  2.62s ┃ 0.00s-2.30s
+OffersController#dashboard.HTML                    ┃   25 ┃ 13.02s ┃  0.52s ┃  0.37s ┃  0.00s ┃  1.08s ┃ 0.00s-1.09s
+Devise::SessionsController#new.HTML                ┃   22 ┃  7.34s ┃  0.33s ┃  0.61s ┃  0.01s ┃  2.27s ┃ 0.01s-2.30s
+Devise::SessionsController#destroy.HTML            ┃   11 ┃  1.69s ┃  0.15s ┃  0.34s ┃  0.00s ┃  1.03s ┃ 0.00s-1.04s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+View rendering time - by sum                       ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#.                                                 ┃   83 ┃ 44.86s ┃  0.54s ┃  0.53s ┃  0.11s ┃  2.51s ┃ 0.15s-2.41s
+OffersController#index.HTML                        ┃   50 ┃ 44.68s ┃  0.89s ┃  0.59s ┃  0.17s ┃  2.40s ┃ 0.17s-2.37s
+OffersController#show.HTML                         ┃   61 ┃ 28.02s ┃  0.46s ┃  0.49s ┃  0.05s ┃  2.38s ┃ 0.12s-1.95s
+OffersController#dashboard.HTML                    ┃   17 ┃  6.98s ┃  0.41s ┃  0.26s ┃  0.16s ┃  0.81s ┃ 0.16s-0.82s
+Devise::SessionsController#new.HTML                ┃   20 ┃  3.52s ┃  0.18s ┃  0.34s ┃  0.01s ┃  1.61s ┃ 0.01s-1.64s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.80s ┃  0.40s ┃  0.18s ┃  0.27s ┃  0.53s ┃ 0.27s-0.54s
+Devise::SessionsController#create.HTML             ┃    5 ┃  0.64s ┃  0.13s ┃  0.06s ┃  0.03s ┃  0.18s ┃ 0.03s-0.18s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+View rendering time - by mean                      ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OffersController#index.HTML                        ┃   50 ┃ 44.68s ┃  0.89s ┃  0.59s ┃  0.17s ┃  2.40s ┃ 0.17s-2.37s
+#.                                                 ┃   83 ┃ 44.86s ┃  0.54s ┃  0.53s ┃  0.11s ┃  2.51s ┃ 0.15s-2.41s
+OffersController#show.HTML                         ┃   61 ┃ 28.02s ┃  0.46s ┃  0.49s ┃  0.05s ┃  2.38s ┃ 0.12s-1.95s
+OffersController#dashboard.HTML                    ┃   17 ┃  6.98s ┃  0.41s ┃  0.26s ┃  0.16s ┃  0.81s ┃ 0.16s-0.82s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.80s ┃  0.40s ┃  0.18s ┃  0.27s ┃  0.53s ┃ 0.27s-0.54s
+Devise::SessionsController#new.HTML                ┃   20 ┃  3.52s ┃  0.18s ┃  0.34s ┃  0.01s ┃  1.61s ┃ 0.01s-1.64s
+Devise::SessionsController#create.HTML             ┃    5 ┃  0.64s ┃  0.13s ┃  0.06s ┃  0.03s ┃  0.18s ┃ 0.03s-0.18s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Database time - by sum                             ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#.                                                 ┃   83 ┃ 23.86s ┃  0.29s ┃  0.13s ┃  0.00s ┃  0.63s ┃ 0.09s-0.58s
+OffersController#show.HTML                         ┃   61 ┃ 17.09s ┃  0.28s ┃  0.08s ┃  0.08s ┃  0.54s ┃ 0.11s-0.52s
+OffersController#index.HTML                        ┃   50 ┃  9.38s ┃  0.19s ┃  0.06s ┃  0.09s ┃  0.42s ┃ 0.10s-0.36s
+OffersController#dashboard.HTML                    ┃   17 ┃  4.76s ┃  0.28s ┃  0.07s ┃  0.14s ┃  0.39s ┃ 0.14s-0.40s
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.79s ┃  0.40s ┃  0.11s ┃  0.32s ┃  0.48s ┃ 0.31s-0.48s
+Devise::SessionsController#create.HTML             ┃    5 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+Devise::SessionsController#new.HTML                ┃   20 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Database time - by mean                            ┃ Hits ┃    Sum ┃   Mean ┃ StdDev ┃    Min ┃    Max ┃    95 %tile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Devise::SessionsController#destroy.HTML            ┃    2 ┃  0.79s ┃  0.40s ┃  0.11s ┃  0.32s ┃  0.48s ┃ 0.31s-0.48s
+#.                                                 ┃   83 ┃ 23.86s ┃  0.29s ┃  0.13s ┃  0.00s ┃  0.63s ┃ 0.09s-0.58s
+OffersController#show.HTML                         ┃   61 ┃ 17.09s ┃  0.28s ┃  0.08s ┃  0.08s ┃  0.54s ┃ 0.11s-0.52s
+OffersController#dashboard.HTML                    ┃   17 ┃  4.76s ┃  0.28s ┃  0.07s ┃  0.14s ┃  0.39s ┃ 0.14s-0.40s
+OffersController#index.HTML                        ┃   50 ┃  9.38s ┃  0.19s ┃  0.06s ┃  0.09s ┃  0.42s ┃ 0.10s-0.36s
+Devise::SessionsController#create.HTML             ┃    5 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
+Devise::SessionsController#new.HTML                ┃   20 ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃  0.00s ┃ 0.00s-0.00s
