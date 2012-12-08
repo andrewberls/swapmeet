@@ -52,7 +52,7 @@ class Offer < ActiveRecord::Base
   # PARENT OFFERS
   # -----------------
   def is_parent_offer?
-    is_parent_offer
+    Response.find_by_bid_id(id).blank?
   end
 
   # You can only bid on open parent offers
