@@ -3,25 +3,25 @@ httperf --client=0/1 --server=swapmeet.dnsdynamic.net --port=80 --uri=/ --rate=2
 httperf: warning: open file limit > FD_SETSIZE; limiting max. # of open files to FD_SETSIZE
 ^CMaximum connect burst length: 1
 
-Total: connections 66 requests 3016 replies 2950 test-duration 396.455 s
+Total: connections 130 requests 6008 replies 5878 test-duration 652.184 s
 
-Connection rate: 0.2 conn/s (6006.9 ms/conn, <=51 concurrent connections)
-Connection time [ms]: min 15772.9 avg 17920.1 max 24938.2 median 16869.5 stddev 2396.7
-Connection time [ms]: connect 18.7
-Connection length [replies/conn]: 184.375
+Connection rate: 0.2 conn/s (5016.8 ms/conn, <=100 concurrent connections)
+Connection time [ms]: min 16739.8 avg 354875.9 max 585721.6 median 0.0 stddev 256030.9
+Connection time [ms]: connect 14.0
+Connection length [replies/conn]: 73.475
 
-Request rate: 7.6 req/s (131.5 ms/req)
-Request size [B]: 440.0
+Request rate: 9.2 req/s (108.6 ms/req)
+Request size [B]: 443.0
 
-Reply rate [replies/s]: min 0.0 avg 7.4 max 11.0 stddev 1.7 (79 samples)
-Reply time [ms]: response 6650.1 transfer 0.7
-Reply size [B]: header 841.0 content 4185.0 footer 0.0 (total 5026.0)
-Reply status: 1xx=0 2xx=2900 3xx=50 4xx=0 5xx=0
+Reply rate [replies/s]: min 1.0 avg 9.0 max 11.0 stddev 1.8 (130 samples)
+Reply time [ms]: response 5511.9 transfer 0.7
+Reply size [B]: header 839.0 content 3946.0 footer 0.0 (total 4785.0)
+Reply status: 1xx=0 2xx=5828 3xx=50 4xx=0 5xx=0
 
-CPU time [s]: user 38.71 system 357.76 (user 9.8% system 90.2% total 100.0%)
-Net I/O: 39.8 KB/s (0.3*10^6 bps)
+CPU time [s]: user 63.55 system 588.66 (user 9.7% system 90.3% total 100.0%)
+Net I/O: 46.1 KB/s (0.4*10^6 bps)
 
-Errors: total 16 client-timo 0 socket-timo 0 connrefused 0 connreset 16
+Errors: total 80 client-timo 0 socket-timo 0 connrefused 0 connreset 80
 Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
 
 Session rate [sess/s]: min 0.00 avg 0.00 max 0.00 stddev 0.00 (0/0)
