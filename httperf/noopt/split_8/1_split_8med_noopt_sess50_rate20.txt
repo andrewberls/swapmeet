@@ -1,0 +1,31 @@
+ubuntu@01-esn6op1h4s0qb:~$ httperf --session-cookie --server=swapmeetlb.dnsdynamic.net --wsesslog=50,0,urls.list --rate 20
+httperf --client=0/1 --server=swapmeetlb.dnsdynamic.net --port=80 --uri=/ --rate=20 --send-buffer=4096 --recv-buffer=16384 --session-cookies --wsesslog=50,0.000,urls.list
+httperf: warning: open file limit > FD_SETSIZE; limiting max. # of open files to FD_SETSIZE
+Maximum connect burst length: 1
+
+Total: connections 150 requests 15100 replies 15000 test-duration 125.533 s
+
+Connection rate: 1.2 conn/s (836.9 ms/conn, <=51 concurrent connections)
+Connection time [ms]: min 4450.7 avg 31866.7 max 67963.1 median 33142.5 stddev 18689.3
+Connection time [ms]: connect 1.0
+Connection length [replies/conn]: 100.000
+
+Request rate: 120.3 req/s (8.3 ms/req)
+Request size [B]: 441.0
+
+Reply rate [replies/s]: min 16.2 avg 119.9 max 157.6 stddev 39.7 (25 samples)
+Reply time [ms]: response 316.8 transfer 0.4
+Reply size [B]: header 837.0 content 4213.0 footer 0.0 (total 5050.0)
+Reply status: 1xx=0 2xx=14950 3xx=50 4xx=0 5xx=0
+
+CPU time [s]: user 15.24 system 110.29 (user 12.1% system 87.9% total 100.0%)
+Net I/O: 641.3 KB/s (5.3*10^6 bps)
+
+Errors: total 100 client-timo 0 socket-timo 0 connrefused 0 connreset 100
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
+
+Session rate [sess/s]: min 0.00 avg 0.40 max 1.60 stddev 0.53 (50/50)
+Session: avg 3.00 connections/session
+Session lifetime [s]: 95.6
+Session failtime [s]: 0.0
+Session length histogram: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 50
