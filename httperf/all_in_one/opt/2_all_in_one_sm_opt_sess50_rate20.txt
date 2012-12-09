@@ -1,0 +1,31 @@
+ubuntu@01-esn6op1h4s0qb:~$ httperf --session-cookie --server=swapmeetapp9.dnsdynamic.net --wsesslog=50,0,urls.list --rate 20
+httperf --client=0/1 --server=swapmeetapp9.dnsdynamic.net --port=80 --uri=/ --rate=20 --send-buffer=4096 --recv-buffer=16384 --session-cookies --wsesslog=50,0.000,urls.list
+httperf: warning: open file limit > FD_SETSIZE; limiting max. # of open files to FD_SETSIZE
+^CMaximum connect burst length: 1
+
+Total: connections 52 requests 4807 replies 4755 test-duration 237.251 s
+
+Connection rate: 0.2 conn/s (4562.5 ms/conn, <=52 concurrent connections)
+Connection time [ms]: min 234538.0 avg 234994.4 max 235450.7 median 0.0 stddev 645.4
+Connection time [ms]: connect 3.2
+Connection length [replies/conn]: 2377.500
+
+Request rate: 20.3 req/s (49.4 ms/req)
+Request size [B]: 440.0
+
+Reply rate [replies/s]: min 12.6 avg 20.0 max 23.8 stddev 2.0 (47 samples)
+Reply time [ms]: response 2467.0 transfer 0.1
+Reply size [B]: header 839.0 content 4174.0 footer 0.0 (total 5013.0)
+Reply status: 1xx=0 2xx=4705 3xx=50 4xx=0 5xx=0
+
+CPU time [s]: user 23.35 system 213.91 (user 9.8% system 90.2% total 100.0%)
+Net I/O: 106.9 KB/s (0.9*10^6 bps)
+
+Errors: total 2 client-timo 0 socket-timo 0 connrefused 0 connreset 2
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
+
+Session rate [sess/s]: min 0.00 avg 0.00 max 0.00 stddev 0.00 (0/0)
+Session: avg 0.00 connections/session
+Session lifetime [s]: 0.0
+Session failtime [s]: 0.0
+Session length histogram: 0
