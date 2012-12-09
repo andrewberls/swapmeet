@@ -14,9 +14,9 @@ set :use_sudo, false
 # web: Your HTTP server, Apache/etc
 # app: This may be the same as your `Web` server
 # db: This is where Rails migrations will run
-role :web, "jacopoapp.dnsdynamic.net"
-role :app, "jacopoapp.dnsdynamic.net"
-role :db,  "jacopoapp.dnsdynamic.net", :primary => true
+role :web, "jacopoallinone.dnsdynamic.net"
+role :app, "jacopoallinone.dnsdynamic.net"
+role :db,  "jacopoallinone.dnsdynamic.net", :primary => true
 
 # Move the AWS credentials from where RightScript put them to where it should be
 after "deploy:update_code", "deploy:symlink_aws"
