@@ -1,0 +1,7420 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<title>FunkLoad bench report</title>
+<meta name="date" content="2012-12-08 18:59:08" />
+<style type="text/css">
+
+/* funkload doc css */
+/* $Id: nuxeo_doc.css 21596 2005-02-15 10:01:33Z bdelbosc $ */
+
+body {
+  font: 90% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: black;
+  margin: 2em;
+  padding: 2em;
+}
+
+a[href] {
+  color: #436976;
+  background-color: transparent;
+}
+
+h1 a[href] {
+  text-decoration: none;
+  color: #fcb100;
+  background-color: transparent;
+}
+
+a.strong {
+  font-weight: bold;
+}
+
+img {
+  margin: 0;
+  border: 0;
+}
+
+p {
+  margin: 0.5em 0 1em 0;
+  line-height: 1.5em;
+}
+p a {
+  text-decoration: underline;
+}
+p a:visited {
+  color: purple;
+  background-color: transparent;
+}
+p a:active {
+  color: red;
+  background-color: transparent;
+}
+a:hover {
+  text-decoration: none;
+}
+p img {
+  border: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #003a6b;
+  background-color: transparent;
+  font: 100% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding-top: 0.5em;
+}
+
+h1 {
+  font-size: 160%;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #888;
+  margin-top: 1em;
+}
+
+h1.title {
+  font-size: 200%;
+}
+
+h2 {
+  font-size: 140%;
+  margin-bottom: 0.5em;
+}
+h3 {
+  font-size: 120%;
+  margin-bottom: 0.5em;
+}
+h4 {
+  font-size: 110%;
+  font-weight: bold;
+}
+h5 {
+  font-size: 100%;
+  font-weight: bold;
+}
+h6 {
+  font-size: 80%;
+  font-weight: bold;
+}
+
+ul a, ol a {
+  text-decoration: underline;
+}
+
+dt {
+  font-weight: bold;
+}
+dt a {
+  text-decoration: none;
+}
+
+dd {
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+legend {
+  background: #ffffff;
+  padding: 0.5em;
+}
+
+form {
+  margin: 0;
+}
+
+
+dl.form {
+  margin: 0;
+  padding: 1em;
+}
+
+dl.form dt {
+  width: 30%;
+  float: left;
+  margin: 0;
+  padding: 0 0.5em 0.5em 0;
+  text-align: right;
+}
+
+input {
+  font: 100% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+  color: black;
+  background-color: white;
+  vertical-align: middle;
+}
+
+abbr, acronym, .explain {
+  color: black;
+  background-color: transparent;
+}
+
+q, blockquote {
+}
+
+code, pre {
+  font-family: monospace;
+  font-size: 1.2em;
+  display: block;
+  padding: 10px;
+  border: 1px solid #838183;
+  background-color: #eee;
+  color: #000;
+  overflow: auto;
+  margin: 0.5em 1em;
+}
+
+table.docutils {
+  border: 1px solid black;
+  font-size: 0.6em;
+  border-spacing: 0;
+  padding: 0;
+  margin: 1em;
+}
+
+table.docutils td {
+  border: 1px solid #CCC;
+  text-align: right;
+  padding: 0 0.3em;
+  margin: 0;
+}
+
+table.docutils tr {
+ padding: 0;
+ margin: 0;
+}
+
+table.docutils th {
+  border: 1px solid #CCC;
+  border-bottom: 1px solid black;
+  padding: 0.3em;
+  font-weight: bold;
+  margin: 0;
+}
+
+table.docutils td p, table.docutils th p {
+  margin: 0;
+  padding: 0;
+}
+
+table.docutils th.field-name {
+  border: 1px solid #CCC;
+}
+
+div.abstract {
+  padding: 0.5em;
+  background-color: #eef;
+  border: 1px solid #838183;
+  margin: 0.5em 1em;
+}
+
+div.abstract {
+  padding: 0.5em;
+  background-color: #eef;
+  border: 1px solid #838183;
+  margin: 0.5em 1em;
+}
+
+div.warning, div.note {
+  padding: 0.5em;
+  background-color: #fee;
+  border: 1px solid #838183;
+  margin: 0.5em 1em;
+}
+
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+}
+
+div.abstract p.topic-title {
+  font-weight: bold
+}
+
+
+th.field-name {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+td.field-body {
+  font-size: 1.5em;
+}
+
+tr.field {
+  border: none;
+}
+
+
+div.contents p.first a {
+  font-size: 150%;
+  border-bottom: 1px solid #888;
+  color: #fcb100;
+}
+
+div.contents a  { text-decoration: none }
+
+pre.address {
+  display: inline;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+</style>
+</head>
+<body>
+<div class="document" id="funkload-bench-report">
+<h1 class="title"><a class="reference external" href="http://funkload.nuxeo.org/">FunkLoad</a> bench report</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Date:</th>
+<td>2012-12-08 18:59:08</td></tr>
+</tbody>
+</table>
+<div class="abstract topic">
+<p class="topic-title first">Abstract</p>
+<p>Tests for Swapmeet
+Bench result of <tt class="docutils literal">CriticalPath.test_critical_path</tt>:
+Test our critical path</p>
+</div>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of contents</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#bench-configuration" id="id1">1&nbsp;&nbsp;&nbsp;Bench configuration</a></li>
+<li><a class="reference internal" href="#bench-content" id="id2">2&nbsp;&nbsp;&nbsp;Bench content</a></li>
+<li><a class="reference internal" href="#test-stats" id="id3">3&nbsp;&nbsp;&nbsp;Test stats</a></li>
+<li><a class="reference internal" href="#page-stats" id="id4">4&nbsp;&nbsp;&nbsp;Page stats</a></li>
+<li><a class="reference internal" href="#request-stats" id="id5">5&nbsp;&nbsp;&nbsp;Request stats</a></li>
+<li><a class="reference internal" href="#slowest-requests" id="id6">6&nbsp;&nbsp;&nbsp;Slowest requests</a></li>
+<li><a class="reference internal" href="#page-detail-stats" id="id7">7&nbsp;&nbsp;&nbsp;Page detail stats</a><ul class="auto-toc">
+<li><a class="reference internal" href="#page-001-login-as-the-seller" id="id8">7.1&nbsp;&nbsp;&nbsp;PAGE 001: Login as the seller</a></li>
+<li><a class="reference internal" href="#page-002-prepare-a-new-trade" id="id9">7.2&nbsp;&nbsp;&nbsp;PAGE 002: Prepare a new trade</a></li>
+<li><a class="reference internal" href="#page-003-post-a-new-trade" id="id10">7.3&nbsp;&nbsp;&nbsp;PAGE 003: Post a new trade</a></li>
+<li><a class="reference internal" href="#page-004-logout-1" id="id11">7.4&nbsp;&nbsp;&nbsp;PAGE 004: Logout 1</a></li>
+<li><a class="reference internal" href="#page-005-login-as-the-buyer" id="id12">7.5&nbsp;&nbsp;&nbsp;PAGE 005: Login as the buyer</a></li>
+<li><a class="reference internal" href="#page-006-browse-trades" id="id13">7.6&nbsp;&nbsp;&nbsp;PAGE 006: Browse trades</a></li>
+<li><a class="reference internal" href="#page-007-look-at-an-offer" id="id14">7.7&nbsp;&nbsp;&nbsp;PAGE 007: Look at an offer</a></li>
+<li><a class="reference internal" href="#page-008-load-the-new-bid-page" id="id15">7.8&nbsp;&nbsp;&nbsp;PAGE 008: Load the new bid page</a></li>
+<li><a class="reference internal" href="#page-009-bid" id="id16">7.9&nbsp;&nbsp;&nbsp;PAGE 009: Bid</a></li>
+<li><a class="reference internal" href="#page-010-logout-2" id="id17">7.10&nbsp;&nbsp;&nbsp;PAGE 010: Logout 2</a></li>
+<li><a class="reference internal" href="#page-011-login-as-the-seller-again" id="id18">7.11&nbsp;&nbsp;&nbsp;PAGE 011: Login as the seller again</a></li>
+<li><a class="reference internal" href="#page-012-get-dashboard" id="id19">7.12&nbsp;&nbsp;&nbsp;PAGE 012: Get /dashboard</a></li>
+<li><a class="reference internal" href="#page-013-look-at-the-offer-again" id="id20">7.13&nbsp;&nbsp;&nbsp;PAGE 013: Look at the offer again</a></li>
+<li><a class="reference internal" href="#page-014-accept-a-bid" id="id21">7.14&nbsp;&nbsp;&nbsp;PAGE 014: Accept a bid</a></li>
+<li><a class="reference internal" href="#page-015-complete-a-bid" id="id22">7.15&nbsp;&nbsp;&nbsp;PAGE 015: Complete a bid</a></li>
+<li><a class="reference internal" href="#page-016-logout-3" id="id23">7.16&nbsp;&nbsp;&nbsp;PAGE 016: Logout 3</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#failures-and-errors" id="id24">8&nbsp;&nbsp;&nbsp;Failures and Errors</a><ul class="auto-toc">
+<li><a class="reference internal" href="#errors" id="id25">8.1&nbsp;&nbsp;&nbsp;Errors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#definitions" id="id26">9&nbsp;&nbsp;&nbsp;Definitions</a></li>
+</ul>
+</div>
+<div class="section" id="bench-configuration">
+<h1><a class="toc-backref" href="#id1">1&nbsp;&nbsp;&nbsp;Bench configuration</a></h1>
+<ul class="simple">
+<li>Launched: 2012-12-08 18:59:08</li>
+<li>From: rigel</li>
+<li>Test: <tt class="docutils literal">test_CriticalPath.py CriticalPath.test_critical_path</tt></li>
+<li>Target server: <a class="reference external" href="http://jacopoallinone.dnsdynamic.net">http://jacopoallinone.dnsdynamic.net</a></li>
+<li>Cycles of concurrent users: [20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500]</li>
+<li>Cycle duration: 200s</li>
+<li>Sleeptime between request: from 0.0s to 2.0s</li>
+<li>Sleeptime between test case: 1.0s</li>
+<li>Startup delay between thread: 0.2s</li>
+<li>Apdex: <sub>1.5</sub></li>
+<li><a class="reference external" href="http://funkload.nuxeo.org/">FunkLoad</a> version: 1.16.1</li>
+</ul>
+</div>
+<div class="section" id="bench-content">
+<h1><a class="toc-backref" href="#id2">2&nbsp;&nbsp;&nbsp;Bench content</a></h1>
+<p>The test <tt class="docutils literal">CriticalPath.test_critical_path</tt> contains:</p>
+<ul class="simple">
+<li>16 page(s)</li>
+<li>10 redirect(s)</li>
+<li>1 link(s)</li>
+<li>0 image(s)</li>
+<li>0 XML RPC call(s)</li>
+</ul>
+<p>The bench contains:</p>
+<ul class="simple">
+<li>864 tests, 784 error(s)</li>
+<li>12264 pages, 719 error(s)</li>
+<li>13809 requests, 719 error(s)</li>
+</ul>
+</div>
+<div class="section" id="test-stats">
+<h1><a class="toc-backref" href="#id3">3&nbsp;&nbsp;&nbsp;Test stats</a></h1>
+<p>The number of Successful <strong>Tests</strong> Per Second (STPS) over Concurrent Users (CUs).</p>
+<blockquote>
+<img alt="tests.png" src="tests.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">CUs</th>
+<th class="head">STPS</th>
+<th class="head">TOTAL</th>
+<th class="head">SUCCESS</th>
+<th class="head">ERROR</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>20</td>
+<td>0.200</td>
+<td>40</td>
+<td>40</td>
+<td>0.00%</td>
+</tr>
+<tr><td>40</td>
+<td>0.200</td>
+<td>40</td>
+<td>40</td>
+<td>0.00%</td>
+</tr>
+<tr><td>300</td>
+<td>0.000</td>
+<td>23</td>
+<td>0</td>
+<td>100.00%</td>
+</tr>
+<tr><td>400</td>
+<td>0.000</td>
+<td>243</td>
+<td>0</td>
+<td>100.00%</td>
+</tr>
+<tr><td>500</td>
+<td>0.000</td>
+<td>518</td>
+<td>0</td>
+<td>100.00%</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</div>
+<div class="section" id="page-stats">
+<h1><a class="toc-backref" href="#id4">4&nbsp;&nbsp;&nbsp;Page stats</a></h1>
+<p>The number of Successful <strong>Pages</strong> Per Second (SPPS) over Concurrent Users (CUs).
+Note that an XML RPC call count like a page.</p>
+<blockquote>
+<img alt="pages_spps.png" src="pages_spps.png" />
+<img alt="pages.png" src="pages.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">CUs</th>
+<th class="head">Apdex*</th>
+<th class="head">Rating</th>
+<th class="head">SPPS</th>
+<th class="head">maxSPPS</th>
+<th class="head">TOTAL</th>
+<th class="head">SUCCESS</th>
+<th class="head">ERROR</th>
+<th class="head">MIN</th>
+<th class="head">AVG</th>
+<th class="head">MAX</th>
+<th class="head">P10</th>
+<th class="head">MED</th>
+<th class="head">P90</th>
+<th class="head">P95</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>20</td>
+<td>0.662</td>
+<td>POOR</td>
+<td>6.045</td>
+<td>21.000</td>
+<td>1209</td>
+<td>1209</td>
+<td>0.00%</td>
+<td>0.043</td>
+<td>2.645</td>
+<td>15.470</td>
+<td>0.604</td>
+<td>2.083</td>
+<td>5.043</td>
+<td>6.615</td>
+</tr>
+<tr><td>40</td>
+<td>0.370</td>
+<td>UNACCEPTABLE</td>
+<td>6.235</td>
+<td>22.000</td>
+<td>1247</td>
+<td>1247</td>
+<td>0.00%</td>
+<td>0.199</td>
+<td>5.765</td>
+<td>20.692</td>
+<td>2.136</td>
+<td>5.042</td>
+<td>10.751</td>
+<td>12.807</td>
+</tr>
+<tr><td>60</td>
+<td>0.207</td>
+<td>UNACCEPTABLE</td>
+<td>6.120</td>
+<td>22.000</td>
+<td>1224</td>
+<td>1224</td>
+<td>0.00%</td>
+<td>0.151</td>
+<td>9.035</td>
+<td>46.199</td>
+<td>3.615</td>
+<td>8.284</td>
+<td>15.344</td>
+<td>18.113</td>
+</tr>
+<tr><td>80</td>
+<td>0.148</td>
+<td>UNACCEPTABLE</td>
+<td>6.540</td>
+<td>20.000</td>
+<td>1308</td>
+<td>1308</td>
+<td>0.00%</td>
+<td>0.180</td>
+<td>11.467</td>
+<td>35.810</td>
+<td>5.362</td>
+<td>10.053</td>
+<td>21.610</td>
+<td>25.571</td>
+</tr>
+<tr><td>100</td>
+<td>0.080</td>
+<td>UNACCEPTABLE</td>
+<td>5.095</td>
+<td>19.000</td>
+<td>1019</td>
+<td>1019</td>
+<td>0.00%</td>
+<td>0.398</td>
+<td>18.260</td>
+<td>73.485</td>
+<td>7.295</td>
+<td>14.159</td>
+<td>34.674</td>
+<td>39.893</td>
+</tr>
+<tr><td>150</td>
+<td>0.150</td>
+<td>UNACCEPTABLE</td>
+<td>5.250</td>
+<td>17.000</td>
+<td>1050</td>
+<td>1050</td>
+<td>0.00%</td>
+<td>0.160</td>
+<td>27.229</td>
+<td>95.990</td>
+<td>6.244</td>
+<td>24.235</td>
+<td>49.711</td>
+<td>60.095</td>
+</tr>
+<tr><td>200</td>
+<td>0.015</td>
+<td>UNACCEPTABLE</td>
+<td>5.355</td>
+<td>26.000</td>
+<td>1071</td>
+<td>1071</td>
+<td>0.00%</td>
+<td>3.994</td>
+<td>36.587</td>
+<td>138.596</td>
+<td>14.818</td>
+<td>29.496</td>
+<td>65.093</td>
+<td>85.442</td>
+</tr>
+<tr><td>250</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>5.105</td>
+<td>21.000</td>
+<td>1021</td>
+<td>1021</td>
+<td>0.00%</td>
+<td>9.722</td>
+<td>49.121</td>
+<td>139.832</td>
+<td>21.194</td>
+<td>40.349</td>
+<td>89.734</td>
+<td>103.037</td>
+</tr>
+<tr><td>300</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>4.475</td>
+<td>14.000</td>
+<td>915</td>
+<td>895</td>
+<td>2.19%</td>
+<td>14.687</td>
+<td>62.482</td>
+<td>152.584</td>
+<td>29.661</td>
+<td>61.843</td>
+<td>95.263</td>
+<td>100.926</td>
+</tr>
+<tr><td>400</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>3.845</td>
+<td>10.000</td>
+<td>993</td>
+<td>769</td>
+<td>22.56%</td>
+<td>24.249</td>
+<td>59.068</td>
+<td>176.978</td>
+<td>48.774</td>
+<td>73.251</td>
+<td>104.336</td>
+<td>117.672</td>
+</tr>
+<tr><td>500</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>3.660</td>
+<td>10.000</td>
+<td>1207</td>
+<td>732</td>
+<td>39.35%</td>
+<td>25.568</td>
+<td>47.974</td>
+<td>225.210</td>
+<td>45.868</td>
+<td>72.487</td>
+<td>118.006</td>
+<td>154.899</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</div>
+<div class="section" id="request-stats">
+<h1><a class="toc-backref" href="#id5">5&nbsp;&nbsp;&nbsp;Request stats</a></h1>
+<p>The number of <strong>Requests</strong> Per Second (RPS) successful or not over Concurrent Users (CUs).</p>
+<blockquote>
+<img alt="requests_rps.png" src="requests_rps.png" />
+<img alt="requests.png" src="requests.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">CUs</th>
+<th class="head">Apdex*</th>
+<th class="head">Rating*</th>
+<th class="head">RPS</th>
+<th class="head">maxRPS</th>
+<th class="head">TOTAL</th>
+<th class="head">SUCCESS</th>
+<th class="head">ERROR</th>
+<th class="head">MIN</th>
+<th class="head">AVG</th>
+<th class="head">MAX</th>
+<th class="head">P10</th>
+<th class="head">MED</th>
+<th class="head">P90</th>
+<th class="head">P95</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>20</td>
+<td>0.662</td>
+<td>POOR</td>
+<td>6.345</td>
+<td>21.000</td>
+<td>1269</td>
+<td>1269</td>
+<td>0.00%</td>
+<td>0.031</td>
+<td>2.520</td>
+<td>15.357</td>
+<td>0.438</td>
+<td>1.982</td>
+<td>4.905</td>
+<td>6.540</td>
+</tr>
+<tr><td>40</td>
+<td>0.370</td>
+<td>UNACCEPTABLE</td>
+<td>6.595</td>
+<td>22.000</td>
+<td>1319</td>
+<td>1319</td>
+<td>0.00%</td>
+<td>0.031</td>
+<td>5.450</td>
+<td>20.692</td>
+<td>1.731</td>
+<td>4.853</td>
+<td>10.525</td>
+<td>12.537</td>
+</tr>
+<tr><td>60</td>
+<td>0.208</td>
+<td>UNACCEPTABLE</td>
+<td>6.360</td>
+<td>22.000</td>
+<td>1272</td>
+<td>1272</td>
+<td>0.00%</td>
+<td>0.032</td>
+<td>8.694</td>
+<td>46.199</td>
+<td>3.084</td>
+<td>8.080</td>
+<td>15.227</td>
+<td>17.995</td>
+</tr>
+<tr><td>80</td>
+<td>0.148</td>
+<td>UNACCEPTABLE</td>
+<td>6.865</td>
+<td>20.000</td>
+<td>1373</td>
+<td>1373</td>
+<td>0.00%</td>
+<td>0.031</td>
+<td>10.924</td>
+<td>35.692</td>
+<td>5.065</td>
+<td>9.599</td>
+<td>21.192</td>
+<td>25.361</td>
+</tr>
+<tr><td>100</td>
+<td>0.080</td>
+<td>UNACCEPTABLE</td>
+<td>5.485</td>
+<td>19.000</td>
+<td>1097</td>
+<td>1097</td>
+<td>0.00%</td>
+<td>0.031</td>
+<td>16.962</td>
+<td>73.485</td>
+<td>6.282</td>
+<td>12.700</td>
+<td>34.100</td>
+<td>39.172</td>
+</tr>
+<tr><td>150</td>
+<td>0.150</td>
+<td>UNACCEPTABLE</td>
+<td>5.830</td>
+<td>17.000</td>
+<td>1166</td>
+<td>1166</td>
+<td>0.00%</td>
+<td>0.031</td>
+<td>24.520</td>
+<td>95.990</td>
+<td>0.191</td>
+<td>22.881</td>
+<td>48.024</td>
+<td>56.214</td>
+</tr>
+<tr><td>200</td>
+<td>0.015</td>
+<td>UNACCEPTABLE</td>
+<td>6.175</td>
+<td>26.000</td>
+<td>1235</td>
+<td>1235</td>
+<td>0.00%</td>
+<td>2.717</td>
+<td>31.761</td>
+<td>134.128</td>
+<td>9.542</td>
+<td>24.804</td>
+<td>57.183</td>
+<td>75.769</td>
+</tr>
+<tr><td>250</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>6.195</td>
+<td>21.000</td>
+<td>1239</td>
+<td>1239</td>
+<td>0.00%</td>
+<td>6.912</td>
+<td>40.661</td>
+<td>139.832</td>
+<td>16.187</td>
+<td>33.895</td>
+<td>74.005</td>
+<td>85.744</td>
+</tr>
+<tr><td>300</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>5.840</td>
+<td>15.000</td>
+<td>1168</td>
+<td>1148</td>
+<td>1.71%</td>
+<td>10.858</td>
+<td>50.458</td>
+<td>144.622</td>
+<td>22.694</td>
+<td>53.026</td>
+<td>76.545</td>
+<td>88.148</td>
+</tr>
+<tr><td>400</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>6.200</td>
+<td>17.000</td>
+<td>1240</td>
+<td>1016</td>
+<td>18.06%</td>
+<td>17.144</td>
+<td>60.025</td>
+<td>176.978</td>
+<td>25.809</td>
+<td>63.113</td>
+<td>96.322</td>
+<td>102.045</td>
+</tr>
+<tr><td>500</td>
+<td>0.000</td>
+<td>UNACCEPTABLE</td>
+<td>7.155</td>
+<td>14.000</td>
+<td>1431</td>
+<td>956</td>
+<td>33.19%</td>
+<td>18.489</td>
+<td>63.006</td>
+<td>225.210</td>
+<td>28.855</td>
+<td>63.117</td>
+<td>95.298</td>
+<td>118.824</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</div>
+<div class="section" id="slowest-requests">
+<h1><a class="toc-backref" href="#id6">6&nbsp;&nbsp;&nbsp;Slowest requests</a></h1>
+<p>The 5 slowest average response time during the best cycle with <strong>20</strong> CUs:</p>
+<ul class="simple">
+<li>In page 001, Apdex rating: UNACCEPTABLE, avg response time: 7.35s, get: <tt class="docutils literal">/</tt>
+``</li>
+<li>In page 012, Apdex rating: UNACCEPTABLE, avg response time: 5.10s, get: <tt class="docutils literal">/dashboard</tt>
+<cite>Get /dashboard</cite></li>
+<li>In page 001, Apdex rating: UNACCEPTABLE, avg response time: 4.44s, post: <tt class="docutils literal">/users/sign_in</tt>
+<cite>Login as the seller</cite></li>
+<li>In page 005, Apdex rating: POOR, avg response time: 3.66s, get: <tt class="docutils literal">/</tt>
+``</li>
+<li>In page 011, Apdex rating: UNACCEPTABLE, avg response time: 3.56s, post: <tt class="docutils literal">/users/sign_in</tt>
+<cite>Login as the seller again</cite></li>
+</ul>
+</div>
+<div class="section" id="page-detail-stats">
+<h1><a class="toc-backref" href="#id7">7&nbsp;&nbsp;&nbsp;Page detail stats</a></h1>
+<div class="section" id="page-001-login-as-the-seller">
+<h2><a class="toc-backref" href="#id8">7.1&nbsp;&nbsp;&nbsp;PAGE 001: Login as the seller</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/users/sign_in</tt></p>
+<blockquote>
+<img alt="request_001.001.png" src="request_001.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.408</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.912</p>
+</td>
+<td><p class="first last">4.438</p>
+</td>
+<td><p class="first last">8.930</p>
+</td>
+<td><p class="first last">1.801</p>
+</td>
+<td><p class="first last">3.969</p>
+</td>
+<td><p class="first last">7.844</p>
+</td>
+<td><p class="first last">8.870</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.246</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">63</p>
+</td>
+<td><p class="first last">63</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.111</p>
+</td>
+<td><p class="first last">6.526</p>
+</td>
+<td><p class="first last">13.272</p>
+</td>
+<td><p class="first last">4.151</p>
+</td>
+<td><p class="first last">6.072</p>
+</td>
+<td><p class="first last">9.830</p>
+</td>
+<td><p class="first last">11.995</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">30</p>
+</td>
+<td><p class="first last">30</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.208</p>
+</td>
+<td><p class="first last">9.987</p>
+</td>
+<td><p class="first last">21.304</p>
+</td>
+<td><p class="first last">7.525</p>
+</td>
+<td><p class="first last">9.474</p>
+</td>
+<td><p class="first last">13.165</p>
+</td>
+<td><p class="first last">13.364</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">8.472</p>
+</td>
+<td><p class="first last">13.607</p>
+</td>
+<td><p class="first last">30.446</p>
+</td>
+<td><p class="first last">9.304</p>
+</td>
+<td><p class="first last">12.215</p>
+</td>
+<td><p class="first last">18.152</p>
+</td>
+<td><p class="first last">29.447</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">9.718</p>
+</td>
+<td><p class="first last">19.223</p>
+</td>
+<td><p class="first last">46.143</p>
+</td>
+<td><p class="first last">11.833</p>
+</td>
+<td><p class="first last">18.510</p>
+</td>
+<td><p class="first last">26.636</p>
+</td>
+<td><p class="first last">36.650</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">81</p>
+</td>
+<td><p class="first last">81</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">17.055</p>
+</td>
+<td><p class="first last">41.675</p>
+</td>
+<td><p class="first last">88.964</p>
+</td>
+<td><p class="first last">20.212</p>
+</td>
+<td><p class="first last">27.495</p>
+</td>
+<td><p class="first last">83.608</p>
+</td>
+<td><p class="first last">85.261</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">115</p>
+</td>
+<td><p class="first last">115</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">19.808</p>
+</td>
+<td><p class="first last">41.033</p>
+</td>
+<td><p class="first last">123.092</p>
+</td>
+<td><p class="first last">24.436</p>
+</td>
+<td><p class="first last">35.369</p>
+</td>
+<td><p class="first last">69.173</p>
+</td>
+<td><p class="first last">80.810</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">164</p>
+</td>
+<td><p class="first last">164</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">23.404</p>
+</td>
+<td><p class="first last">50.542</p>
+</td>
+<td><p class="first last">107.491</p>
+</td>
+<td><p class="first last">34.665</p>
+</td>
+<td><p class="first last">51.912</p>
+</td>
+<td><p class="first last">62.443</p>
+</td>
+<td><p class="first last">71.957</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">191</p>
+</td>
+<td><p class="first last">186</p>
+</td>
+<td><p class="first last">2.62%</p>
+</td>
+<td><p class="first last">20.750</p>
+</td>
+<td><p class="first last">58.642</p>
+</td>
+<td><p class="first last">98.907</p>
+</td>
+<td><p class="first last">30.193</p>
+</td>
+<td><p class="first last">59.203</p>
+</td>
+<td><p class="first last">78.052</p>
+</td>
+<td><p class="first last">84.271</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">390</p>
+</td>
+<td><p class="first last">282</p>
+</td>
+<td><p class="first last">27.69%</p>
+</td>
+<td><p class="first last">26.079</p>
+</td>
+<td><p class="first last">71.309</p>
+</td>
+<td><p class="first last">176.978</p>
+</td>
+<td><p class="first last">49.639</p>
+</td>
+<td><p class="first last">64.530</p>
+</td>
+<td><p class="first last">101.165</p>
+</td>
+<td><p class="first last">104.949</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">576</p>
+</td>
+<td><p class="first last">303</p>
+</td>
+<td><p class="first last">47.40%</p>
+</td>
+<td><p class="first last">34.222</p>
+</td>
+<td><p class="first last">71.205</p>
+</td>
+<td><p class="first last">171.363</p>
+</td>
+<td><p class="first last">49.569</p>
+</td>
+<td><p class="first last">63.135</p>
+</td>
+<td><p class="first last">101.784</p>
+</td>
+<td><p class="first last">121.582</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/</tt></p>
+<blockquote>
+<img alt="request_001.002.png" src="request_001.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.217</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.707</p>
+</td>
+<td><p class="first last">7.352</p>
+</td>
+<td><p class="first last">15.357</p>
+</td>
+<td><p class="first last">2.924</p>
+</td>
+<td><p class="first last">7.649</p>
+</td>
+<td><p class="first last">11.347</p>
+</td>
+<td><p class="first last">14.640</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.111</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">72</p>
+</td>
+<td><p class="first last">72</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.710</p>
+</td>
+<td><p class="first last">11.267</p>
+</td>
+<td><p class="first last">20.353</p>
+</td>
+<td><p class="first last">5.226</p>
+</td>
+<td><p class="first last">11.098</p>
+</td>
+<td><p class="first last">18.123</p>
+</td>
+<td><p class="first last">19.722</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">47</p>
+</td>
+<td><p class="first last">47</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.358</p>
+</td>
+<td><p class="first last">16.369</p>
+</td>
+<td><p class="first last">29.913</p>
+</td>
+<td><p class="first last">7.680</p>
+</td>
+<td><p class="first last">17.517</p>
+</td>
+<td><p class="first last">22.555</p>
+</td>
+<td><p class="first last">23.716</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.054</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">65</p>
+</td>
+<td><p class="first last">65</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.612</p>
+</td>
+<td><p class="first last">21.641</p>
+</td>
+<td><p class="first last">35.692</p>
+</td>
+<td><p class="first last">8.585</p>
+</td>
+<td><p class="first last">25.241</p>
+</td>
+<td><p class="first last">32.057</p>
+</td>
+<td><p class="first last">32.568</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.006</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">78</p>
+</td>
+<td><p class="first last">78</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">5.228</p>
+</td>
+<td><p class="first last">32.321</p>
+</td>
+<td><p class="first last">68.997</p>
+</td>
+<td><p class="first last">13.904</p>
+</td>
+<td><p class="first last">33.458</p>
+</td>
+<td><p class="first last">43.308</p>
+</td>
+<td><p class="first last">55.593</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.013</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">116</p>
+</td>
+<td><p class="first last">116</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.311</p>
+</td>
+<td><p class="first last">39.345</p>
+</td>
+<td><p class="first last">89.755</p>
+</td>
+<td><p class="first last">19.675</p>
+</td>
+<td><p class="first last">39.922</p>
+</td>
+<td><p class="first last">58.427</p>
+</td>
+<td><p class="first last">83.345</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">160</p>
+</td>
+<td><p class="first last">160</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">21.593</p>
+</td>
+<td><p class="first last">51.925</p>
+</td>
+<td><p class="first last">134.128</p>
+</td>
+<td><p class="first last">26.700</p>
+</td>
+<td><p class="first last">43.906</p>
+</td>
+<td><p class="first last">82.000</p>
+</td>
+<td><p class="first last">108.588</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">206</p>
+</td>
+<td><p class="first last">206</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">22.960</p>
+</td>
+<td><p class="first last">68.902</p>
+</td>
+<td><p class="first last">119.783</p>
+</td>
+<td><p class="first last">37.859</p>
+</td>
+<td><p class="first last">68.721</p>
+</td>
+<td><p class="first last">109.957</p>
+</td>
+<td><p class="first last">113.028</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">246</p>
+</td>
+<td><p class="first last">244</p>
+</td>
+<td><p class="first last">0.81%</p>
+</td>
+<td><p class="first last">24.513</p>
+</td>
+<td><p class="first last">67.128</p>
+</td>
+<td><p class="first last">136.631</p>
+</td>
+<td><p class="first last">48.099</p>
+</td>
+<td><p class="first last">67.644</p>
+</td>
+<td><p class="first last">80.393</p>
+</td>
+<td><p class="first last">97.703</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">301</p>
+</td>
+<td><p class="first last">275</p>
+</td>
+<td><p class="first last">8.64%</p>
+</td>
+<td><p class="first last">32.262</p>
+</td>
+<td><p class="first last">66.519</p>
+</td>
+<td><p class="first last">146.936</p>
+</td>
+<td><p class="first last">47.031</p>
+</td>
+<td><p class="first last">63.522</p>
+</td>
+<td><p class="first last">95.770</p>
+</td>
+<td><p class="first last">102.525</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">341</p>
+</td>
+<td><p class="first last">278</p>
+</td>
+<td><p class="first last">18.48%</p>
+</td>
+<td><p class="first last">23.347</p>
+</td>
+<td><p class="first last">67.070</p>
+</td>
+<td><p class="first last">225.210</p>
+</td>
+<td><p class="first last">41.422</p>
+</td>
+<td><p class="first last">61.281</p>
+</td>
+<td><p class="first last">101.072</p>
+</td>
+<td><p class="first last">141.155</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 003, link, url <tt class="docutils literal"><span class="pre">/assets/swapmeet-06c9c0d4c397a92cd445c411470a2bb8.css</span></tt></p>
+<blockquote>
+<img alt="request_001.003.png" src="request_001.003.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">1.000</p>
+</td>
+<td><p class="first last">Excellent</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.031</p>
+</td>
+<td><p class="first last">0.082</p>
+</td>
+<td><p class="first last">0.533</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.081</p>
+</td>
+<td><p class="first last">0.122</p>
+</td>
+<td><p class="first last">0.251</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">1.000</p>
+</td>
+<td><p class="first last">Excellent</p>
+</td>
+<td><p class="first last">72</p>
+</td>
+<td><p class="first last">72</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.031</p>
+</td>
+<td><p class="first last">0.066</p>
+</td>
+<td><p class="first last">0.122</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.079</p>
+</td>
+<td><p class="first last">0.116</p>
+</td>
+<td><p class="first last">0.120</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">1.000</p>
+</td>
+<td><p class="first last">Excellent</p>
+</td>
+<td><p class="first last">48</p>
+</td>
+<td><p class="first last">48</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.072</p>
+</td>
+<td><p class="first last">0.120</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.086</p>
+</td>
+<td><p class="first last">0.118</p>
+</td>
+<td><p class="first last">0.119</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">1.000</p>
+</td>
+<td><p class="first last">Excellent</p>
+</td>
+<td><p class="first last">65</p>
+</td>
+<td><p class="first last">65</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.031</p>
+</td>
+<td><p class="first last">0.091</p>
+</td>
+<td><p class="first last">0.334</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.085</p>
+</td>
+<td><p class="first last">0.187</p>
+</td>
+<td><p class="first last">0.247</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">1.000</p>
+</td>
+<td><p class="first last">Excellent</p>
+</td>
+<td><p class="first last">78</p>
+</td>
+<td><p class="first last">78</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.031</p>
+</td>
+<td><p class="first last">0.075</p>
+</td>
+<td><p class="first last">0.358</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.083</p>
+</td>
+<td><p class="first last">0.117</p>
+</td>
+<td><p class="first last">0.131</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">1.000</p>
+</td>
+<td><p class="first last">Excellent</p>
+</td>
+<td><p class="first last">116</p>
+</td>
+<td><p class="first last">116</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.031</p>
+</td>
+<td><p class="first last">0.068</p>
+</td>
+<td><p class="first last">0.258</p>
+</td>
+<td><p class="first last">0.032</p>
+</td>
+<td><p class="first last">0.076</p>
+</td>
+<td><p class="first last">0.118</p>
+</td>
+<td><p class="first last">0.121</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.107</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">164</p>
+</td>
+<td><p class="first last">164</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.717</p>
+</td>
+<td><p class="first last">9.474</p>
+</td>
+<td><p class="first last">18.035</p>
+</td>
+<td><p class="first last">4.498</p>
+</td>
+<td><p class="first last">9.502</p>
+</td>
+<td><p class="first last">13.637</p>
+</td>
+<td><p class="first last">16.890</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">218</p>
+</td>
+<td><p class="first last">218</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.912</p>
+</td>
+<td><p class="first last">17.612</p>
+</td>
+<td><p class="first last">31.479</p>
+</td>
+<td><p class="first last">10.274</p>
+</td>
+<td><p class="first last">16.486</p>
+</td>
+<td><p class="first last">25.619</p>
+</td>
+<td><p class="first last">27.075</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">253</p>
+</td>
+<td><p class="first last">253</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.858</p>
+</td>
+<td><p class="first last">24.879</p>
+</td>
+<td><p class="first last">60.983</p>
+</td>
+<td><p class="first last">15.953</p>
+</td>
+<td><p class="first last">24.911</p>
+</td>
+<td><p class="first last">30.071</p>
+</td>
+<td><p class="first last">31.957</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">247</p>
+</td>
+<td><p class="first last">247</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">17.144</p>
+</td>
+<td><p class="first last">26.537</p>
+</td>
+<td><p class="first last">68.860</p>
+</td>
+<td><p class="first last">18.545</p>
+</td>
+<td><p class="first last">25.809</p>
+</td>
+<td><p class="first last">32.655</p>
+</td>
+<td><p class="first last">39.577</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">224</p>
+</td>
+<td><p class="first last">224</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">18.489</p>
+</td>
+<td><p class="first last">28.540</p>
+</td>
+<td><p class="first last">77.926</p>
+</td>
+<td><p class="first last">21.371</p>
+</td>
+<td><p class="first last">27.288</p>
+</td>
+<td><p class="first last">36.592</p>
+</td>
+<td><p class="first last">45.884</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-002-prepare-a-new-trade">
+<h2><a class="toc-backref" href="#id9">7.2&nbsp;&nbsp;&nbsp;PAGE 002: Prepare a new trade</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/offers/new</tt></p>
+<blockquote>
+<img alt="request_002.001.png" src="request_002.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.708</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.542</p>
+</td>
+<td><p class="first last">2.131</p>
+</td>
+<td><p class="first last">4.774</p>
+</td>
+<td><p class="first last">0.782</p>
+</td>
+<td><p class="first last">1.903</p>
+</td>
+<td><p class="first last">3.899</p>
+</td>
+<td><p class="first last">4.220</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.221</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">77</p>
+</td>
+<td><p class="first last">77</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.826</p>
+</td>
+<td><p class="first last">7.412</p>
+</td>
+<td><p class="first last">17.773</p>
+</td>
+<td><p class="first last">2.922</p>
+</td>
+<td><p class="first last">6.719</p>
+</td>
+<td><p class="first last">12.136</p>
+</td>
+<td><p class="first last">14.933</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.118</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.726</p>
+</td>
+<td><p class="first last">11.191</p>
+</td>
+<td><p class="first last">21.028</p>
+</td>
+<td><p class="first last">5.343</p>
+</td>
+<td><p class="first last">11.048</p>
+</td>
+<td><p class="first last">18.936</p>
+</td>
+<td><p class="first last">19.434</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.020</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">76</p>
+</td>
+<td><p class="first last">76</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">5.542</p>
+</td>
+<td><p class="first last">18.178</p>
+</td>
+<td><p class="first last">27.690</p>
+</td>
+<td><p class="first last">7.738</p>
+</td>
+<td><p class="first last">19.330</p>
+</td>
+<td><p class="first last">26.240</p>
+</td>
+<td><p class="first last">27.323</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.006</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">89</p>
+</td>
+<td><p class="first last">89</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.411</p>
+</td>
+<td><p class="first last">25.346</p>
+</td>
+<td><p class="first last">47.766</p>
+</td>
+<td><p class="first last">7.868</p>
+</td>
+<td><p class="first last">29.184</p>
+</td>
+<td><p class="first last">36.135</p>
+</td>
+<td><p class="first last">36.816</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.038</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">130</p>
+</td>
+<td><p class="first last">130</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.013</p>
+</td>
+<td><p class="first last">35.317</p>
+</td>
+<td><p class="first last">90.762</p>
+</td>
+<td><p class="first last">14.294</p>
+</td>
+<td><p class="first last">34.788</p>
+</td>
+<td><p class="first last">53.635</p>
+</td>
+<td><p class="first last">71.827</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">182</p>
+</td>
+<td><p class="first last">182</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">7.275</p>
+</td>
+<td><p class="first last">43.956</p>
+</td>
+<td><p class="first last">118.033</p>
+</td>
+<td><p class="first last">19.172</p>
+</td>
+<td><p class="first last">44.766</p>
+</td>
+<td><p class="first last">73.618</p>
+</td>
+<td><p class="first last">103.988</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">231</p>
+</td>
+<td><p class="first last">231</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">13.530</p>
+</td>
+<td><p class="first last">39.994</p>
+</td>
+<td><p class="first last">109.169</p>
+</td>
+<td><p class="first last">19.955</p>
+</td>
+<td><p class="first last">32.026</p>
+</td>
+<td><p class="first last">66.513</p>
+</td>
+<td><p class="first last">81.078</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">239</p>
+</td>
+<td><p class="first last">230</p>
+</td>
+<td><p class="first last">3.77%</p>
+</td>
+<td><p class="first last">14.687</p>
+</td>
+<td><p class="first last">55.793</p>
+</td>
+<td><p class="first last">128.359</p>
+</td>
+<td><p class="first last">27.515</p>
+</td>
+<td><p class="first last">56.166</p>
+</td>
+<td><p class="first last">79.223</p>
+</td>
+<td><p class="first last">95.428</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">177</p>
+</td>
+<td><p class="first last">121</p>
+</td>
+<td><p class="first last">31.64%</p>
+</td>
+<td><p class="first last">24.249</p>
+</td>
+<td><p class="first last">68.182</p>
+</td>
+<td><p class="first last">132.577</p>
+</td>
+<td><p class="first last">46.381</p>
+</td>
+<td><p class="first last">63.162</p>
+</td>
+<td><p class="first last">94.480</p>
+</td>
+<td><p class="first last">98.310</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">176</p>
+</td>
+<td><p class="first last">85</p>
+</td>
+<td><p class="first last">51.70%</p>
+</td>
+<td><p class="first last">25.568</p>
+</td>
+<td><p class="first last">68.220</p>
+</td>
+<td><p class="first last">176.966</p>
+</td>
+<td><p class="first last">45.163</p>
+</td>
+<td><p class="first last">63.143</p>
+</td>
+<td><p class="first last">98.770</p>
+</td>
+<td><p class="first last">109.670</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-003-post-a-new-trade">
+<h2><a class="toc-backref" href="#id10">7.3&nbsp;&nbsp;&nbsp;PAGE 003: Post a new trade</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/offers</tt></p>
+<blockquote>
+<img alt="request_003.001.png" src="request_003.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.593</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">59</p>
+</td>
+<td><p class="first last">59</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.473</p>
+</td>
+<td><p class="first last">2.869</p>
+</td>
+<td><p class="first last">5.891</p>
+</td>
+<td><p class="first last">1.120</p>
+</td>
+<td><p class="first last">2.908</p>
+</td>
+<td><p class="first last">4.643</p>
+</td>
+<td><p class="first last">5.469</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.295</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">73</p>
+</td>
+<td><p class="first last">73</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.756</p>
+</td>
+<td><p class="first last">6.440</p>
+</td>
+<td><p class="first last">20.360</p>
+</td>
+<td><p class="first last">2.186</p>
+</td>
+<td><p class="first last">5.631</p>
+</td>
+<td><p class="first last">12.151</p>
+</td>
+<td><p class="first last">13.838</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.292</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.320</p>
+</td>
+<td><p class="first last">7.612</p>
+</td>
+<td><p class="first last">18.236</p>
+</td>
+<td><p class="first last">2.794</p>
+</td>
+<td><p class="first last">5.716</p>
+</td>
+<td><p class="first last">16.529</p>
+</td>
+<td><p class="first last">17.995</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.163</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.660</p>
+</td>
+<td><p class="first last">12.971</p>
+</td>
+<td><p class="first last">28.032</p>
+</td>
+<td><p class="first last">5.318</p>
+</td>
+<td><p class="first last">9.743</p>
+</td>
+<td><p class="first last">24.390</p>
+</td>
+<td><p class="first last">26.947</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.021</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">97</p>
+</td>
+<td><p class="first last">97</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.005</p>
+</td>
+<td><p class="first last">17.136</p>
+</td>
+<td><p class="first last">55.740</p>
+</td>
+<td><p class="first last">6.429</p>
+</td>
+<td><p class="first last">9.631</p>
+</td>
+<td><p class="first last">36.470</p>
+</td>
+<td><p class="first last">37.256</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.028</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">142</p>
+</td>
+<td><p class="first last">142</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.300</p>
+</td>
+<td><p class="first last">28.949</p>
+</td>
+<td><p class="first last">79.682</p>
+</td>
+<td><p class="first last">14.189</p>
+</td>
+<td><p class="first last">25.553</p>
+</td>
+<td><p class="first last">50.321</p>
+</td>
+<td><p class="first last">54.339</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">186</p>
+</td>
+<td><p class="first last">186</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.939</p>
+</td>
+<td><p class="first last">31.205</p>
+</td>
+<td><p class="first last">87.977</p>
+</td>
+<td><p class="first last">11.975</p>
+</td>
+<td><p class="first last">25.543</p>
+</td>
+<td><p class="first last">51.803</p>
+</td>
+<td><p class="first last">58.079</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">191</p>
+</td>
+<td><p class="first last">191</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.951</p>
+</td>
+<td><p class="first last">37.097</p>
+</td>
+<td><p class="first last">107.877</p>
+</td>
+<td><p class="first last">20.804</p>
+</td>
+<td><p class="first last">34.859</p>
+</td>
+<td><p class="first last">57.002</p>
+</td>
+<td><p class="first last">68.458</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">136</p>
+</td>
+<td><p class="first last">136</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">14.859</p>
+</td>
+<td><p class="first last">44.252</p>
+</td>
+<td><p class="first last">95.263</p>
+</td>
+<td><p class="first last">22.310</p>
+</td>
+<td><p class="first last">33.954</p>
+</td>
+<td><p class="first last">70.710</p>
+</td>
+<td><p class="first last">76.555</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">56</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">26.79%</p>
+</td>
+<td><p class="first last">38.624</p>
+</td>
+<td><p class="first last">64.961</p>
+</td>
+<td><p class="first last">112.597</p>
+</td>
+<td><p class="first last">43.245</p>
+</td>
+<td><p class="first last">63.152</p>
+</td>
+<td><p class="first last">83.502</p>
+</td>
+<td><p class="first last">99.248</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">59</p>
+</td>
+<td><p class="first last">28</p>
+</td>
+<td><p class="first last">52.54%</p>
+</td>
+<td><p class="first last">37.973</p>
+</td>
+<td><p class="first last">69.335</p>
+</td>
+<td><p class="first last">123.211</p>
+</td>
+<td><p class="first last">54.433</p>
+</td>
+<td><p class="first last">63.146</p>
+</td>
+<td><p class="first last">101.368</p>
+</td>
+<td><p class="first last">115.268</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/offers/122762</tt></p>
+<blockquote>
+<img alt="request_003.002.png" src="request_003.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.737</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">57</p>
+</td>
+<td><p class="first last">57</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.250</p>
+</td>
+<td><p class="first last">1.767</p>
+</td>
+<td><p class="first last">4.246</p>
+</td>
+<td><p class="first last">0.851</p>
+</td>
+<td><p class="first last">1.610</p>
+</td>
+<td><p class="first last">2.991</p>
+</td>
+<td><p class="first last">3.587</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.400</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">70</p>
+</td>
+<td><p class="first last">70</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.943</p>
+</td>
+<td><p class="first last">4.794</p>
+</td>
+<td><p class="first last">13.906</p>
+</td>
+<td><p class="first last">1.967</p>
+</td>
+<td><p class="first last">4.845</p>
+</td>
+<td><p class="first last">8.174</p>
+</td>
+<td><p class="first last">10.779</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.408</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.378</p>
+</td>
+<td><p class="first last">6.116</p>
+</td>
+<td><p class="first last">20.559</p>
+</td>
+<td><p class="first last">2.638</p>
+</td>
+<td><p class="first last">3.984</p>
+</td>
+<td><p class="first last">16.160</p>
+</td>
+<td><p class="first last">18.758</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.294</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.642</p>
+</td>
+<td><p class="first last">8.881</p>
+</td>
+<td><p class="first last">27.954</p>
+</td>
+<td><p class="first last">5.117</p>
+</td>
+<td><p class="first last">5.791</p>
+</td>
+<td><p class="first last">23.448</p>
+</td>
+<td><p class="first last">27.561</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.005</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">5.840</p>
+</td>
+<td><p class="first last">13.138</p>
+</td>
+<td><p class="first last">47.203</p>
+</td>
+<td><p class="first last">6.760</p>
+</td>
+<td><p class="first last">8.694</p>
+</td>
+<td><p class="first last">33.161</p>
+</td>
+<td><p class="first last">36.487</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.073</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">144</p>
+</td>
+<td><p class="first last">144</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.191</p>
+</td>
+<td><p class="first last">23.975</p>
+</td>
+<td><p class="first last">95.990</p>
+</td>
+<td><p class="first last">5.606</p>
+</td>
+<td><p class="first last">22.890</p>
+</td>
+<td><p class="first last">41.681</p>
+</td>
+<td><p class="first last">47.972</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.006</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">174</p>
+</td>
+<td><p class="first last">174</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.994</p>
+</td>
+<td><p class="first last">27.538</p>
+</td>
+<td><p class="first last">116.530</p>
+</td>
+<td><p class="first last">13.063</p>
+</td>
+<td><p class="first last">22.238</p>
+</td>
+<td><p class="first last">49.536</p>
+</td>
+<td><p class="first last">57.003</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">122</p>
+</td>
+<td><p class="first last">122</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.186</p>
+</td>
+<td><p class="first last">35.701</p>
+</td>
+<td><p class="first last">139.832</p>
+</td>
+<td><p class="first last">19.925</p>
+</td>
+<td><p class="first last">30.094</p>
+</td>
+<td><p class="first last">62.325</p>
+</td>
+<td><p class="first last">79.365</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">63</p>
+</td>
+<td><p class="first last">61</p>
+</td>
+<td><p class="first last">3.17%</p>
+</td>
+<td><p class="first last">15.083</p>
+</td>
+<td><p class="first last">50.073</p>
+</td>
+<td><p class="first last">115.280</p>
+</td>
+<td><p class="first last">20.844</p>
+</td>
+<td><p class="first last">49.521</p>
+</td>
+<td><p class="first last">93.648</p>
+</td>
+<td><p class="first last">94.058</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">33</p>
+</td>
+<td><p class="first last">27</p>
+</td>
+<td><p class="first last">18.18%</p>
+</td>
+<td><p class="first last">40.682</p>
+</td>
+<td><p class="first last">66.589</p>
+</td>
+<td><p class="first last">131.476</p>
+</td>
+<td><p class="first last">49.140</p>
+</td>
+<td><p class="first last">63.165</p>
+</td>
+<td><p class="first last">92.422</p>
+</td>
+<td><p class="first last">104.336</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">21</p>
+</td>
+<td><p class="first last">19</p>
+</td>
+<td><p class="first last">9.52%</p>
+</td>
+<td><p class="first last">37.300</p>
+</td>
+<td><p class="first last">70.111</p>
+</td>
+<td><p class="first last">167.964</p>
+</td>
+<td><p class="first last">40.073</p>
+</td>
+<td><p class="first last">59.653</p>
+</td>
+<td><p class="first last">103.735</p>
+</td>
+<td><p class="first last">118.159</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-004-logout-1">
+<h2><a class="toc-backref" href="#id11">7.4&nbsp;&nbsp;&nbsp;PAGE 004: Logout 1</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/logout</tt></p>
+<blockquote>
+<img alt="request_004.001.png" src="request_004.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.868</p>
+</td>
+<td><p class="first last">Good</p>
+</td>
+<td><p class="first last">57</p>
+</td>
+<td><p class="first last">57</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.043</p>
+</td>
+<td><p class="first last">1.129</p>
+</td>
+<td><p class="first last">4.733</p>
+</td>
+<td><p class="first last">0.130</p>
+</td>
+<td><p class="first last">0.842</p>
+</td>
+<td><p class="first last">2.885</p>
+</td>
+<td><p class="first last">3.646</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.500</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">65</p>
+</td>
+<td><p class="first last">65</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.317</p>
+</td>
+<td><p class="first last">3.640</p>
+</td>
+<td><p class="first last">6.632</p>
+</td>
+<td><p class="first last">1.620</p>
+</td>
+<td><p class="first last">3.980</p>
+</td>
+<td><p class="first last">5.650</p>
+</td>
+<td><p class="first last">5.867</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.500</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.151</p>
+</td>
+<td><p class="first last">4.378</p>
+</td>
+<td><p class="first last">17.033</p>
+</td>
+<td><p class="first last">1.439</p>
+</td>
+<td><p class="first last">4.424</p>
+</td>
+<td><p class="first last">6.210</p>
+</td>
+<td><p class="first last">7.608</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.350</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.626</p>
+</td>
+<td><p class="first last">6.743</p>
+</td>
+<td><p class="first last">20.674</p>
+</td>
+<td><p class="first last">4.954</p>
+</td>
+<td><p class="first last">5.496</p>
+</td>
+<td><p class="first last">11.556</p>
+</td>
+<td><p class="first last">14.992</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.005</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">5.986</p>
+</td>
+<td><p class="first last">10.259</p>
+</td>
+<td><p class="first last">36.882</p>
+</td>
+<td><p class="first last">6.959</p>
+</td>
+<td><p class="first last">8.385</p>
+</td>
+<td><p class="first last">15.821</p>
+</td>
+<td><p class="first last">27.941</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.058</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">137</p>
+</td>
+<td><p class="first last">137</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.160</p>
+</td>
+<td><p class="first last">21.918</p>
+</td>
+<td><p class="first last">56.214</p>
+</td>
+<td><p class="first last">6.102</p>
+</td>
+<td><p class="first last">21.775</p>
+</td>
+<td><p class="first last">39.214</p>
+</td>
+<td><p class="first last">47.465</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.004</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">124</p>
+</td>
+<td><p class="first last">124</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.232</p>
+</td>
+<td><p class="first last">23.868</p>
+</td>
+<td><p class="first last">111.722</p>
+</td>
+<td><p class="first last">10.805</p>
+</td>
+<td><p class="first last">20.681</p>
+</td>
+<td><p class="first last">42.504</p>
+</td>
+<td><p class="first last">50.490</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">56</p>
+</td>
+<td><p class="first last">56</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">9.722</p>
+</td>
+<td><p class="first last">32.691</p>
+</td>
+<td><p class="first last">105.615</p>
+</td>
+<td><p class="first last">11.450</p>
+</td>
+<td><p class="first last">26.902</p>
+</td>
+<td><p class="first last">60.774</p>
+</td>
+<td><p class="first last">80.188</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">23</p>
+</td>
+<td><p class="first last">22</p>
+</td>
+<td><p class="first last">4.35%</p>
+</td>
+<td><p class="first last">15.911</p>
+</td>
+<td><p class="first last">68.746</p>
+</td>
+<td><p class="first last">144.622</p>
+</td>
+<td><p class="first last">37.715</p>
+</td>
+<td><p class="first last">66.852</p>
+</td>
+<td><p class="first last">95.240</p>
+</td>
+<td><p class="first last">100.259</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">23</p>
+</td>
+<td><p class="first last">13</p>
+</td>
+<td><p class="first last">43.48%</p>
+</td>
+<td><p class="first last">26.586</p>
+</td>
+<td><p class="first last">58.630</p>
+</td>
+<td><p class="first last">80.499</p>
+</td>
+<td><p class="first last">32.773</p>
+</td>
+<td><p class="first last">63.113</p>
+</td>
+<td><p class="first last">71.650</p>
+</td>
+<td><p class="first last">72.545</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">20</p>
+</td>
+<td><p class="first last">11</p>
+</td>
+<td><p class="first last">45.00%</p>
+</td>
+<td><p class="first last">46.871</p>
+</td>
+<td><p class="first last">70.912</p>
+</td>
+<td><p class="first last">173.852</p>
+</td>
+<td><p class="first last">58.133</p>
+</td>
+<td><p class="first last">63.165</p>
+</td>
+<td><p class="first last">82.540</p>
+</td>
+<td><p class="first last">173.852</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/login</tt></p>
+<blockquote>
+<img alt="request_004.002.png" src="request_004.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.857</p>
+</td>
+<td><p class="first last">Good</p>
+</td>
+<td><p class="first last">56</p>
+</td>
+<td><p class="first last">56</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.102</p>
+</td>
+<td><p class="first last">1.143</p>
+</td>
+<td><p class="first last">3.854</p>
+</td>
+<td><p class="first last">0.149</p>
+</td>
+<td><p class="first last">0.797</p>
+</td>
+<td><p class="first last">2.561</p>
+</td>
+<td><p class="first last">3.184</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.526</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">58</p>
+</td>
+<td><p class="first last">58</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.444</p>
+</td>
+<td><p class="first last">3.701</p>
+</td>
+<td><p class="first last">6.820</p>
+</td>
+<td><p class="first last">1.587</p>
+</td>
+<td><p class="first last">3.872</p>
+</td>
+<td><p class="first last">5.196</p>
+</td>
+<td><p class="first last">5.812</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.367</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.828</p>
+</td>
+<td><p class="first last">5.179</p>
+</td>
+<td><p class="first last">9.854</p>
+</td>
+<td><p class="first last">3.099</p>
+</td>
+<td><p class="first last">5.227</p>
+</td>
+<td><p class="first last">8.125</p>
+</td>
+<td><p class="first last">9.425</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.250</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.060</p>
+</td>
+<td><p class="first last">7.350</p>
+</td>
+<td><p class="first last">17.554</p>
+</td>
+<td><p class="first last">5.104</p>
+</td>
+<td><p class="first last">6.146</p>
+</td>
+<td><p class="first last">11.573</p>
+</td>
+<td><p class="first last">15.610</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.015</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.833</p>
+</td>
+<td><p class="first last">10.750</p>
+</td>
+<td><p class="first last">36.892</p>
+</td>
+<td><p class="first last">7.225</p>
+</td>
+<td><p class="first last">9.097</p>
+</td>
+<td><p class="first last">15.589</p>
+</td>
+<td><p class="first last">22.110</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.118</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">123</p>
+</td>
+<td><p class="first last">123</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.371</p>
+</td>
+<td><p class="first last">18.046</p>
+</td>
+<td><p class="first last">50.774</p>
+</td>
+<td><p class="first last">4.309</p>
+</td>
+<td><p class="first last">17.864</p>
+</td>
+<td><p class="first last">32.642</p>
+</td>
+<td><p class="first last">38.407</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">71</p>
+</td>
+<td><p class="first last">71</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.764</p>
+</td>
+<td><p class="first last">23.103</p>
+</td>
+<td><p class="first last">61.343</p>
+</td>
+<td><p class="first last">9.993</p>
+</td>
+<td><p class="first last">20.470</p>
+</td>
+<td><p class="first last">39.933</p>
+</td>
+<td><p class="first last">54.803</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">30</p>
+</td>
+<td><p class="first last">30</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.154</p>
+</td>
+<td><p class="first last">29.832</p>
+</td>
+<td><p class="first last">62.569</p>
+</td>
+<td><p class="first last">19.491</p>
+</td>
+<td><p class="first last">30.320</p>
+</td>
+<td><p class="first last">39.868</p>
+</td>
+<td><p class="first last">42.418</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">13</p>
+</td>
+<td><p class="first last">7.14%</p>
+</td>
+<td><p class="first last">15.096</p>
+</td>
+<td><p class="first last">44.769</p>
+</td>
+<td><p class="first last">97.893</p>
+</td>
+<td><p class="first last">15.117</p>
+</td>
+<td><p class="first last">50.276</p>
+</td>
+<td><p class="first last">74.721</p>
+</td>
+<td><p class="first last">97.893</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">10</p>
+</td>
+<td><p class="first last">9</p>
+</td>
+<td><p class="first last">10.00%</p>
+</td>
+<td><p class="first last">32.551</p>
+</td>
+<td><p class="first last">58.310</p>
+</td>
+<td><p class="first last">78.610</p>
+</td>
+<td><p class="first last">48.090</p>
+</td>
+<td><p class="first last">59.706</p>
+</td>
+<td><p class="first last">78.610</p>
+</td>
+<td><p class="first last">78.610</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">9</p>
+</td>
+<td><p class="first last">8</p>
+</td>
+<td><p class="first last">11.11%</p>
+</td>
+<td><p class="first last">39.587</p>
+</td>
+<td><p class="first last">64.451</p>
+</td>
+<td><p class="first last">165.431</p>
+</td>
+<td><p class="first last">39.587</p>
+</td>
+<td><p class="first last">54.966</p>
+</td>
+<td><p class="first last">165.431</p>
+</td>
+<td><p class="first last">165.431</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-005-login-as-the-buyer">
+<h2><a class="toc-backref" href="#id12">7.5&nbsp;&nbsp;&nbsp;PAGE 005: Login as the buyer</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/users/sign_in</tt></p>
+<blockquote>
+<img alt="request_005.001.png" src="request_005.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.527</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.070</p>
+</td>
+<td><p class="first last">3.390</p>
+</td>
+<td><p class="first last">6.556</p>
+</td>
+<td><p class="first last">1.947</p>
+</td>
+<td><p class="first last">3.237</p>
+</td>
+<td><p class="first last">4.821</p>
+</td>
+<td><p class="first last">5.733</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.370</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">46</p>
+</td>
+<td><p class="first last">46</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.955</p>
+</td>
+<td><p class="first last">5.392</p>
+</td>
+<td><p class="first last">8.511</p>
+</td>
+<td><p class="first last">3.357</p>
+</td>
+<td><p class="first last">5.645</p>
+</td>
+<td><p class="first last">6.276</p>
+</td>
+<td><p class="first last">7.298</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.125</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.130</p>
+</td>
+<td><p class="first last">7.331</p>
+</td>
+<td><p class="first last">13.781</p>
+</td>
+<td><p class="first last">4.456</p>
+</td>
+<td><p class="first last">7.575</p>
+</td>
+<td><p class="first last">10.030</p>
+</td>
+<td><p class="first last">11.444</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.044</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.321</p>
+</td>
+<td><p class="first last">10.338</p>
+</td>
+<td><p class="first last">26.113</p>
+</td>
+<td><p class="first last">6.188</p>
+</td>
+<td><p class="first last">9.463</p>
+</td>
+<td><p class="first last">15.555</p>
+</td>
+<td><p class="first last">17.402</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">7.288</p>
+</td>
+<td><p class="first last">13.722</p>
+</td>
+<td><p class="first last">53.722</p>
+</td>
+<td><p class="first last">8.412</p>
+</td>
+<td><p class="first last">11.420</p>
+</td>
+<td><p class="first last">20.327</p>
+</td>
+<td><p class="first last">22.474</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.053</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">85</p>
+</td>
+<td><p class="first last">85</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.289</p>
+</td>
+<td><p class="first last">20.522</p>
+</td>
+<td><p class="first last">55.858</p>
+</td>
+<td><p class="first last">5.598</p>
+</td>
+<td><p class="first last">19.705</p>
+</td>
+<td><p class="first last">34.791</p>
+</td>
+<td><p class="first last">38.420</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">39</p>
+</td>
+<td><p class="first last">39</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.006</p>
+</td>
+<td><p class="first last">24.506</p>
+</td>
+<td><p class="first last">60.706</p>
+</td>
+<td><p class="first last">10.988</p>
+</td>
+<td><p class="first last">21.901</p>
+</td>
+<td><p class="first last">51.819</p>
+</td>
+<td><p class="first last">52.596</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">15</p>
+</td>
+<td><p class="first last">15</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">19.316</p>
+</td>
+<td><p class="first last">30.546</p>
+</td>
+<td><p class="first last">55.591</p>
+</td>
+<td><p class="first last">21.649</p>
+</td>
+<td><p class="first last">25.217</p>
+</td>
+<td><p class="first last">44.124</p>
+</td>
+<td><p class="first last">55.591</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">2</p>
+</td>
+<td><p class="first last">2</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">71.698</p>
+</td>
+<td><p class="first last">79.399</p>
+</td>
+<td><p class="first last">87.100</p>
+</td>
+<td><p class="first last">71.698</p>
+</td>
+<td><p class="first last">87.100</p>
+</td>
+<td><p class="first last">87.100</p>
+</td>
+<td><p class="first last">87.100</p>
+</td>
+</tr>
+<tr><td><p class="first last">400</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">3</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">66.67%</p>
+</td>
+<td><p class="first last">63.117</p>
+</td>
+<td><p class="first last">69.364</p>
+</td>
+<td><p class="first last">75.359</p>
+</td>
+<td><p class="first last">63.117</p>
+</td>
+<td><p class="first last">69.614</p>
+</td>
+<td><p class="first last">75.359</p>
+</td>
+<td><p class="first last">75.359</p>
+</td>
+</tr>
+<tr><td><p class="first last">500</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">0</p>
+</td>
+<td><p class="first last">100.00%</p>
+</td>
+<td><p class="first last">63.108</p>
+</td>
+<td><p class="first last">63.132</p>
+</td>
+<td><p class="first last">63.144</p>
+</td>
+<td><p class="first last">63.108</p>
+</td>
+<td><p class="first last">63.136</p>
+</td>
+<td><p class="first last">63.144</p>
+</td>
+<td><p class="first last">63.144</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/</tt></p>
+<blockquote>
+<img alt="request_005.002.png" src="request_005.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.510</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">50</p>
+</td>
+<td><p class="first last">50</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.077</p>
+</td>
+<td><p class="first last">3.657</p>
+</td>
+<td><p class="first last">8.489</p>
+</td>
+<td><p class="first last">1.528</p>
+</td>
+<td><p class="first last">3.708</p>
+</td>
+<td><p class="first last">5.760</p>
+</td>
+<td><p class="first last">7.690</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.442</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">43</p>
+</td>
+<td><p class="first last">43</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.021</p>
+</td>
+<td><p class="first last">4.942</p>
+</td>
+<td><p class="first last">9.307</p>
+</td>
+<td><p class="first last">3.557</p>
+</td>
+<td><p class="first last">4.599</p>
+</td>
+<td><p class="first last">6.708</p>
+</td>
+<td><p class="first last">9.240</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.125</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.514</p>
+</td>
+<td><p class="first last">7.835</p>
+</td>
+<td><p class="first last">23.670</p>
+</td>
+<td><p class="first last">4.149</p>
+</td>
+<td><p class="first last">7.569</p>
+</td>
+<td><p class="first last">9.904</p>
+</td>
+<td><p class="first last">20.201</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.056</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.395</p>
+</td>
+<td><p class="first last">12.037</p>
+</td>
+<td><p class="first last">26.665</p>
+</td>
+<td><p class="first last">6.470</p>
+</td>
+<td><p class="first last">11.710</p>
+</td>
+<td><p class="first last">19.202</p>
+</td>
+<td><p class="first last">21.745</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.010</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">96</p>
+</td>
+<td><p class="first last">96</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.485</p>
+</td>
+<td><p class="first last">17.497</p>
+</td>
+<td><p class="first last">73.485</p>
+</td>
+<td><p class="first last">7.560</p>
+</td>
+<td><p class="first last">13.072</p>
+</td>
+<td><p class="first last">27.739</p>
+</td>
+<td><p class="first last">46.002</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.135</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">48</p>
+</td>
+<td><p class="first last">48</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.723</p>
+</td>
+<td><p class="first last">15.412</p>
+</td>
+<td><p class="first last">40.366</p>
+</td>
+<td><p class="first last">2.977</p>
+</td>
+<td><p class="first last">14.021</p>
+</td>
+<td><p class="first last">26.439</p>
+</td>
+<td><p class="first last">28.567</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.482</p>
+</td>
+<td><p class="first last">25.948</p>
+</td>
+<td><p class="first last">55.717</p>
+</td>
+<td><p class="first last">11.902</p>
+</td>
+<td><p class="first last">23.462</p>
+</td>
+<td><p class="first last">50.384</p>
+</td>
+<td><p class="first last">55.717</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">23.690</p>
+</td>
+<td><p class="first last">34.296</p>
+</td>
+<td><p class="first last">43.864</p>
+</td>
+<td><p class="first last">23.690</p>
+</td>
+<td><p class="first last">39.173</p>
+</td>
+<td><p class="first last">43.864</p>
+</td>
+<td><p class="first last">43.864</p>
+</td>
+</tr>
+<tr><td><p class="first last">300</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+<td><p class="first last">52.319</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-006-browse-trades">
+<h2><a class="toc-backref" href="#id13">7.6&nbsp;&nbsp;&nbsp;PAGE 006: Browse trades</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/offers</tt></p>
+<blockquote>
+<img alt="request_006.001.png" src="request_006.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.551</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">49</p>
+</td>
+<td><p class="first last">49</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.579</p>
+</td>
+<td><p class="first last">3.095</p>
+</td>
+<td><p class="first last">9.046</p>
+</td>
+<td><p class="first last">1.215</p>
+</td>
+<td><p class="first last">2.282</p>
+</td>
+<td><p class="first last">6.339</p>
+</td>
+<td><p class="first last">6.580</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.388</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.193</p>
+</td>
+<td><p class="first last">5.504</p>
+</td>
+<td><p class="first last">12.011</p>
+</td>
+<td><p class="first last">3.682</p>
+</td>
+<td><p class="first last">4.739</p>
+</td>
+<td><p class="first last">9.337</p>
+</td>
+<td><p class="first last">11.694</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.033</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.927</p>
+</td>
+<td><p class="first last">9.979</p>
+</td>
+<td><p class="first last">19.880</p>
+</td>
+<td><p class="first last">6.155</p>
+</td>
+<td><p class="first last">8.701</p>
+</td>
+<td><p class="first last">17.882</p>
+</td>
+<td><p class="first last">18.495</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">7.154</p>
+</td>
+<td><p class="first last">14.193</p>
+</td>
+<td><p class="first last">28.828</p>
+</td>
+<td><p class="first last">9.220</p>
+</td>
+<td><p class="first last">13.193</p>
+</td>
+<td><p class="first last">21.610</p>
+</td>
+<td><p class="first last">24.872</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.012</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">83</p>
+</td>
+<td><p class="first last">83</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.525</p>
+</td>
+<td><p class="first last">20.981</p>
+</td>
+<td><p class="first last">52.446</p>
+</td>
+<td><p class="first last">8.673</p>
+</td>
+<td><p class="first last">21.607</p>
+</td>
+<td><p class="first last">28.947</p>
+</td>
+<td><p class="first last">33.841</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.056</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">27</p>
+</td>
+<td><p class="first last">27</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.529</p>
+</td>
+<td><p class="first last">19.389</p>
+</td>
+<td><p class="first last">43.382</p>
+</td>
+<td><p class="first last">4.910</p>
+</td>
+<td><p class="first last">19.041</p>
+</td>
+<td><p class="first last">32.372</p>
+</td>
+<td><p class="first last">36.048</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">16.254</p>
+</td>
+<td><p class="first last">21.952</p>
+</td>
+<td><p class="first last">27.878</p>
+</td>
+<td><p class="first last">16.254</p>
+</td>
+<td><p class="first last">21.134</p>
+</td>
+<td><p class="first last">27.878</p>
+</td>
+<td><p class="first last">27.878</p>
+</td>
+</tr>
+<tr><td><p class="first last">250</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+<td><p class="first last">21.194</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-007-look-at-an-offer">
+<h2><a class="toc-backref" href="#id14">7.7&nbsp;&nbsp;&nbsp;PAGE 007: Look at an offer</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/offers/122749</tt></p>
+<blockquote>
+<img alt="request_007.001.png" src="request_007.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.773</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">44</p>
+</td>
+<td><p class="first last">44</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.231</p>
+</td>
+<td><p class="first last">1.871</p>
+</td>
+<td><p class="first last">5.488</p>
+</td>
+<td><p class="first last">0.613</p>
+</td>
+<td><p class="first last">1.434</p>
+</td>
+<td><p class="first last">3.463</p>
+</td>
+<td><p class="first last">4.394</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.388</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.016</p>
+</td>
+<td><p class="first last">5.093</p>
+</td>
+<td><p class="first last">14.442</p>
+</td>
+<td><p class="first last">2.710</p>
+</td>
+<td><p class="first last">4.581</p>
+</td>
+<td><p class="first last">9.309</p>
+</td>
+<td><p class="first last">9.576</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.058</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.808</p>
+</td>
+<td><p class="first last">9.771</p>
+</td>
+<td><p class="first last">15.543</p>
+</td>
+<td><p class="first last">6.116</p>
+</td>
+<td><p class="first last">9.444</p>
+</td>
+<td><p class="first last">13.932</p>
+</td>
+<td><p class="first last">14.155</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.019</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.189</p>
+</td>
+<td><p class="first last">13.220</p>
+</td>
+<td><p class="first last">30.309</p>
+</td>
+<td><p class="first last">8.882</p>
+</td>
+<td><p class="first last">12.364</p>
+</td>
+<td><p class="first last">22.286</p>
+</td>
+<td><p class="first last">24.750</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">62</p>
+</td>
+<td><p class="first last">62</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.200</p>
+</td>
+<td><p class="first last">22.495</p>
+</td>
+<td><p class="first last">49.627</p>
+</td>
+<td><p class="first last">10.942</p>
+</td>
+<td><p class="first last">21.262</p>
+</td>
+<td><p class="first last">44.492</p>
+</td>
+<td><p class="first last">46.028</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.179</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.860</p>
+</td>
+<td><p class="first last">14.347</p>
+</td>
+<td><p class="first last">35.005</p>
+</td>
+<td><p class="first last">4.085</p>
+</td>
+<td><p class="first last">12.476</p>
+</td>
+<td><p class="first last">28.173</p>
+</td>
+<td><p class="first last">35.005</p>
+</td>
+</tr>
+<tr><td><p class="first last">200</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+<td><p class="first last">19.975</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-008-load-the-new-bid-page">
+<h2><a class="toc-backref" href="#id15">7.8&nbsp;&nbsp;&nbsp;PAGE 008: Load the new bid page</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/offers/122746/bid</tt></p>
+<blockquote>
+<img alt="request_008.001.png" src="request_008.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.756</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.438</p>
+</td>
+<td><p class="first last">1.976</p>
+</td>
+<td><p class="first last">4.808</p>
+</td>
+<td><p class="first last">0.562</p>
+</td>
+<td><p class="first last">1.373</p>
+</td>
+<td><p class="first last">4.224</p>
+</td>
+<td><p class="first last">4.386</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.338</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.094</p>
+</td>
+<td><p class="first last">4.937</p>
+</td>
+<td><p class="first last">9.708</p>
+</td>
+<td><p class="first last">2.520</p>
+</td>
+<td><p class="first last">3.547</p>
+</td>
+<td><p class="first last">9.315</p>
+</td>
+<td><p class="first last">9.521</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.092</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.049</p>
+</td>
+<td><p class="first last">9.851</p>
+</td>
+<td><p class="first last">19.417</p>
+</td>
+<td><p class="first last">4.949</p>
+</td>
+<td><p class="first last">9.136</p>
+</td>
+<td><p class="first last">13.957</p>
+</td>
+<td><p class="first last">16.435</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.025</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.218</p>
+</td>
+<td><p class="first last">12.337</p>
+</td>
+<td><p class="first last">30.601</p>
+</td>
+<td><p class="first last">7.754</p>
+</td>
+<td><p class="first last">11.827</p>
+</td>
+<td><p class="first last">21.094</p>
+</td>
+<td><p class="first last">25.148</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.041</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">37</p>
+</td>
+<td><p class="first last">37</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.398</p>
+</td>
+<td><p class="first last">25.256</p>
+</td>
+<td><p class="first last">46.348</p>
+</td>
+<td><p class="first last">11.109</p>
+</td>
+<td><p class="first last">22.417</p>
+</td>
+<td><p class="first last">43.864</p>
+</td>
+<td><p class="first last">45.961</p>
+</td>
+</tr>
+<tr><td><p class="first last">150</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">3</p>
+</td>
+<td><p class="first last">3</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">12.231</p>
+</td>
+<td><p class="first last">19.114</p>
+</td>
+<td><p class="first last">28.509</p>
+</td>
+<td><p class="first last">12.231</p>
+</td>
+<td><p class="first last">16.600</p>
+</td>
+<td><p class="first last">28.509</p>
+</td>
+<td><p class="first last">28.509</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-009-bid">
+<h2><a class="toc-backref" href="#id16">7.9&nbsp;&nbsp;&nbsp;PAGE 009: Bid</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/offers/122746/bid</tt></p>
+<blockquote>
+<img alt="request_009.001.png" src="request_009.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.634</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">41</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.352</p>
+</td>
+<td><p class="first last">2.316</p>
+</td>
+<td><p class="first last">5.032</p>
+</td>
+<td><p class="first last">1.047</p>
+</td>
+<td><p class="first last">2.247</p>
+</td>
+<td><p class="first last">4.075</p>
+</td>
+<td><p class="first last">4.586</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.400</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.138</p>
+</td>
+<td><p class="first last">4.575</p>
+</td>
+<td><p class="first last">9.682</p>
+</td>
+<td><p class="first last">2.548</p>
+</td>
+<td><p class="first last">4.001</p>
+</td>
+<td><p class="first last">8.741</p>
+</td>
+<td><p class="first last">9.538</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.167</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.275</p>
+</td>
+<td><p class="first last">8.813</p>
+</td>
+<td><p class="first last">17.959</p>
+</td>
+<td><p class="first last">4.987</p>
+</td>
+<td><p class="first last">7.989</p>
+</td>
+<td><p class="first last">14.660</p>
+</td>
+<td><p class="first last">14.945</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.031</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.421</p>
+</td>
+<td><p class="first last">10.775</p>
+</td>
+<td><p class="first last">23.996</p>
+</td>
+<td><p class="first last">7.376</p>
+</td>
+<td><p class="first last">10.054</p>
+</td>
+<td><p class="first last">15.897</p>
+</td>
+<td><p class="first last">20.943</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.036</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">14</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.549</p>
+</td>
+<td><p class="first last">23.052</p>
+</td>
+<td><p class="first last">47.213</p>
+</td>
+<td><p class="first last">17.555</p>
+</td>
+<td><p class="first last">20.802</p>
+</td>
+<td><p class="first last">33.145</p>
+</td>
+<td><p class="first last">47.213</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/offers/122725</tt></p>
+<blockquote>
+<img alt="request_009.002.png" src="request_009.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.787</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.283</p>
+</td>
+<td><p class="first last">1.706</p>
+</td>
+<td><p class="first last">4.976</p>
+</td>
+<td><p class="first last">0.554</p>
+</td>
+<td><p class="first last">1.420</p>
+</td>
+<td><p class="first last">3.642</p>
+</td>
+<td><p class="first last">4.457</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.438</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.076</p>
+</td>
+<td><p class="first last">4.365</p>
+</td>
+<td><p class="first last">10.588</p>
+</td>
+<td><p class="first last">2.528</p>
+</td>
+<td><p class="first last">3.521</p>
+</td>
+<td><p class="first last">8.920</p>
+</td>
+<td><p class="first last">9.657</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.317</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.635</p>
+</td>
+<td><p class="first last">7.099</p>
+</td>
+<td><p class="first last">19.790</p>
+</td>
+<td><p class="first last">4.475</p>
+</td>
+<td><p class="first last">5.623</p>
+</td>
+<td><p class="first last">13.714</p>
+</td>
+<td><p class="first last">14.377</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.075</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.180</p>
+</td>
+<td><p class="first last">8.522</p>
+</td>
+<td><p class="first last">16.823</p>
+</td>
+<td><p class="first last">5.890</p>
+</td>
+<td><p class="first last">8.007</p>
+</td>
+<td><p class="first last">12.638</p>
+</td>
+<td><p class="first last">13.379</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">7</p>
+</td>
+<td><p class="first last">7</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">20.599</p>
+</td>
+<td><p class="first last">30.558</p>
+</td>
+<td><p class="first last">50.377</p>
+</td>
+<td><p class="first last">20.599</p>
+</td>
+<td><p class="first last">28.680</p>
+</td>
+<td><p class="first last">50.377</p>
+</td>
+<td><p class="first last">50.377</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-010-logout-2">
+<h2><a class="toc-backref" href="#id17">7.10&nbsp;&nbsp;&nbsp;PAGE 010: Logout 2</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/logout</tt></p>
+<blockquote>
+<img alt="request_010.001.png" src="request_010.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.787</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.451</p>
+</td>
+<td><p class="first last">1.490</p>
+</td>
+<td><p class="first last">4.020</p>
+</td>
+<td><p class="first last">0.496</p>
+</td>
+<td><p class="first last">1.219</p>
+</td>
+<td><p class="first last">3.311</p>
+</td>
+<td><p class="first last">3.904</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.500</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.222</p>
+</td>
+<td><p class="first last">3.598</p>
+</td>
+<td><p class="first last">6.303</p>
+</td>
+<td><p class="first last">2.389</p>
+</td>
+<td><p class="first last">3.409</p>
+</td>
+<td><p class="first last">5.642</p>
+</td>
+<td><p class="first last">5.856</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.300</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.079</p>
+</td>
+<td><p class="first last">6.480</p>
+</td>
+<td><p class="first last">13.335</p>
+</td>
+<td><p class="first last">4.257</p>
+</td>
+<td><p class="first last">5.450</p>
+</td>
+<td><p class="first last">10.085</p>
+</td>
+<td><p class="first last">11.850</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.171</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">79</p>
+</td>
+<td><p class="first last">79</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.297</p>
+</td>
+<td><p class="first last">7.418</p>
+</td>
+<td><p class="first last">14.314</p>
+</td>
+<td><p class="first last">5.262</p>
+</td>
+<td><p class="first last">7.118</p>
+</td>
+<td><p class="first last">11.011</p>
+</td>
+<td><p class="first last">12.599</p>
+</td>
+</tr>
+<tr><td><p class="first last">100</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+<td><p class="first last">31.240</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/login</tt></p>
+<blockquote>
+<img alt="request_010.002.png" src="request_010.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.688</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.505</p>
+</td>
+<td><p class="first last">1.662</p>
+</td>
+<td><p class="first last">3.091</p>
+</td>
+<td><p class="first last">0.886</p>
+</td>
+<td><p class="first last">1.774</p>
+</td>
+<td><p class="first last">2.607</p>
+</td>
+<td><p class="first last">2.957</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.388</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.870</p>
+</td>
+<td><p class="first last">4.529</p>
+</td>
+<td><p class="first last">7.761</p>
+</td>
+<td><p class="first last">2.483</p>
+</td>
+<td><p class="first last">4.986</p>
+</td>
+<td><p class="first last">6.901</p>
+</td>
+<td><p class="first last">7.659</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.292</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.389</p>
+</td>
+<td><p class="first last">7.109</p>
+</td>
+<td><p class="first last">14.535</p>
+</td>
+<td><p class="first last">4.114</p>
+</td>
+<td><p class="first last">5.552</p>
+</td>
+<td><p class="first last">11.906</p>
+</td>
+<td><p class="first last">13.616</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.127</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">71</p>
+</td>
+<td><p class="first last">71</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.972</p>
+</td>
+<td><p class="first last">8.352</p>
+</td>
+<td><p class="first last">14.266</p>
+</td>
+<td><p class="first last">5.413</p>
+</td>
+<td><p class="first last">7.283</p>
+</td>
+<td><p class="first last">12.752</p>
+</td>
+<td><p class="first last">13.080</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-011-login-as-the-seller-again">
+<h2><a class="toc-backref" href="#id18">7.11&nbsp;&nbsp;&nbsp;PAGE 011: Login as the seller again</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/users/sign_in</tt></p>
+<blockquote>
+<img alt="request_011.001.png" src="request_011.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.463</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.897</p>
+</td>
+<td><p class="first last">3.560</p>
+</td>
+<td><p class="first last">8.044</p>
+</td>
+<td><p class="first last">2.358</p>
+</td>
+<td><p class="first last">3.297</p>
+</td>
+<td><p class="first last">5.256</p>
+</td>
+<td><p class="first last">6.987</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.150</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.071</p>
+</td>
+<td><p class="first last">6.721</p>
+</td>
+<td><p class="first last">11.448</p>
+</td>
+<td><p class="first last">4.267</p>
+</td>
+<td><p class="first last">6.948</p>
+</td>
+<td><p class="first last">8.559</p>
+</td>
+<td><p class="first last">9.923</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.075</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.017</p>
+</td>
+<td><p class="first last">10.238</p>
+</td>
+<td><p class="first last">20.174</p>
+</td>
+<td><p class="first last">5.748</p>
+</td>
+<td><p class="first last">10.861</p>
+</td>
+<td><p class="first last">14.479</p>
+</td>
+<td><p class="first last">16.190</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.036</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">55</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.712</p>
+</td>
+<td><p class="first last">11.721</p>
+</td>
+<td><p class="first last">24.923</p>
+</td>
+<td><p class="first last">7.204</p>
+</td>
+<td><p class="first last">11.614</p>
+</td>
+<td><p class="first last">16.605</p>
+</td>
+<td><p class="first last">21.492</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/</tt></p>
+<blockquote>
+<img alt="request_011.002.png" src="request_011.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.463</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.087</p>
+</td>
+<td><p class="first last">3.460</p>
+</td>
+<td><p class="first last">8.077</p>
+</td>
+<td><p class="first last">1.960</p>
+</td>
+<td><p class="first last">3.110</p>
+</td>
+<td><p class="first last">6.214</p>
+</td>
+<td><p class="first last">6.463</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.075</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.521</p>
+</td>
+<td><p class="first last">8.790</p>
+</td>
+<td><p class="first last">20.692</p>
+</td>
+<td><p class="first last">5.696</p>
+</td>
+<td><p class="first last">7.270</p>
+</td>
+<td><p class="first last">14.357</p>
+</td>
+<td><p class="first last">14.949</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.100</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.150</p>
+</td>
+<td><p class="first last">12.109</p>
+</td>
+<td><p class="first last">46.199</p>
+</td>
+<td><p class="first last">3.285</p>
+</td>
+<td><p class="first last">11.456</p>
+</td>
+<td><p class="first last">20.484</p>
+</td>
+<td><p class="first last">21.543</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.129</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">31</p>
+</td>
+<td><p class="first last">31</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.359</p>
+</td>
+<td><p class="first last">10.432</p>
+</td>
+<td><p class="first last">16.118</p>
+</td>
+<td><p class="first last">4.990</p>
+</td>
+<td><p class="first last">12.228</p>
+</td>
+<td><p class="first last">13.772</p>
+</td>
+<td><p class="first last">15.734</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-012-get-dashboard">
+<h2><a class="toc-backref" href="#id19">7.12&nbsp;&nbsp;&nbsp;PAGE 012: Get /dashboard</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/dashboard</tt></p>
+<blockquote>
+<img alt="request_012.001.png" src="request_012.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.362</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.581</p>
+</td>
+<td><p class="first last">5.097</p>
+</td>
+<td><p class="first last">9.456</p>
+</td>
+<td><p class="first last">3.373</p>
+</td>
+<td><p class="first last">4.861</p>
+</td>
+<td><p class="first last">7.357</p>
+</td>
+<td><p class="first last">8.389</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.087</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">4.381</p>
+</td>
+<td><p class="first last">9.044</p>
+</td>
+<td><p class="first last">17.551</p>
+</td>
+<td><p class="first last">5.693</p>
+</td>
+<td><p class="first last">9.187</p>
+</td>
+<td><p class="first last">12.772</p>
+</td>
+<td><p class="first last">16.596</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.034</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">58</p>
+</td>
+<td><p class="first last">58</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">3.995</p>
+</td>
+<td><p class="first last">12.834</p>
+</td>
+<td><p class="first last">18.299</p>
+</td>
+<td><p class="first last">10.048</p>
+</td>
+<td><p class="first last">13.164</p>
+</td>
+<td><p class="first last">16.414</p>
+</td>
+<td><p class="first last">17.096</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">9</p>
+</td>
+<td><p class="first last">9</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">6.268</p>
+</td>
+<td><p class="first last">11.100</p>
+</td>
+<td><p class="first last">13.703</p>
+</td>
+<td><p class="first last">6.268</p>
+</td>
+<td><p class="first last">11.359</p>
+</td>
+<td><p class="first last">13.703</p>
+</td>
+<td><p class="first last">13.703</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-013-look-at-the-offer-again">
+<h2><a class="toc-backref" href="#id20">7.13&nbsp;&nbsp;&nbsp;PAGE 013: Look at the offer again</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/offers/122725</tt></p>
+<blockquote>
+<img alt="request_013.001.png" src="request_013.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.600</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.598</p>
+</td>
+<td><p class="first last">2.845</p>
+</td>
+<td><p class="first last">5.530</p>
+</td>
+<td><p class="first last">1.251</p>
+</td>
+<td><p class="first last">2.926</p>
+</td>
+<td><p class="first last">4.736</p>
+</td>
+<td><p class="first last">5.443</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.188</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.417</p>
+</td>
+<td><p class="first last">6.798</p>
+</td>
+<td><p class="first last">12.203</p>
+</td>
+<td><p class="first last">3.196</p>
+</td>
+<td><p class="first last">7.112</p>
+</td>
+<td><p class="first last">11.257</p>
+</td>
+<td><p class="first last">12.038</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.043</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">47</p>
+</td>
+<td><p class="first last">47</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.269</p>
+</td>
+<td><p class="first last">11.550</p>
+</td>
+<td><p class="first last">22.665</p>
+</td>
+<td><p class="first last">6.278</p>
+</td>
+<td><p class="first last">10.962</p>
+</td>
+<td><p class="first last">16.183</p>
+</td>
+<td><p class="first last">17.278</p>
+</td>
+</tr>
+<tr><td><p class="first last">80</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+<td><p class="first last">10.277</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-014-accept-a-bid">
+<h2><a class="toc-backref" href="#id21">7.14&nbsp;&nbsp;&nbsp;PAGE 014: Accept a bid</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/offers/122725/accept/122745</tt></p>
+<blockquote>
+<img alt="request_014.001.png" src="request_014.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.637</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.496</p>
+</td>
+<td><p class="first last">2.354</p>
+</td>
+<td><p class="first last">4.687</p>
+</td>
+<td><p class="first last">0.804</p>
+</td>
+<td><p class="first last">2.463</p>
+</td>
+<td><p class="first last">4.018</p>
+</td>
+<td><p class="first last">4.299</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.250</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.431</p>
+</td>
+<td><p class="first last">6.330</p>
+</td>
+<td><p class="first last">14.835</p>
+</td>
+<td><p class="first last">1.874</p>
+</td>
+<td><p class="first last">6.387</p>
+</td>
+<td><p class="first last">12.050</p>
+</td>
+<td><p class="first last">14.101</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.051</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">39</p>
+</td>
+<td><p class="first last">39</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.572</p>
+</td>
+<td><p class="first last">12.234</p>
+</td>
+<td><p class="first last">18.469</p>
+</td>
+<td><p class="first last">4.487</p>
+</td>
+<td><p class="first last">13.707</p>
+</td>
+<td><p class="first last">16.068</p>
+</td>
+<td><p class="first last">18.076</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/offers/122725</tt></p>
+<blockquote>
+<img alt="request_014.002.png" src="request_014.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.637</p>
+</td>
+<td><p class="first last">POOR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.459</p>
+</td>
+<td><p class="first last">2.127</p>
+</td>
+<td><p class="first last">5.096</p>
+</td>
+<td><p class="first last">0.986</p>
+</td>
+<td><p class="first last">1.998</p>
+</td>
+<td><p class="first last">3.811</p>
+</td>
+<td><p class="first last">4.257</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.325</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.737</p>
+</td>
+<td><p class="first last">5.241</p>
+</td>
+<td><p class="first last">12.242</p>
+</td>
+<td><p class="first last">2.042</p>
+</td>
+<td><p class="first last">4.684</p>
+</td>
+<td><p class="first last">9.082</p>
+</td>
+<td><p class="first last">11.194</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.103</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">29</p>
+</td>
+<td><p class="first last">29</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.528</p>
+</td>
+<td><p class="first last">10.307</p>
+</td>
+<td><p class="first last">15.803</p>
+</td>
+<td><p class="first last">2.922</p>
+</td>
+<td><p class="first last">11.747</p>
+</td>
+<td><p class="first last">13.959</p>
+</td>
+<td><p class="first last">14.409</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-015-complete-a-bid">
+<h2><a class="toc-backref" href="#id22">7.15&nbsp;&nbsp;&nbsp;PAGE 015: Complete a bid</a></h2>
+<ul>
+<li><p class="first">Req: 001, post, url <tt class="docutils literal">/offers/122724/complete/122743</tt></p>
+<blockquote>
+<img alt="request_015.001.png" src="request_015.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.812</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.194</p>
+</td>
+<td><p class="first last">1.450</p>
+</td>
+<td><p class="first last">4.360</p>
+</td>
+<td><p class="first last">0.526</p>
+</td>
+<td><p class="first last">1.177</p>
+</td>
+<td><p class="first last">3.574</p>
+</td>
+<td><p class="first last">3.790</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.475</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.199</p>
+</td>
+<td><p class="first last">3.811</p>
+</td>
+<td><p class="first last">15.218</p>
+</td>
+<td><p class="first last">1.696</p>
+</td>
+<td><p class="first last">3.355</p>
+</td>
+<td><p class="first last">6.986</p>
+</td>
+<td><p class="first last">8.083</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.346</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">13</p>
+</td>
+<td><p class="first last">13</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.202</p>
+</td>
+<td><p class="first last">5.212</p>
+</td>
+<td><p class="first last">11.458</p>
+</td>
+<td><p class="first last">2.825</p>
+</td>
+<td><p class="first last">3.562</p>
+</td>
+<td><p class="first last">8.952</p>
+</td>
+<td><p class="first last">11.458</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/offers/122724</tt></p>
+<blockquote>
+<img alt="request_015.002.png" src="request_015.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.812</p>
+</td>
+<td><p class="first last">FAIR</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.173</p>
+</td>
+<td><p class="first last">1.483</p>
+</td>
+<td><p class="first last">4.888</p>
+</td>
+<td><p class="first last">0.578</p>
+</td>
+<td><p class="first last">1.338</p>
+</td>
+<td><p class="first last">2.547</p>
+</td>
+<td><p class="first last">3.527</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.438</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">1.366</p>
+</td>
+<td><p class="first last">4.226</p>
+</td>
+<td><p class="first last">13.417</p>
+</td>
+<td><p class="first last">1.701</p>
+</td>
+<td><p class="first last">2.980</p>
+</td>
+<td><p class="first last">11.385</p>
+</td>
+<td><p class="first last">13.194</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.300</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">5</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">2.632</p>
+</td>
+<td><p class="first last">6.728</p>
+</td>
+<td><p class="first last">15.775</p>
+</td>
+<td><p class="first last">2.632</p>
+</td>
+<td><p class="first last">4.257</p>
+</td>
+<td><p class="first last">15.775</p>
+</td>
+<td><p class="first last">15.775</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="page-016-logout-3">
+<h2><a class="toc-backref" href="#id23">7.16&nbsp;&nbsp;&nbsp;PAGE 016: Logout 3</a></h2>
+<ul>
+<li><p class="first">Req: 001, get, url <tt class="docutils literal">/logout</tt></p>
+<blockquote>
+<img alt="request_016.001.png" src="request_016.001.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.925</p>
+</td>
+<td><p class="first last">Good</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.043</p>
+</td>
+<td><p class="first last">0.990</p>
+</td>
+<td><p class="first last">3.740</p>
+</td>
+<td><p class="first last">0.157</p>
+</td>
+<td><p class="first last">0.899</p>
+</td>
+<td><p class="first last">1.748</p>
+</td>
+<td><p class="first last">3.688</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.425</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.867</p>
+</td>
+<td><p class="first last">3.958</p>
+</td>
+<td><p class="first last">12.807</p>
+</td>
+<td><p class="first last">1.518</p>
+</td>
+<td><p class="first last">2.425</p>
+</td>
+<td><p class="first last">9.063</p>
+</td>
+<td><p class="first last">11.757</p>
+</td>
+</tr>
+<tr><td><p class="first last">60</p>
+</td>
+<td><p class="first last">0.000</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">1</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+<td><p class="first last">12.272</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+<li><p class="first">Req: 002, get, url <tt class="docutils literal">/login</tt></p>
+<blockquote>
+<img alt="request_016.002.png" src="request_016.002.png" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">CUs</p>
+</th>
+<th class="head"><p class="first last">Apdex*</p>
+</th>
+<th class="head"><p class="first last">Rating</p>
+</th>
+<th class="head"><p class="first last">TOTAL</p>
+</th>
+<th class="head"><p class="first last">SUCCESS</p>
+</th>
+<th class="head"><p class="first last">ERROR</p>
+</th>
+<th class="head"><p class="first last">MIN</p>
+</th>
+<th class="head"><p class="first last">AVG</p>
+</th>
+<th class="head"><p class="first last">MAX</p>
+</th>
+<th class="head"><p class="first last">P10</p>
+</th>
+<th class="head"><p class="first last">MED</p>
+</th>
+<th class="head"><p class="first last">P90</p>
+</th>
+<th class="head"><p class="first last">P95</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">20</p>
+</td>
+<td><p class="first last">0.863</p>
+</td>
+<td><p class="first last">Good</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.119</p>
+</td>
+<td><p class="first last">1.276</p>
+</td>
+<td><p class="first last">4.982</p>
+</td>
+<td><p class="first last">0.160</p>
+</td>
+<td><p class="first last">0.836</p>
+</td>
+<td><p class="first last">3.232</p>
+</td>
+<td><p class="first last">4.881</p>
+</td>
+</tr>
+<tr><td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.438</p>
+</td>
+<td><p class="first last">UNACCEPTABLE</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">40</p>
+</td>
+<td><p class="first last">0.00%</p>
+</td>
+<td><p class="first last">0.779</p>
+</td>
+<td><p class="first last">4.322</p>
+</td>
+<td><p class="first last">12.016</p>
+</td>
+<td><p class="first last">1.148</p>
+</td>
+<td><p class="first last">2.931</p>
+</td>
+<td><p class="first last">9.468</p>
+</td>
+<td><p class="first last">10.944</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Apdex <sub>1.5</sub></p>
+</blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="failures-and-errors">
+<h1><a class="toc-backref" href="#id24">8&nbsp;&nbsp;&nbsp;Failures and Errors</a></h1>
+<div class="section" id="errors">
+<h2><a class="toc-backref" href="#id25">8.1&nbsp;&nbsp;&nbsp;Errors</a></h2>
+<ul>
+<li><p class="first">719 time(s), code: -1:</p>
+<pre class="literal-block">
+Traceback (most recent call last):
+
+File &quot;/usr/local/lib/python2.7/dist-packages/funkload-1.16.1-py2.7.egg/funkload/FunkLoadTestCase.py&quot;, line 202, in _connect
+cert_file=self._certfile_path, method=rtype)
+
+File &quot;/usr/local/lib/python2.7/dist-packages/funkload-1.16.1-py2.7.egg/funkload/PatchWebunit.py&quot;, line 360, in WF_fetch
+h.endheaders()
+
+File &quot;/usr/lib/python2.7/httplib.py&quot;, line 954, in endheaders
+self._send_output(message_body)
+
+File &quot;/usr/lib/python2.7/httplib.py&quot;, line 814, in _send_output
+self.send(msg)
+
+File &quot;/usr/lib/python2.7/httplib.py&quot;, line 776, in send
+self.connect()
+
+File &quot;/usr/lib/python2.7/httplib.py&quot;, line 757, in connect
+self.timeout, self.source_address)
+
+File &quot;/usr/lib/python2.7/socket.py&quot;, line 571, in create_connection
+raise err
+</pre>
+</li>
+</ul>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/jacopo/Dropbox/Classes/scalable/repo/funkload/test_critical_path-20121208T185908/index.rst</tt>, line 688)</p>
+Bullet list ends without a blank line; unexpected unindent.</div>
+<blockquote>
+error: [Errno 110] Connection timed out</blockquote>
+</div>
+</div>
+<div class="section" id="definitions">
+<h1><a class="toc-backref" href="#id26">9&nbsp;&nbsp;&nbsp;Definitions</a></h1>
+<ul>
+<li><p class="first">CUs: Concurrent users or number of concurrent threads executing tests.</p>
+</li>
+<li><p class="first">Request: a single GET/POST/redirect/xmlrpc request.</p>
+</li>
+<li><p class="first">Page: a request with redirects and resource links (image, css, js) for an html page.</p>
+</li>
+<li><p class="first">STPS: Successful tests per second.</p>
+</li>
+<li><p class="first">SPPS: Successful pages per second.</p>
+</li>
+<li><p class="first">RPS: Requests per second, successful or not.</p>
+</li>
+<li><p class="first">maxSPPS: Maximum SPPS during the cycle.</p>
+</li>
+<li><p class="first">maxRPS: Maximum RPS during the cycle.</p>
+</li>
+<li><p class="first">MIN: Minimum response time for a page or request.</p>
+</li>
+<li><p class="first">AVG: Average response time for a page or request.</p>
+</li>
+<li><p class="first">MAX: Maximmum response time for a page or request.</p>
+</li>
+<li><p class="first">P10: 10th percentile, response time where 10 percent of pages or requests are delivered.</p>
+</li>
+<li><p class="first">MED: Median or 50th percentile, response time where half of pages or requests are delivered.</p>
+</li>
+<li><p class="first">P90: 90th percentile, response time where 90 percent of pages or requests are delivered.</p>
+</li>
+<li><p class="first">P95: 95th percentile, response time where 95 percent of pages or requests are delivered.</p>
+</li>
+<li><p class="first">Apdex T: Application Performance Index,
+this is a numerical measure of user satisfaction, it is based
+on three zones of application responsiveness:</p>
+<ul>
+<li><p class="first">Satisfied: The user is fully productive. This represents the
+time value (T seconds) below which users are not impeded by
+application response time.</p>
+</li>
+<li><p class="first">Tolerating: The user notices performance lagging within
+responses greater than T, but continues the process.</p>
+</li>
+<li><p class="first">Frustrated: Performance with a response time greater than 4*T
+seconds is unacceptable, and users may abandon the process.</p>
+<p>By default T is set to 1.5s this means that response time between 0
+and 1.5s the user is fully productive, between 1.5 and 6s the
+responsivness is tolerating and above 6s the user is frustrated.</p>
+<p>The Apdex score converts many measurements into one number on a
+uniform scale of 0-to-1 (0 = no users satisfied, 1 = all users
+satisfied).</p>
+<p>Visit <a class="reference external" href="http://www.apdex.org/">http://www.apdex.org/</a> for more information.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">Rating: To ease interpretation the Apdex
+score is also represented as a rating:</p>
+<ul class="simple">
+<li>U for UNACCEPTABLE represented in gray for a score between 0 and 0.5</li>
+<li>P for POOR represented in red for a score between 0.5 and 0.7</li>
+<li>F for FAIR represented in yellow for a score between 0.7 and 0.85</li>
+<li>G for Good represented in green for a score between 0.85 and 0.94</li>
+<li>E for Excellent represented in blue for a score between 0.94 and 1.</li>
+</ul>
+</li>
+</ul>
+<p>Report generated with <a class="reference external" href="http://funkload.nuxeo.org/">FunkLoad</a> 1.16.1, more information available on the <a class="reference external" href="http://funkload.nuxeo.org/#benching">FunkLoad site</a>.</p>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2012-12-09 05:31 UTC.
+
+</div>
+</body>
+</html>
