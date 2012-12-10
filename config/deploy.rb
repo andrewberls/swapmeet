@@ -14,8 +14,8 @@ set :use_sudo, false
 # web: Your HTTP server, Apache/etc
 # app: This may be the same as your `Web` server
 # db: This is where Rails migrations will run
-role :web, "swapmeetapp1.dnsdynamic.net", "swapmeetapp2.dnsdynamic.net", "swapmeetapp3.dnsdynamic.net", "swapmeetapp4.dnsdynamic.net"
-role :app, "swapmeetapp1.dnsdynamic.net", "swapmeetapp2.dnsdynamic.net", "swapmeetapp3.dnsdynamic.net", "swapmeetapp4.dnsdynamic.net"
+role :web, "swapmeetapp1.dnsdynamic.net", "swapmeetapp2.dnsdynamic.net", "swapmeetapp3.dnsdynamic.net", "swapmeetapp4.dnsdynamic.net", "swapmeetapp5.dnsdynamic.net", "swapmeetapp6.dnsdynamic.net", "swapmeetapp7.dnsdynamic.net", "swapmeetapp8.dnsdynamic.net"
+role :app, "swapmeetapp1.dnsdynamic.net", "swapmeetapp2.dnsdynamic.net", "swapmeetapp3.dnsdynamic.net", "swapmeetapp4.dnsdynamic.net", "swapmeetapp5.dnsdynamic.net", "swapmeetapp6.dnsdynamic.net", "swapmeetapp7.dnsdynamic.net", "swapmeetapp8.dnsdynamic.net"
 role :db,  "swapmeetapp1.dnsdynamic.net", :primary => true
 
 # Move the AWS credentials from where RightScript put them to where it should be

@@ -1,0 +1,47 @@
+<response cycle="001" cvus="000" thread="001" suite="CriticalPath" name="test_critical_path" step="001" number="001" type="post" result="Successful" url="/users/sign_in" code="302" description="Login as the seller" time="1355114217.84" duration="0.538711071014" />
+<response cycle="001" cvus="000" thread="001" suite="CriticalPath" name="test_critical_path" step="001" number="002" type="get" result="Failure" url="/" code="500" description="" time="1355114218.38" duration="0.0232601165771">
+  <headers>
+    <header name="status" value="500" />
+    <header name="x-request-id" value="ec4f5e7b46bebc7148bfb64b0797770a" />
+    <header name="x-powered-by" value="Phusion Passenger (mod_rails/mod_rack) 3.0.18" />
+    <header name="connection" value="close" />
+    <header name="vary" value="Accept-Encoding" />
+    <header name="content-length" value="643" />
+    <header name="server" value="Apache/2.2.22 (Ubuntu)" />
+    <header name="x-runtime" value="0.013727" />
+    <header name="cache-control" value="private" />
+    <header name="date" value="Mon, 10 Dec 2012 04:36:58 GMT" />
+    <header name="content-type" value="text/html; charset=utf-8" />
+    <header name="x-rack-cache" value="miss" />
+  </headers>
+  <body><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+  <title>We're sorry, but something went wrong (500)</title>
+  <style type="text/css">
+    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
+    div.dialog {
+      width: 25em;
+      padding: 0 4em;
+      margin: 4em auto 0 auto;
+      border: 1px solid #ccc;
+      border-right-color: #999;
+      border-bottom-color: #999;
+    }
+    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+  </style>
+</head>
+
+<body>
+  <!-- This file lives in public/500.html -->
+  <div class="dialog">
+    <h1>We're sorry, but something went wrong.</h1>
+  </div>
+</body>
+</html>
+
+]]>
+  </body>
+</response>
+<testResult cycle="001" cvus="000" thread="001" suite="CriticalPath" name="test_critical_path"  time="1355114217.84" result="Failure" steps="1" duration="0.564283847809" connection_duration="0.561971187592" requests="2" pages="1" xmlrpc="0" redirects="0" images="0" links="0" traceback='Traceback (most recent call last):&#10;   File "/usr/local/lib/python2.7/dist-packages/funkload-1.16.1-py2.7.egg/funkload/FunkLoadTestCase.py", line 946, in __call__&#10;    testMethod()&#10;   File "/home/ubuntu/swapmeet/funkload/test_CriticalPath.py", line 51, in test_critical_path&#10;    description="Login as the seller")&#10;   File "/usr/local/lib/python2.7/dist-packages/funkload-1.16.1-py2.7.egg/funkload/FunkLoadTestCase.py", line 383, in post&#10;    method="post", load_auto_links=load_auto_links)&#10;   File "/usr/local/lib/python2.7/dist-packages/funkload-1.16.1-py2.7.egg/funkload/FunkLoadTestCase.py", line 320, in _browse&#10;    description=None, redirect=True)&#10;   File "/usr/local/lib/python2.7/dist-packages/funkload-1.16.1-py2.7.egg/funkload/FunkLoadTestCase.py", line 216, in _connect&#10;    raise self.failureException, str(value.response)&#10; AssertionError: /&#10;HTTP Response 500: Internal Server Error&#10;' />
