@@ -17,11 +17,13 @@
     <div class="split-left">
       <h3>Your Trades</h3>
       <ul>
-        <% @user_parents.each do |offer| %>
-          <li>
-            <%= link_to offer.title, offer %>
-            <%= content_tag :span, "- #{pluralize(offer.bids.count, 'bid')}", style: 'color: #666' if offer.bids.present? %>
-          </li>
+        <% cache "user#{current_user.id}_parents" do %>
+          <% @user_parents.each do |offer| %>
+            <li>
+              <%= link_to offer.title, offer %>
+              <%= content_tag :span, "- #{pluralize(offer.bids.count, 'bid')}", style: 'color: #666' if offer.bids.present? %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
@@ -29,61 +31,42 @@
     <div class="split-right">
       <h3>Your Bids</h3>
       <ul>
-        <% @user_bids.each do |bid| %>
-          <li>
-            <%= link_to bid.title, Response.find_by_bid_id(bid).offer %>
-            <%= content_tag :span, "- Accepted!", class: 'green' if bid.accepted? %>
-          </li>
+        <% cache "user#{current_user.id}_bids" do %>
+          <% @user_bids.each do |bid| %>
+            <li>
+              <%= link_to bid.title, Response.find_by_bid_id(bid).offer %>
+              <%= content_tag :span, "- Accepted!", class: 'green' if bid.accepted? %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
   </div><!-- .user-notifications -->
 
-
-  <div class="offer-masonry">
-    <% [].each do |offer| %>
-      <div class="offer-box">
-        <div class="offer-details">
-          <p class="offer-title"><%= offer.title %></p>
-          <% if offer.image.present? %>
-            <%= link_to image_tag(offer.image.url(:w350)), offer %>
-          <% else %>
-            No image available
-          <% end %>
-        </div>
-
-        <div class="offer-notifications">
-          <p>New message from <span class="username">user99</span></p>
-          <%= link_to raw("View offer &raquo;"), offer %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-</div><!-- .page-section -->
-
-
+</div>
 
 <div class="page-section">
   <h1 class="section-title">Recently posted for: Santa Barbara</h1>
 
   <div class="offer-masonry">
-    <% @recent_offers.each do |offer| %>
-      <div class="offer-box">
-        <div class="offer-details">
-          <p class="offer-title"><%= offer.title %></p>
-          <% if offer.image.present? %>
-            <%= link_to image_tag(offer.image.url(:w350)), offer.image.url(:original) %>
-          <% else %>
-            No image available
-          <% end %>
-        </div>
+    <% cache 'recent_offers' do %>
+      <% @recent_offers.each do |offer| %>
+        <div class="offer-box">
+          <div class="offer-details">
+            <p class="offer-title"><%= offer.title %></p>
+            <% if offer.image.present? %>
+              <%= link_to image_tag(offer.image.url(:w350)), offer %>
+            <% else %>
+              No image available
+            <% end %>
+          </div>
 
-        <div class="offer-notifications">
-          <p><%= offer.description %></p>
-          <%= link_to raw("More info &raquo;"), offer, class: 'more-info' %>
+          <div class="offer-notifications">
+            <p><%= offer.description %></p>
+            <%= link_to raw("More info &raquo;"), offer, class: 'more-info' %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 

@@ -10,7 +10,7 @@ USER_COUNT, OFFER_COUNT, BID_COUNT =
 if Rails.env == 'development'
   [ 500, 550, 600 ]       # Keep small data for development
 else
-  [ 50000, 55000, 60000 ] # Production configuration
+  [ 5000, 5500, 6000 ]    # Production configuration
 end
 
 
@@ -56,7 +56,10 @@ admin_user = User.new(username: "admin", email: "admin@admin.com", password: "pa
 good_user  = User.new(username: "gooduser", email: "gooduser@email.com", password: "password", password_confirmation: "password", up_ratings: 14); good_user.save!
 bad_user   = User.new(username: "baduser", email: "baduser@email.com", password: "password", password_confirmation: "password", down_ratings: 49); bad_user.save!
 
-awesome_offer = Offer.new(title: "Awesome offer", description: "I need to get rid of my really awesome stuff.") { |o| o.user = admin_user }
+awesome_offer = Offer.new(title: "Awesome offer", description: "I need to get rid of my really awesome stuff.") do |o|
+  o.user = admin_user
+  o.is_parent_offer = true
+end
 good_bid      = Offer.new(title: "Good bid", description: "I will give you really cool stuff for your awesome stuff") { |o| o.user = good_user }
 bad_bid       = Offer.new(title: "Bad bid", description: "I will probably rip you off or back out") { |o| o.user = bad_user }
 
@@ -101,7 +104,7 @@ print "Creating offers.........."
 OFFER_COUNT.times do |i|
   desc  = LiterateRandomizer.sentence
   time  = Time.now.to_s(:db)
-  query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `title`, `updated_at`, `user_id`) VALUES ('#{time}', "#{desc}", NULL, NULL, NULL, NULL, 'test-offer#{i}', '#{time}', #{random_user_id})}
+  query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `is_parent_offer`,`title`, `updated_at`, `user_id`) VALUES ('#{time}', "#{desc}", NULL, NULL, NULL, NULL, '1','test-offer#{i}', '#{time}', #{random_user_id})}
 
   execute(query)
 end
@@ -132,7 +135,7 @@ BID_COUNT.times do |i|
 
   desc      = LiterateRandomizer.sentence
   time      = Time.now.to_s(:db)
-  bid_query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `title`, `updated_at`, `user_id`) VALUES ('#{time}', "#{desc}", NULL, NULL, NULL, NULL, 'test-bid#{i}', '#{time}', #{bid_user_id})}
+  bid_query = %Q{INSERT INTO `offers` (`created_at`, `description`, `image_content_type`, `image_file_name`, `image_file_size`, `image_updated_at`, `is_parent_offer`,`title`, `updated_at`, `user_id`) VALUES ('#{time}', "#{desc}", NULL, NULL, NULL, NULL, '0','test-bid#{i}', '#{time}', #{bid_user_id})}
   execute(bid_query)
 
   bid_id = Offer.last.id # TODO

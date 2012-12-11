@@ -40,6 +40,7 @@ class OffersController < ApplicationController
 
       respond_to do |format|
         if @offer.save
+          expire_fragment "user#{current_user.id}_bids"
           flash[:success] = 'Your bid was successfully registered.'
           format.html { redirect_to @parent_offer }
           format.json { render json: @offer, status: :created, location: @parent_offer }
@@ -174,10 +175,14 @@ class OffersController < ApplicationController
   # POST /offers
   # POST /offers.json
   def create
-    @offer = current_user.offers.build(params[:offer])
+    @offer = current_user.offers.build(params[:offer]) do |offer|
+      offer.is_parent_offer = true
+    end
 
     respond_to do |format|
       if @offer.save
+        expire_fragment "recent_offers" # TODO: this probably doesn't need to be expired after every single offer
+        expire_fragment "user#{current_user.id}_parents"
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
         format.json { render json: @offer, status: :created, location: @offer }
       else
