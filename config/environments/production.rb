@@ -43,7 +43,7 @@ Swapmeet::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :dalli_store, 'swapmeetmem.dnsdynamic.net'
+  config.cache_store = :dalli_store, 'jacopomemcached.dnsdynamic.net'
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
