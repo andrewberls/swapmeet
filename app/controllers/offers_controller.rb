@@ -44,11 +44,13 @@ class OffersController < ApplicationController
           flash[:success] = 'Your bid was successfully registered.'
           format.html { redirect_to @parent_offer }
           format.json { render json: @offer, status: :created, location: @parent_offer }
+        
+          # Send bid received email.
+          OfferMailer.bid_received_email(@parent_offer).deliver
         else
           format.html { render action: "bid" }
           format.json { render json: { :offer_errors => @offer.errors, :response_errors => @response.errors }, status: :unprocessable_entity }
         end
-
       end
     end
   end
@@ -69,6 +71,9 @@ class OffersController < ApplicationController
       format.html { redirect_to @offer }
       format.json { render json: @offer, status: :created, location: @offer }
     end
+
+    # Send bid accepted email.
+    OfferMailer.bid_accepted_email(Offer.find(params[:bid_id])).deliver
   end
 
 
